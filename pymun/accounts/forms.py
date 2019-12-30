@@ -15,7 +15,7 @@ def fieldToString(**kwargs):
         if field == "css_class":
             string += ('class="' + value + '" ')
         if field == "name":
-            string += ('id="' + value + '" max_length=' + str(User._meta.get_field(value).max_length))
+            string += ('id="' + value + '" max_length="' + str(User._meta.get_field(value).max_length) + '" ')
         string += (field + '="' + value + '" ')
     string += ">"
     return string
