@@ -11,6 +11,7 @@ from django.utils.text import slugify
 from django.utils.timezone import now as timezone_now
 
 from utils import models as util_models
+
 # from utils import fields as util_fields
 
 

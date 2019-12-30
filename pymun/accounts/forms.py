@@ -1,13 +1,28 @@
 from typing import Type, Dict, Any
-from crispy_forms import helper, layout, bootstrap
+from crispy_forms import helper, layout, utils
 
 from django import forms
 from django.contrib.auth.forms import UsernameField, ReadOnlyPasswordHashField
 from django.contrib.auth import password_validation
 from django.utils.translation import gettext_lazy as _
-from django.forms.renderers import TemplatesSetting
 
 from .models import User
+
+
+def fieldToString(**kwargs):
+    string = '<input class="form-control" '
+    for field, value in kwargs.items():
+        if field == "css_class":
+            string += ('class="' + value + '" ')
+        if field == "name":
+            string += ('id="' + value + '" max_length=' + str(User._meta.get_field(value).max_length))
+        string += (field + '="' + value + '" ')
+    string += ">"
+    return string
+
+
+def valueToLabel(name, cont):
+    return '<label for="{}">{}</label>'.format(name, cont)
 
 
 class UserCreationForm(forms.ModelForm):
@@ -67,33 +82,41 @@ class UserCreationForm(forms.ModelForm):
         choices=FAVORITE_COLORS_CHOICES,
     )
 
+    def __init__(self, *args, **kwargs):
+        super(UserCreationForm, self).__init__(*args, **kwargs)
+        self.helper = helper.FormHelper()
+
+        self.helper.form_show_labels = False
+
+        self.helper.layout = layout.Layout(
+
+            layout.Div(
+                layout.Div(
+                    layout.HTML(fieldToString(type="text", name="first_name", maxlength="150", label="First Name")),
+                    layout.HTML(valueToLabel("first_name", "First Name")),
+                    css_class="md-form md-outline",
+                ),
+
+                layout.Div(
+                    layout.HTML(fieldToString(type="text", name="last_name", maxlength="150", label="Last Name")),
+                    layout.HTML(valueToLabel("last_name", "Last Name")),
+                    css_class="md-form md-outline"
+                ),
+
+                layout.ButtonHolder(
+                    layout.Submit('Save', 'Save', css_class='button white'),
+                ),
+
+                css_class="container"
+            ),
+
+        )
+
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'email', 'password1',
                   'password2', 'birthday', 'gender', 'recovery_email')
         field_classes: Dict[Any, Type[UsernameField]] = dict(username=UsernameField)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = helper.FormHelper()
-
-        self.helper.layout = layout.Layout(
-            layout.Fieldset(
-                layout.Field('first_name', type='text', css_class='form-control'),
-                layout.Field('last_name', type='text', css_class='form-control'),
-                layout.Div('first_name', 'last_name', css_class='md-form md-outline')
-            ),
-            layout.Fieldset(
-                _('Contact details'),
-                layout.Field('username', type='text', css_class='form-control'),
-                layout.Field('email', type='email', css_class='form-control'),
-                layout.Field('password1', type='password', css_class='form-control'),
-                layout.Field('password2', type='password', css_class='form-control'),
-            ),
-            layout.ButtonHolder(
-                layout.Submit('Save', 'Save', css_class='button white'),
-            ),
-        )
 
 
 class UserUpdateFormBase(forms.ModelForm):
