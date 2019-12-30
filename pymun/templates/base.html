@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.4.1/css/bootstrap.min.css' %}"/>
+
+    {% block style %}{% endblock style %}
+</head>
+<body>
+<section {{ idea.itemtype_attribute }}>
+    <header {{ idea.title_itemprop_attribute }}>{{ user.username }}</header>
+    <div {{ idea.content_itemprop_attribute }}>
+        {{ user.email }}
+        {{ user.first_name }}
+        {{ user.last_name }}
+        {{ user.biography }}
+    </div>
+</section>
+
+{% block navbar %}
+  <header>
+    <!--Navbar -->
+    {% if user.is_authenticated %}
+    <p>{{ user.username }}</p>
+    <a href="{% url 'profile' slug=user.slug %}">mi account</a>
+    <a href="{% url 'logout' %}">logout</a>
+    <a href="{% url 'edit_main' slug=user.slug %}">edit</a>
+    <a href="{% url 'edit_addons' slug=user.slug %}">add info</a>
+    {% else %}
+    <p>Not logged in.</p>
+    <a href="{% url 'login' %}">login</a>
+    <a href="{% url 'signup' %}">signup</a>
+    {% endif %}
+    <!--/.Navbar -->
+  </header>
+{% endblock navbar %}
+
+{% block content %}{% endblock content %}
+</body>
+
+  <script type="text/javascript" src="{% static 'jquery-3.4.1/jquery-3.4.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'popper.js@1.16.0/popper.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'tooltip.js@1.3.3/tooltip.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'bootstrap-4.4.1/js/bootstrap.min.js' %}"></script>
+</html>

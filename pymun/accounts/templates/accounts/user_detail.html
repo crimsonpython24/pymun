@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-3">
+      <img src="/static/media/{{user.avatar}}" class="img-fluid" style="width: 160px; height: 160px;"/>
+    </div>
+    <div class="col-md-9">
+      <h4>username: {{ user.username }}</h4>
+      <h4>first name: {{ user.first_name }}</h4>
+      <h4>last name: {{ user.last_name }}</h4>
+      <h4>email: {{ user.email }}</h4>
+      <h4>birthday: {{ user.birthday }}</h4>
+      <h4>gender: {{ user.gender }}</h4>
+      <h4>biography: {{ user.biography }}</h4>
+    </div>
+    <a href="{% url 'user-pdf' slug=user.slug %}">generate ur pdf!</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block pdf %}{% endblock pdf %}

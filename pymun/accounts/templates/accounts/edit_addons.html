@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="post" action="{% url 'edit_addons' slug=user.slug %}">
+{% csrf_token %}
+{{ form.as_p }}
+<button class="btn btn-outline-default btn-rounded waves-effect" type="submit">Submit</button>
+</form>
+{% endblock content %}
