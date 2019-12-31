@@ -85,30 +85,37 @@ class UserCreationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.helper = helper.FormHelper()
-
         self.helper.form_show_labels = False
-
         self.helper.layout = layout.Layout(
 
             layout.Div(
                 layout.Div(
-                    layout.HTML(fieldToString(type="text", name="first_name", maxlength="150", label="First Name")),
-                    layout.HTML(valueToLabel("first_name", "First Name")),
-                    css_class="md-form md-outline",
+                    layout.Div(
+                        layout.HTML(fieldToString(type="text", name="first_name", maxlength="150", label="First Name")),
+                        layout.HTML(valueToLabel("first_name", "First Name")),
+                        css_class="md-form md-outline",
+                    ),
+
+                    css_class="col",
                 ),
 
                 layout.Div(
-                    layout.HTML(fieldToString(type="text", name="last_name", maxlength="150", label="Last Name")),
-                    layout.HTML(valueToLabel("last_name", "Last Name")),
-                    css_class="md-form md-outline"
+                    layout.Div(
+                        layout.HTML(fieldToString(type="text", name="last_name", maxlength="150", label="Last Name")),
+                        layout.HTML(valueToLabel("last_name", "Last Name")),
+                        css_class="md-form md-outline"
+                    ),
+
+                    css_class="col",
                 ),
 
-                layout.ButtonHolder(
-                    layout.Submit('Save', 'Save', css_class='button white'),
-                ),
-
-                css_class="container"
+                css_class="row",
             ),
+
+            layout.ButtonHolder(
+                layout.Submit('Save', 'Save', css_class='button white'),
+            ),
+
 
         )
 
