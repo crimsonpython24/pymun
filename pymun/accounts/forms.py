@@ -95,7 +95,7 @@ class UserCreationForm(forms.ModelForm):
                     layout.Div(
                         layout.HTML(fieldToString(type="text", name="first_name")),
                         layout.HTML(valueToLabel("first_name", "First Name")),
-                        css_class="md-form md-outline form-sm",
+                        css_class="md-form md-outline",
                     ),
                     css_class="col",
                 ),
@@ -104,7 +104,7 @@ class UserCreationForm(forms.ModelForm):
                     layout.Div(
                         layout.HTML(fieldToString(type="text", name="last_name")),
                         layout.HTML(valueToLabel("last_name", "Last Name")),
-                        css_class="md-form md-outline form-sm",
+                        css_class="md-form md-outline",
                     ),
                     css_class="col",
                 ),
@@ -122,7 +122,7 @@ class UserCreationForm(forms.ModelForm):
                         You can use letter, numbers, and periods</small>
                         """
                     ),
-                    css_class="md-form md-outline form-sm",
+                    css_class="md-form md-outline",
                 ),
             ),
 
@@ -130,10 +130,30 @@ class UserCreationForm(forms.ModelForm):
                 layout.Div(
                     layout.HTML(fieldToString(type="text", name="username")),
                     layout.HTML(valueToLabel("username", "Username")),
-                    css_class="md-form md-outline form-sm",
+                    css_class="md-form md-outline",
                 ),
             ),
 
+            layout.Div(
+                layout.Div(
+                    layout.Div(
+                        layout.HTML(fieldToString(type="password", name="password")),
+                        layout.HTML(valueToLabel("password", "Password")),
+                        css_class="md-form md-outline",
+                    ),
+                    css_class="col",
+                ),
+
+                layout.Div(
+                    layout.Div(
+                        layout.HTML(fieldToString(type="password", name="password")),
+                        layout.HTML(valueToLabel("password", "Confirm")),
+                        css_class="md-form md-outline",
+                    ),
+                    css_class="col",
+                ),
+                css_class="row",
+            ),
 
             layout.ButtonHolder(
                 layout.Submit('Save', 'Save', css_class='button white'),
