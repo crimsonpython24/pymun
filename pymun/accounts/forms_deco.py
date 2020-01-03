@@ -84,6 +84,83 @@ class UserCreationForm(forms.ModelForm):
         choices=FAVORITE_COLORS_CHOICES,
     )
 
+    def __init__(self, *args, **kwargs):
+        super(UserCreationForm, self).__init__(*args, **kwargs)
+        self.helper = helper.FormHelper()
+        self.helper.form_show_labels = False
+        self.helper.layout = layout.Layout(
+
+            layout.Div(
+                layout.Div(
+                    layout.Div(
+                        layout.HTML(fieldtostring(type="text", name="first_name")),
+                        layout.HTML(valuetolabel("first_name", "First Name")),
+                        css_class="md-form md-outline",
+                    ),
+                    css_class="col",
+                ),
+
+                layout.Div(
+                    layout.Div(
+                        layout.HTML(fieldtostring(type="text", name="last_name")),
+                        layout.HTML(valuetolabel("last_name", "Last Name")),
+                        css_class="md-form md-outline",
+                    ),
+                    css_class="col",
+                ),
+                css_class="row",
+            ),
+
+            layout.Div(
+                layout.Div(
+                    layout.HTML(fieldtostring(type="email", name="email",
+                                              aria_describedby="emailHelpBlock")),
+                    layout.HTML(valuetolabel("email", "Email")),
+                    layout.HTML(
+                        """
+                        <small id="emailHelpBlock" class="form-text text-muted">
+                        You can use letter, numbers, and periods</small>
+                        """
+                    ),
+                    css_class="md-form md-outline",
+                ),
+            ),
+
+            layout.Div(
+                layout.Div(
+                    layout.HTML(fieldtostring(type="text", name="username")),
+                    layout.HTML(valuetolabel("username", "Username")),
+                    css_class="md-form md-outline",
+                ),
+            ),
+
+            layout.Div(
+                layout.Div(
+                    layout.Div(
+                        layout.HTML(fieldtostring(type="password", name="password")),
+                        layout.HTML(valuetolabel("password", "Password")),
+                        css_class="md-form md-outline",
+                    ),
+                    css_class="col",
+                ),
+
+                layout.Div(
+                    layout.Div(
+                        layout.HTML(fieldtostring(type="password", name="password")),
+                        layout.HTML(valuetolabel("password", "Confirm")),
+                        css_class="md-form md-outline",
+                    ),
+                    css_class="col",
+                ),
+                css_class="row",
+            ),
+
+            layout.ButtonHolder(
+                layout.Submit('Save', 'Save', css_class='button white'),
+            ),
+
+        )
+
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'email', 'password1',
