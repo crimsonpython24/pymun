@@ -57,10 +57,8 @@ class UserCreationView(CreateView):
     form_class = forms.UserCreationForm
     success_url = '/accounts/login/'
 
-    def get_context_data(self, **kwargs):
-        f = forms.UserCreationForm
-        context = BeautifulSoup(f.as_p(self), features="html5lib").prettify()
-        return context
+    # f = forms.UserCreationForm
+    # context = BeautifulSoup(f.as_p(self), features="html5lib").prettify()
 
 
 @method_decorator(login_required, name='dispatch')
