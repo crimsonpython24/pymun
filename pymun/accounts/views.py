@@ -1,5 +1,7 @@
 import os
 
+from bs4 import BeautifulSoup
+
 from django.views.generic.edit import CreateView, UpdateView
 from django.views import generic
 from django.urls import reverse
@@ -16,15 +18,12 @@ from xhtml2pdf import pisa
 from . import models, forms
 
 
-
 def link_callback(uri, rel):
     # convert URIs to absolute system paths
     if uri.startswith(settings.MEDIA_URL):
-        path = os.path.join(settings.MEDIA_ROOT,
-                            uri.replace(settings.MEDIA_URL, ""))
+        path = os.path.join(settings.MEDIA_ROOT, uri.replace(settings.MEDIA_URL, ""))
     elif uri.startswith(settings.STATIC_URL):
-        path = os.path.join(settings.STATIC_ROOT,
-                            uri.replace(settings.STATIC_URL, ""))
+        path = os.path.join(settings.STATIC_ROOT, uri.replace(settings.STATIC_URL, ""))
     else:
         # handle absolute uri (ie: http://my.tld/a.png)
         return uri
@@ -58,7 +57,11 @@ class UserCreationView(CreateView):
     form_class = forms.UserCreationForm
     success_url = '/accounts/login/'
 
+    # f = forms.UserCreationForm
+    # context = BeautifulSoup(f.as_p(self), features="html5lib").prettify()
 
+
+@method_decorator(login_required, name='dispatch')
 class ProfileView(generic.DetailView):
     model = models.User
 
