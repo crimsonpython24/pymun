@@ -98,14 +98,14 @@ class User(util_models.CreationModificationDateMixin,
 
     def get_thumbnail_picture_url(self):
         url = ""
+        self.create_thumbnail()
         picture_path, thumbnail_path = self.get_picture_paths()
 
         if thumbnail_path:
             url = (storage.url(thumbnail_path)
-                   if storage.exists(thumbnail_path)
-                   else self.avatar.url)
+                   if storage.exists(thumbnail_path) else self.avatar.url)
 
-        return url
+        return 'static/' + url
 
     def get_picture_paths(self):
         picture_path = None

@@ -1,11 +1,11 @@
 import os
 
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 
 from django.views.generic.edit import CreateView, UpdateView
 from django.views import generic
 from django.urls import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.conf import settings

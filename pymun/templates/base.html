@@ -10,33 +10,91 @@
     <link rel="stylesheet" type="text/css" href="{% static 'MDB-Pro_4.11.0/css/mdb.min.css' %}"/>
 
     {% block style %}{% endblock style %}
+
+    <style>
+        .navbar-custom {
+            min-height: 64px;
+            background-color:rgba(0,0,0,0);
+            padding-right: 1.45rem; padding-left: 1.45rem;
+            padding-top: 1.2rem; padding-bottom: 1.2rem;
+        }
+
+        .dropdown-menu-profile {
+            min-width: 400px !important;
+            background-color:rgba(0,0,0,0);
+            border: none
+        }
+
+        .icon-margin {
+            padding-left: 1em;
+            padding-right: 1em;
+        }
+
+        .bg-profile {
+            max-height: 75px;
+            background-color:rgba(0,0,0,0);
+        }
+
+        .card-title-profile {
+            margin-bottom: 0rem;
+        }
+
+        .no-transition {
+            -webkit-transition: height 0;
+            -moz-transition: height 0;
+            -ms-transition: height 0;
+            -o-transition: height 0;
+            transition: height 0;
+        }
+
+    </style>
+
 </head>
 <body>
-<section {{ idea.itemtype_attribute }}>
-    <header {{ idea.title_itemprop_attribute }}>{{ user.username }}</header>
-    <div {{ idea.content_itemprop_attribute }}>
-        {{ user.email }}
-        {{ user.first_name }}
-        {{ user.last_name }}
-        {{ user.biography }}
-    </div>
-</section>
 
 {% block navbar %}
   <header>
-    <!--Navbar -->
-    {% if user.is_authenticated %}
-    <p>{{ user.username }}</p>
-    <a href="{% url 'profile' slug=user.slug %}">mi account</a>
-    <a href="{% url 'logout' %}">logout</a>
-    <a href="{% url 'edit_main' slug=user.slug %}">edit</a>
-    <a href="{% url 'edit_addons' slug=user.slug %}">add info</a>
-    {% else %}
-    <p>Not logged in.</p>
-    <a href="{% url 'login' %}">login</a>
-    <a href="{% url 'signup' %}">signup</a>
-    {% endif %}
     <!--/.Navbar -->
+    <nav class="mb-1 navbar navbar-expand navbar-custom lighten-1 z-depth-0">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+        aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+        <ul class="navbar-nav mr-auto">
+<!--          put stuffs here later-->
+        </ul>
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+
+          {% if user.is_authenticated %}
+          <li class="nav-item icon-margin">
+            <a class="nav-link waves-effect waves-light">
+              <i class="fas fa-ellipsis-v fa-md text-black-50"></i>
+            </a>
+          </li>
+          <li class="nav-item avatar dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="{{ user.get_thumbnail_picture_url }}" class="rounded-circle z-depth-0" alt="avatar image">
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg-right dropdown-menu-profile dropdown-secondary
+                        no-transition nav-collapse" aria-labelledby="navbarDropdownMenuLink-55">
+              <div class="card testimonial-card z-depth-1-half">
+                <div class="card-up transparent-obj bg-profile lighten-1"></div>
+                <div class="avatar mx-auto white">
+                  <img src="static/media/{{ user.avatar }}" class="rounded-circle" alt="woman avatar">
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title card-title-profile">{{ user.first_name }} {{ user.last_name }}</h5>
+                  <p class="card-text">{{ user.email }}</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
   </header>
 {% endblock navbar %}
 
