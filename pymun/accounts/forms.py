@@ -1,5 +1,5 @@
 from typing import Type, Dict, Any
-from crispy_forms import helper, layout, utils
+from crispy_forms import helper, layout
 
 from django import forms
 from django.contrib.auth.forms import UsernameField, ReadOnlyPasswordHashField
@@ -9,13 +9,8 @@ from django.utils.translation import gettext_lazy as _
 from .models import User
 
 
-<<<<<<< HEAD
-def fieldToString(**kwargs):
-    string = '<input '
-=======
 def fieldtostring(**kwargs):
     string = '<input class="form-control" '
->>>>>>> 8265c4129bb9cc4cb4d00d2a619ac346248ff323
     for field, value in kwargs.items():
         if field == "css_class":
             string += ('class="' + value + '" ')
@@ -29,13 +24,8 @@ def fieldtostring(**kwargs):
     return string
 
 
-<<<<<<< HEAD
-def valueToLabel(name, cont):
-    return '<label for="{}"><p>{}</p></label>'.format(name, cont)
-=======
 def valuetolabel(name, cont):
-    return '<label for="{}">{}</label>'.format(name, cont)
->>>>>>> 8265c4129bb9cc4cb4d00d2a619ac346248ff323
+    return '<label for="{}"><p>{}</p></label>'.format(name, cont)
 
 
 class UserCreationForm(forms.ModelForm):
@@ -95,7 +85,6 @@ class UserCreationForm(forms.ModelForm):
         choices=FAVORITE_COLORS_CHOICES,
     )
 
-<<<<<<< HEAD
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.helper = helper.FormHelper()
@@ -105,9 +94,9 @@ class UserCreationForm(forms.ModelForm):
             layout.Div(
                 layout.Div(
                     layout.Div(
-                        layout.HTML(fieldToString(type="text", name="first_name",
+                        layout.HTML(fieldtostring(type="text", name="first_name",
                                                   css_class="form-control form-control-sm")),
-                        layout.HTML(valueToLabel("first_name", "First Name")),
+                        layout.HTML(valuetolabel("first_name", "First Name")),
                         css_class="md-form md-outline form-sm",
                     ),
                     css_class="col",
@@ -115,9 +104,9 @@ class UserCreationForm(forms.ModelForm):
 
                 layout.Div(
                     layout.Div(
-                        layout.HTML(fieldToString(type="text", name="last_name",
+                        layout.HTML(fieldtostring(type="text", name="last_name",
                                                   css_class="form-control form-control-sm")),
-                        layout.HTML(valueToLabel("last_name", "Last Name")),
+                        layout.HTML(valuetolabel("last_name", "Last Name")),
                         css_class="md-form md-outline form-sm",
                     ),
                     css_class="col",
@@ -127,10 +116,10 @@ class UserCreationForm(forms.ModelForm):
 
             layout.Div(
                 layout.Div(
-                    layout.HTML(fieldToString(type="email", name="email",
+                    layout.HTML(fieldtostring(type="email", name="email",
                                               aria_describedby="emailHelpBlock",
                                               css_class="form-control form-control-sm")),
-                    layout.HTML(valueToLabel("email", "Email")),
+                    layout.HTML(valuetolabel("email", "Email")),
                     layout.HTML(
                         """
                         <small id="emailHelpBlock" class="form-text text-muted">
@@ -143,9 +132,9 @@ class UserCreationForm(forms.ModelForm):
 
             layout.Div(
                 layout.Div(
-                    layout.HTML(fieldToString(type="text", name="username",
+                    layout.HTML(fieldtostring(type="text", name="username",
                                               css_class="form-control form-control-sm")),
-                    layout.HTML(valueToLabel("username", "Username")),
+                    layout.HTML(valuetolabel("username", "Username")),
                     css_class="md-form md-outline form-sm",
                 ),
             ),
@@ -153,9 +142,9 @@ class UserCreationForm(forms.ModelForm):
             layout.Div(
                 layout.Div(
                     layout.Div(
-                        layout.HTML(fieldToString(type="password", name="password",
+                        layout.HTML(fieldtostring(type="password", name="password",
                                                   css_class="form-control form-control-sm")),
-                        layout.HTML(valueToLabel("password", "Password")),
+                        layout.HTML(valuetolabel("password", "Password")),
                         css_class="md-form md-outline form-sm",
                     ),
                     css_class="col",
@@ -163,9 +152,9 @@ class UserCreationForm(forms.ModelForm):
 
                 layout.Div(
                     layout.Div(
-                        layout.HTML(fieldToString(type="password", name="password",
+                        layout.HTML(fieldtostring(type="password", name="password",
                                                   css_class="form-control form-control-sm")),
-                        layout.HTML(valueToLabel("password", "Confirm")),
+                        layout.HTML(valuetolabel("password", "Confirm")),
                         css_class="md-form md-outline form-sm",
                     ),
                     css_class="col",
@@ -179,8 +168,6 @@ class UserCreationForm(forms.ModelForm):
 
         )
 
-=======
->>>>>>> 8265c4129bb9cc4cb4d00d2a619ac346248ff323
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'email', 'password1',
