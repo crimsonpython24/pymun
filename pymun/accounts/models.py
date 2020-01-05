@@ -105,7 +105,7 @@ class User(util_models.CreationModificationDateMixin,
             url = (storage.url(thumbnail_path)
                    if storage.exists(thumbnail_path) else self.avatar.url)
 
-        return 'static/' + url
+        return '/static/' + url
 
     def get_picture_paths(self):
         picture_path = None

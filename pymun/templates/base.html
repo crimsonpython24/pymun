@@ -13,7 +13,7 @@
 
     <style>
         .navbar-custom {
-            min-height: 64px;
+            max-height: 64px;
             background-color:rgba(0,0,0,0);
             padding-right: 1.45rem; padding-left: 1.45rem;
             padding-top: 1.2rem; padding-bottom: 1.2rem;
@@ -87,23 +87,23 @@
           </li>
           <li class="nav-item avatar dropdown no-transition">
             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img src="{{ user.get_thumbnail_picture_url }}" class="rounded-circle z-depth-0" alt="avatar image">
+              <img src="/static/media/{{ user.avatar }}" class="rounded-circle z-depth-0" alt="avatar image">
             </a>
             <div class="dropdown-menu dropdown-menu-lg-right dropdown-menu-profile dropdown-secondary no-transition nav-collapse" aria-labelledby="navbarDropdownMenuLink-55">
               <div class="card testimonial-card z-depth-1-half no-shrink custom-width-card">
                 <div class="card-up-custom transparent-obj bg-profile lighten-1"></div>
                 <div class="size-avatar mx-auto white">
-                  <img src="https://wowsciencecamp.org/wp-content/uploads/2018/07/dummy-user-img-1.png" class="rounded-circle" width="84">
+                  <img src="{{ user.get_thumbnail_picture_url }}" class="rounded-circle" width="84">
                 </div>
                 <div class="card-body card-body-custom">
-                  <h6 class="card-title card-title-profile">Conda</h6>
-                  <p class="card-text">kdIsSnake@gmail.com</p>
+                  <h6 class="card-title card-title-profile">{{ user.first_name }} {{ user.last_name }}</h6>
+                  <p class="card-text">{{ user.email }}</p>
                 </div>
                 <div class="btn-margin-3">
                   <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8">
-                      <a href="#" class="btn btn-block btn-sm btn-flat btn-custom btn-rounded btn-smaller">
+                      <a href="{% url 'my_account' %}" class="btn btn-block btn-sm btn-flat btn-custom btn-rounded btn-smaller">
                         <span class="text-manage-acc align-middle">Manage your Account</span>
                       </a>
                     </div>
