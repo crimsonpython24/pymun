@@ -19,90 +19,6 @@
             padding-top: 1.2rem; padding-bottom: 1.2rem;
         }
 
-        .dropdown-menu-profile {
-            min-width: 400px !important;
-            background-color:rgba(0,0,0,0);
-            border: none
-        }
-
-        .icon-margin {
-            padding-left: 1em;
-            padding-right: 1em;
-        }
-
-        .bg-profile {
-          max-height: 75px;
-          background-color:rgba(0,0,0,0);
-        }
-
-        .card-title-profile {
-          margin-bottom: 0.15rem;
-        }
-
-        .card-body-custom {
-          margin-top: 0rem;
-          padding-top: 0.8rem;
-          padding-bottom: 1rem;
-        }
-
-        .btn-custom {
-          border: 1px solid #c9c9c9;
-        }
-
-        .text-manage-acc {
-          text-transform: capitalize;
-          font-weight: normal;
-          font-size: 0.9rem;
-        }
-
-        .text-add-acc {
-          text-transform: none;
-          font-weight: normal;
-        }
-
-        .btn-add-acc {
-          border-top: 1px solid #c9c9c9;
-          border-bottom: 1px solid #c9c9c9;
-        }
-
-        .btn-margin-0 {
-          margin-top: 0.85rem;
-        }
-
-        .btn-margin-1 {
-          margin-top: 1rem;
-          margin-bottom: 1rem;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        .text-sign-out {
-          font-size: 0.85rem;
-          text-transform: capitalize;
-          font-weight: normal;
-        }
-
-        .btn-sign-out {
-          border: 1px solid #d4d4d4;
-        }
-
-        .icon-signout {
-          margin-right: 0.6rem;
-        }
-
-        .margin-2 {
-          border-top: 1px solid #d4d4d4;
-        }
-
-        .margin-2a {
-          margin-top: 1rem;
-          text-align: center;
-        }
-
-        .text-footer {
-          display: inline-block;
-          vertical-align: top;
-        }
 
         .no-transition {
             -webkit-transition: height 0;
@@ -112,6 +28,37 @@
             transition: height 0;
         }
 
+        .dropdown-menu-profile {min-width: 400px !important; background-color:rgba(0,0,0,0); border: none}
+        .icon-margin {padding-left: 1em; padding-right: 1em;}
+        .bg-profile {max-height: 75px; background-color:rgba(0,0,0,0);}
+        .card-title-profile {margin-bottom: 0.15rem;}
+        .card-body-custom {margin-top: 0rem; padding-top: 0.8rem; padding-bottom: 0.9rem;}
+        .btn-custom {border: 1px solid #c9c9c9;}
+        .text-manage-acc {text-transform: capitalize; font-weight: normal; font-size: 0.9rem;}
+        .text-add-acc {text-transform: none; font-weight: normal;}
+        .btn-add-acc {border-top: 1px solid #c9c9c9; border-bottom: 1px solid #c9c9c9;}
+        .btn-margin-0 {margin-top: 0.85rem;}
+
+        .btn-margin-1 {
+          margin-top: 0.6rem;
+          margin-bottom: 0.6rem;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .text-sign-out {font-size: 0.85rem; text-transform: capitalize; font-weight: normal;}
+        .btn-sign-out {border: 1px solid #d4d4d4;}
+        .icon-signout {margin-right: 0.6rem;}
+        .margin-2 {border-top: 1px solid #d4d4d4;}
+        .margin-2a {margin-top: 1rem; text-align: center;}
+        .text-footer {display: inline-block; vertical-align: top;}
+        .btn-smaller {height: 85%;}
+        .btn-margin-3 {margin-bottom: -3%;}
+        .size-avatar {margin-top: 0px;}
+        .card-up-custom {margin-top: 20px;}
+        .btn-manage-account {height: 80%;}
+        .btn-manage-acc {height: 80%; border: 1px solid #c9c9c9;}
+        .custom-width-card {max-width: 356px;}
     </style>
 
 </head>
@@ -142,25 +89,27 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <img src="{{ user.get_thumbnail_picture_url }}" class="rounded-circle z-depth-0" alt="avatar image">
             </a>
-            <div class="dropdown-menu dropdown-menu-lg-right dropdown-menu-profile dropdown-secondary
-                        no-transition nav-collapse" aria-labelledby="navbarDropdownMenuLink-55">
-              <div class="card testimonial-card z-depth-1-half no-shrink">
-                <div class="card-up transparent-obj bg-profile lighten-1"></div>
-                <div class="avatar mx-auto white">
-                  <img src="static/media/{{ user.avatar }}" class="rounded-circle" alt="woman avatar">
+            <div class="dropdown-menu dropdown-menu-lg-right dropdown-menu-profile dropdown-secondary no-transition nav-collapse" aria-labelledby="navbarDropdownMenuLink-55">
+              <div class="card testimonial-card z-depth-1-half no-shrink custom-width-card">
+                <div class="card-up-custom transparent-obj bg-profile lighten-1"></div>
+                <div class="size-avatar mx-auto white">
+                  <img src="https://wowsciencecamp.org/wp-content/uploads/2018/07/dummy-user-img-1.png" class="rounded-circle" width="84">
                 </div>
                 <div class="card-body card-body-custom">
-                  <h5 class="card-title card-title-profile">{{ user.first_name }} {{ user.last_name }}</h5>
-                  <p class="card-text">{{ user.email }}</p>
+                  <h6 class="card-title card-title-profile">Conda</h6>
+                  <p class="card-text">kdIsSnake@gmail.com</p>
                 </div>
-                <div class="row">
-                  <div class="col-2"></div>
-                  <div class="col-8">
-                    <a href="#" class="btn btn-block btn-sm btn-flat btn-custom btn-rounded">
-                      <span class="text-manage-acc align-middle">Manage your Account</span>
-                    </a>
+                <div class="btn-margin-3">
+                  <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                      <a href="#" class="btn btn-block btn-sm btn-flat btn-custom btn-rounded btn-smaller">
+                        <span class="text-manage-acc align-middle">Manage your Account</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
+
                 <div class="btn-margin-0">
                   <button type="button" class="btn btn-flat btn-lg btn-block btn-add-acc">
                     <div class="row">
