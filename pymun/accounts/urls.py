@@ -13,5 +13,6 @@ urlpatterns = [
     path('edit_addons/<slug:slug>', views.EditAddonsView.as_view(), name='edit_addons'),
     path('profile/<slug:slug>/pdf/', views.download_cv_pdf, name="user-pdf"),
 
-    path('myaccount', views.ManageAccountView.as_view(), name='my_account')
+    path('myaccount', views.ManageAccountView.as_view(), name='my_account'),
+    path('myaccount/personal-info', views.PersonalInfoView.as_view(), name='personal_info')
 ]

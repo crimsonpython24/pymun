@@ -52,8 +52,16 @@
 
   <div class="tab-content border-right border-bottom border-left rounded-bottom" id="myClassicTabContent">
     <div class="tab-pane fade active show" id="home-classic" role="tabpanel" aria-labelledby="home-tab-classic">
-      <img src="/static/media/{{ user.avatar }}" class="rounded-circle z-depth-0 head-thumbnail" alt="avatar image">
-      <h3 class="text-center">Welcome, {{ user.first_name }} {{ user.last_name }}</h3>
+      {% if user.avatar %}
+        <img src="/static/media/{{ user.avatar }}" class="rounded-circle z-depth-0 head-thumbnail" alt="avatar image">
+      {% else %}
+        <img src="{% static 'media/site_images/dummy_img.jpg' %}" class="rounded-circle z-depth-0 head-thumbnail" alt="avatar image">
+      {% endif %}
+      {% if user.first_name and user.last_name %}
+        <h3 class="text-center">Welcome, {{ user.first_name }} {{ user.last_name }}</h3>
+      {% else %}
+        <h3 class="text-center">Welcome, [u] {{ user.username }}</h3>
+      {% endif %}
       <p class="text-center custom-p-0">Manage, change, or remove any of your personal information.</p>
       <div class="row">
         <div class="col-6 content-col">

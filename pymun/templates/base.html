@@ -59,6 +59,7 @@
         .btn-manage-account {height: 80%;}
         .btn-manage-acc {height: 80%; border: 1px solid #c9c9c9;}
         .custom-width-card {max-width: 356px;}
+        .custom-nav-brand {text-transformation: capitalize;}
     </style>
 
 </head>
@@ -68,7 +69,7 @@
   <header>
     <!--/.Navbar -->
     <nav class="mb-1 navbar navbar-expand navbar-custom lighten-1 z-depth-0">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand custom-nav-brand text-muted" href="{% url 'my_account' %}">My Account</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
         aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -86,17 +87,31 @@
             </a>
           </li>
           <li class="nav-item avatar dropdown no-transition">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img src="/static/media/{{ user.avatar }}" class="rounded-circle z-depth-0" alt="avatar image">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true"
+               aria-expanded="false" href="{% url 'profile' slug=user.slug %}">
+              {% if user.avatar %}
+                <img src="/static/media/{{ user.avatar }}" class="rounded-circle" width="84">
+              {% else %}
+                <img src="{% static 'media/site_images/dummy_img.jpg' %}" class="rounded-circle">
+              {% endif %}
             </a>
-            <div class="dropdown-menu dropdown-menu-lg-right dropdown-menu-profile dropdown-secondary no-transition nav-collapse" aria-labelledby="navbarDropdownMenuLink-55">
+            <div class="dropdown-menu dropdown-menu-lg-right dropdown-menu-profile dropdown-secondary no-transition nav-collapse"
+                 aria-labelledby="navbarDropdownMenuLink-55">
               <div class="card testimonial-card z-depth-1-half no-shrink custom-width-card">
                 <div class="card-up-custom transparent-obj bg-profile lighten-1"></div>
                 <div class="size-avatar mx-auto white">
-                  <img src="{{ user.get_thumbnail_picture_url }}" class="rounded-circle" width="84">
+                  {% if user.avatar %}
+                    <img src="/static/media/{{ user.avatar }}" class="rounded-circle" width="84">
+                  {% else %}
+                    <img src="{% static 'media/site_images/dummy_img.jpg' %}" class="rounded-circle" width="84"/>
+                  {% endif %}
                 </div>
                 <div class="card-body card-body-custom">
-                  <h6 class="card-title card-title-profile">{{ user.first_name }} {{ user.last_name }}</h6>
+                  {% if user.first_name and user.last_name %}
+                    <h6 class="card-title card-title-profile">{{ user.first_name }} {{ user.last_name }}</h6>
+                  {% else %}
+                    <h6 class="card-title card-title-profile">[u] {{ user.username }}</h6>
+                  {% endif %}
                   <p class="card-text">{{ user.email }}</p>
                 </div>
                 <div class="btn-margin-3">
