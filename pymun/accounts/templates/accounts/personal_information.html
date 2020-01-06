@@ -1,4 +1,69 @@
 {% extends "accounts/manage_account.html" %}
 
+{% block style %}
+<style>
+    .custom-tabs-0 {max-height: 48px;}
+    .custom-tabs-0a {margin-top: -5px; padding-top: 0px; padding-bottom: 0px; border-bottom: 5px solid red;}
+    .custom-p-0 {margin-top: 1.2rem;}
+    .head-thumbnail {
+        height: 96px;
+        width: 96px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -0.7rem;
+        margin-bottom: 1rem;
+    }
+    .content-col {max-width: 430px;}
+    .custom-card-0 {border: 1px solid #c3c3c3; display: block; margin-left: auto; margin-right: auto;}
+    .custom-hr-0 {margin-top: 0px; margin-bottom: 0px;}
+    .help-image {vertical-align: middle;}
+    .bottom-label {text-align: left; width:100%; text-transform: capitalize; padding-left: 0px;}
+    .btn-custom-flat {color: inherit; background-color: transparent; -webkit-box-shadow: none; box-shadow: none;}
+    .btn-custom-0 {
+      padding: 1rem 2.4rem;
+      padding-top: 1rem;
+      padding-right: 2.4rem;
+      padding-bottom: 1rem;
+      padding-left: 1.2rem;
+      font-size: .94rem;
+      color: #4285f4 !important;
+      font-weight: normal;
+    }
+    .custom-head-text-0 {margin-top: 25px; margin-bottom: 25px;}
+    .content-card-custom-0 {max-width: 836px; margin-left: auto; margin-right: auto; padding-top: 0rem; border: 1px solid #c3c3c3;}
+    .card-header-custom-0 {margin-bottom: 2rem;}
+</style>
+{% endblock style %}
+
 {% block tab_content %}
+  <div class="custom-head-text-0">
+    <h3 class="text-center">Personal Info</h3>
+    <p class="text-center custom-p-0">Basic info, like your name and photo, that you use on __ services</p>
+  </div>
+  <div class="container">
+    <!-- Card -->
+    <div class="card content-card-custom-0 z-depth-0">
+      <div class="card-body">
+        <div class="card-header-custom-0">
+          <h4 class="card-title">Profile</h4>
+          <p class="card-text">Some info may be visible to other people, but not right now</p>
+        </div>
+        <div class="card-body-custom-0">
+          <ul class="list-group list-group-flush">
+            <a href="#" class="list-group-item list-group-item-action waves-effect">
+              <div class="row">
+                <div class="col-3 text-muted"><small>Field Name</small></div>
+                <div class="col-6">
+                  Context
+                </div>
+                <div class="col-3"><i class="fas fa-angle-right"></i></div>
+              </div>
+            </a>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Card -->
+  </div>
 {% endblock tab_content %}
