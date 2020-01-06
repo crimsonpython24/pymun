@@ -3,15 +3,37 @@
 {% load static %}
 
 {% block style %}
+<style>
+  .pills-custom {
+    vertical-align: middle;
+  }
+  .custom-item-0 {
+    padding-right: 0px !important;
+    padding-top: 0px !important;
+    transform: scale(1.2);
+    font-size: 0.825rem;
+  }
+  .custom-col-0 {
+    padding-right: 0px !important;
+    float: right !important;
+    padding-bottom: auto;
+  }
+  .custom-col-1 {
+    padding-left: 0.25rem;
+  }
+  .d-custom-help {
+    padding-top: 1rem;
+  }
+</style>
 <link rel="stylesheet" href="{% static 'accounts/css/manage_account.css' %}">
 {% endblock style %}
 
 {% block content %}
 <!-- Classic tabs -->
   <div class="row">
-    <div class="col-lg-3">
+    <div class="col-xl-3 custom-xl-2">
       {% block nav_content %}
-        <div class="d-lg-none classic-tabs">
+        <div class="d-xl-none classic-tabs">
           <ul class="nav tabs-primary" id="myClassicTab" role="tablist">
             <li class="nav-item custom-tabs-0a">
               <a class="nav-link waves-light active show" id="home-tab-classic" href="{% url 'my_account' %}" role="tab" aria-controls="home-classic" aria-selected="true">Home</a>
@@ -21,17 +43,23 @@
             </li>
           </ul>
         </div>
-        <div class="d-none d-lg-block">
+        <div class="d-none d-xl-block d-custom-help">
           <!-- Nav tabs -->
           <ul class="nav md-pills pills-primary flex-column" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" href="{% url 'my_account' %}" role="tab">Downloads
-                <i class="fas fa-download ml-2"></i>
+            <li class="nav-item custom-item-0">
+              <a class="nav-link" data-toggle="tab" href="#panel90" role="tab">
+                <div class="row">
+                  <div class="col-3 float-right custom-col-0"><i class="far fa-user-circle fa-lg"></i></div>
+                  <div class="col-9 text-left custom-col-1">Home</div>
+                </div>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'personal_info' %}" role="tab">Orders & invoices
-                <i class="fas fa-file-alt ml-2"></i>
+            <li class="nav-item custom-item-0">
+              <a class="nav-link" data-toggle="tab" href="#panel91" role="tab">
+                <div class="row">
+                  <div class="col-3 float-right custom-col-0"><i class="far fa-id-card fa-lg"></i></div>
+                  <div class="col-9 text-left custom-col-1">Personal Info</div>
+                </div>
               </a>
             </li>
           </ul>
@@ -39,7 +67,7 @@
         </div>
       {% endblock nav_content %}
       </div>
-    <div class="col-lg-9">
+    <div class="col-xl-9 custom-xl-10">
       {% block tab_content %}
         <div class="tab-content border-right border-bottom border-left rounded-bottom" id="myClassicTabContent">
           <div class="tab-pane fade active show" id="home-classic" role="tabpanel" aria-labelledby="home-tab-classic">
