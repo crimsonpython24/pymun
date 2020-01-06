@@ -15,7 +15,7 @@
         margin-bottom: 1rem;
     }
     .content-col {max-width: 430px;}
-    .custom-card-0 {border: 1px solid #c3c3c3; display: block; margin-left: auto; margin-right: auto;}
+    .custom-card-0 {display: block; margin-left: auto; margin-right: auto;}
     .custom-hr-0 {margin-top: 0px; margin-bottom: 0px;}
     .help-image {vertical-align: middle;}
     .bottom-label {text-align: left; width:100%; text-transform: capitalize; padding-left: 0px;}
@@ -33,6 +33,15 @@
     .custom-head-text-0 {margin-top: 25px; margin-bottom: 25px;}
     .content-card-custom-0 {max-width: 836px; margin-left: auto; margin-right: auto; padding-top: 0rem; border: 1px solid #c3c3c3;}
     .card-header-custom-0 {margin-bottom: 2rem;}
+    .card-body-custom-0 {margin-left: -20px; margin-right: -20px;}
+    .custom-text-0 {text-transform: uppercase; font-weight: bold;}
+    .custom-text-1 {text-transform: capitalize; transform: scale(0.95);}
+    .list-group-custom {height: 3.8rem;}
+    /* for this property, add auto attributes later. important */
+    .custom-row-0 {margin-top: 7px;}
+    .custom-card-1 {border: 1px solid #c3c3c3; padding-bottom: 0px;}
+    .inserted-space-0 {height: 30px;}
+    .custom-text-1b {text-transform: lowercase; transform: scale(0.95);}
 </style>
 {% endblock style %}
 
@@ -44,20 +53,74 @@
   <div class="container">
     <!-- Card -->
     <div class="card content-card-custom-0 z-depth-0">
-      <div class="card-body">
+      <div class="card-body card-custom-1">
         <div class="card-header-custom-0">
           <h4 class="card-title">Profile</h4>
           <p class="card-text">Some info may be visible to other people, but not right now</p>
         </div>
         <div class="card-body-custom-0">
           <ul class="list-group list-group-flush">
-            <a href="#" class="list-group-item list-group-item-action waves-effect">
-              <div class="row">
-                <div class="col-3 text-muted"><small>Field Name</small></div>
-                <div class="col-6">
-                  Context
-                </div>
-                <div class="col-3"><i class="fas fa-angle-right"></i></div>
+            <a href="#" class="list-group-item list-group-item-action waves-effect list-group-custom">
+              <div class="row custom-row-0">
+                <div class="col-3 text-muted custom-text-0"><small>Name</small></div>
+                {% if user.first_name and user.last_name %}
+                  <div class="col-8 custom-text-1">{{ user.first_name }} {{ user.last_name }}</div>
+                {% else %}
+                  <div class="col-8 custom-text-1">No First or Last Names Set</div>
+                {% endif %}
+                <div class="col-1"><i class="fas fa-angle-right"></i></div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action waves-effect list-group-custom">
+              <div class="row custom-row-0">
+                <div class="col-3 text-muted custom-text-0"><small>Birthday</small></div>
+                <div class="col-8 custom-text-1">{{ user.birthday }}</div>
+                <div class="col-1"><i class="fas fa-angle-right"></i></div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action waves-effect list-group-custom">
+              <div class="row custom-row-0">
+                <div class="col-3 text-muted custom-text-0"><small>Gender</small></div>
+                <div class="col-8 custom-text-1">{{ user.gender }}</div>
+                <div class="col-1"><i class="fas fa-angle-right"></i></div>
+              </div>
+            </a>
+            <a href="{% url 'password_change'  %}" class="list-group-item list-group-item-action waves-effect list-group-custom">
+              <div class="row custom-row-0">
+                <div class="col-3 text-muted custom-text-0"><small>Password</small></div>
+                <div class="col-8 custom-text-1">Please change it via this form:</div>
+                <div class="col-1"><i class="fas fa-angle-right"></i></div>
+              </div>
+            </a>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Card -->
+    <div class="inserted-space-0"></div>
+    <div class="card content-card-custom-0 z-depth-0">
+      <div class="card-body card-custom-1">
+        <div class="card-header-custom-0">
+          <h4 class="card-title">Contact Info</h4>
+        </div>
+        <div class="card-body-custom-0">
+          <ul class="list-group list-group-flush">
+            <a href="#" class="list-group-item list-group-item-action waves-effect list-group-custom">
+              <div class="row custom-row-0">
+                <div class="col-3 text-muted custom-text-0"><small>Email</small></div>
+                <div class="col-8 custom-text-1b">{{ user.email }}</div>
+                <div class="col-1"><i class="fas fa-angle-right"></i></div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action waves-effect list-group-custom">
+              <div class="row custom-row-0">
+                <div class="col-3 text-muted custom-text-0"><small>Recovery Email</small></div>
+                {% if user.recovery_email %}
+                  <div class="col-8 custom-text-1b">{{ user.recovery_email }}</div>
+                {% else %}
+                  <div class="col-8 custom-text-1b">No recovery emails set</div>
+                {% endif %}
+                <div class="col-1"><i class="fas fa-angle-right"></i></div>
               </div>
             </a>
           </ul>
