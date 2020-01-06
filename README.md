@@ -36,6 +36,8 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 
 Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
 
+## Logs
+
 ### Sources
 
 This is the second version of the `pymun` project, and it was initially derived from [this version](https://github.com/crimsonpython24/pymun-webpack-legacy) after `Webpack.js` was removed to simplify the build process
