@@ -1,49 +1,23 @@
 {% extends "accounts/manage_account.html" %}
+{% load static %}
 
 {% block style %}
-<style>
-    .custom-tabs-0 {max-height: 48px;}
-    .custom-tabs-0a {margin-top: -5px; padding-top: 0px; padding-bottom: 0px; border-bottom: 5px solid red;}
-    .custom-p-0 {margin-top: 1.2rem;}
-    .head-thumbnail {
-        height: 96px;
-        width: 96px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: -0.7rem;
-        margin-bottom: 1rem;
-    }
-    .content-col {max-width: 430px;}
-    .custom-card-0 {display: block; margin-left: auto; margin-right: auto;}
-    .custom-hr-0 {margin-top: 0px; margin-bottom: 0px;}
-    .help-image {vertical-align: middle;}
-    .bottom-label {text-align: left; width:100%; text-transform: capitalize; padding-left: 0px;}
-    .btn-custom-flat {color: inherit; background-color: transparent; -webkit-box-shadow: none; box-shadow: none;}
-    .btn-custom-0 {
-      padding: 1rem 2.4rem;
-      padding-top: 1rem;
-      padding-right: 2.4rem;
-      padding-bottom: 1rem;
-      padding-left: 1.2rem;
-      font-size: .94rem;
-      color: #4285f4 !important;
-      font-weight: normal;
-    }
-    .custom-head-text-0 {margin-top: 25px; margin-bottom: 25px;}
-    .content-card-custom-0 {max-width: 836px; margin-left: auto; margin-right: auto; padding-top: 0rem; border: 1px solid #c3c3c3;}
-    .card-header-custom-0 {margin-bottom: 2rem;}
-    .card-body-custom-0 {margin-left: -20px; margin-right: -20px;}
-    .custom-text-0 {text-transform: uppercase; font-weight: bold;}
-    .custom-text-1 {text-transform: capitalize; transform: scale(0.95);}
-    .list-group-custom {height: 3.8rem;}
-    /* for this property, add auto attributes later. important */
-    .custom-row-0 {margin-top: 7px;}
-    .custom-card-1 {border: 1px solid #c3c3c3; padding-bottom: 0px;}
-    .inserted-space-0 {height: 30px;}
-    .custom-text-1b {text-transform: lowercase; transform: scale(0.95);}
-</style>
+<link rel="stylesheet" href="{% static 'accounts/css/manage_account.css' %}">
+<link rel="stylesheet" href="{% static 'accounts/css/personal_info.css' %}">
 {% endblock style %}
+
+{% block nav_content %}
+<ul class="nav tabs-primary" id="myClassicTab" role="tablist">
+  <li class="nav-item custom-tabs-0a">
+    <a class="nav-link waves-light" id="home-tab-classic" href="{% url 'my_account' %}"
+      role="tab" aria-controls="home-classic" aria-selected="true">Home</a>
+  </li>
+  <li class="nav-item custom-tabs-0a">
+    <a class="nav-link waves-light active show" id="info-tab-classic" href="{% url 'personal_info' %}" role="tab"
+      aria-controls="info-classic" aria-selected="false">Personal Info</a>
+  </li>
+</ul>
+{% endblock nav_content %}
 
 {% block tab_content %}
   <div class="custom-head-text-0">

@@ -96,12 +96,12 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true"
                aria-expanded="false" href="{% url 'profile' slug=user.slug %}">
               {% if user.avatar %}
-                <img src="/static/media/{{ user.avatar }}" class="rounded-circle" width="84">
+                <img src="/static/media/{{ user.avatar }}" class="rounded-circle">
               {% else %}
                 <img src="{% static 'media/site_images/dummy_img.jpg' %}" class="rounded-circle">
               {% endif %}
             </a>
-            <div class="dropdown-menu dropdown-menu-lg-right dropdown-menu-profile dropdown-secondary no-transition nav-collapse"
+            <div class="dropdown-menu dropdown-menu-lg-right dropdown-menu-profile dropdown-secondary no-transition nav-collapse dropdown-menu-right"
                  aria-labelledby="navbarDropdownMenuLink-55">
               <div class="card testimonial-card z-depth-1-half no-shrink custom-width-card">
                 <div class="card-up-custom transparent-obj bg-profile lighten-1"></div>

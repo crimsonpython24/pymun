@@ -3,95 +3,89 @@
 {% load static %}
 
 {% block style %}
-<style>
-    .custom-tabs-0 {max-height: 48px;}
-    .custom-tabs-0a {margin-top: -5px; padding-top: 0px; padding-bottom: 0px; border-bottom: 5px solid red;}
-    .custom-p-0 {margin-top: 1.2rem;}
-    .head-thumbnail {
-        height: 96px;
-        width: 96px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: -0.7rem;
-        margin-bottom: 1rem;
-    }
-    .content-col {max-width: 430px;}
-    .custom-card-0 {border: 1px solid #c3c3c3; display: block; margin-left: auto; margin-right: auto;}
-    .custom-hr-0 {margin-top: 0px; margin-bottom: 0px;}
-    .help-image {vertical-align: middle;}
-    .bottom-label {text-align: left; width:100%; text-transform: capitalize; padding-left: 0px;}
-    .btn-custom-flat {color: inherit; background-color: transparent; -webkit-box-shadow: none; box-shadow: none;}
-    .btn-custom-0 {
-      padding: 1rem 2.4rem;
-      padding-top: 1rem;
-      padding-right: 2.4rem;
-      padding-bottom: 1rem;
-      padding-left: 1.2rem;
-      font-size: .94rem;
-      color: #4285f4 !important;
-      font-weight: normal;
-    }
-</style>
+<link rel="stylesheet" href="{% static 'accounts/css/manage_account.css' %}">
 {% endblock style %}
 
 {% block content %}
 <!-- Classic tabs -->
-<div class="classic-tabs">
-
-  <ul class="nav tabs-primary custom-tabs-0" id="myClassicTab" role="tablist">
-    <li class="nav-item custom-tabs-0a">
-      <a class="nav-link waves-light active show" id="home-tab-classic" data-toggle="tab" href="#home-classic"
-        role="tab" aria-controls="home-classic" aria-selected="true">Home</a>
-    </li>
-    <li class="nav-item custom-tabs-0a">
-      <a class="nav-link waves-light" id="info-tab-classic" data-toggle="tab" href="{% url 'personal_info' %}" role="tab"
-        aria-controls="info-classic" aria-selected="false">Personal Info</a>
-    </li>
-  </ul>
-
-  {% block tab_content %}
-  <div class="tab-content border-right border-bottom border-left rounded-bottom" id="myClassicTabContent">
-    <div class="tab-pane fade active show" id="home-classic" role="tabpanel" aria-labelledby="home-tab-classic">
-      {% if user.avatar %}
-        <img src="/static/media/{{ user.avatar }}" class="rounded-circle z-depth-0 head-thumbnail" alt="avatar image">
-      {% else %}
-        <img src="{% static 'media/site_images/dummy_img.jpg' %}" class="rounded-circle z-depth-0 head-thumbnail" alt="avatar image">
-      {% endif %}
-      {% if user.first_name and user.last_name %}
-        <h3 class="text-center">Welcome, {{ user.first_name }} {{ user.last_name }}</h3>
-      {% else %}
-        <h3 class="text-center">Welcome, [u] {{ user.username }}</h3>
-      {% endif %}
-      <p class="text-center custom-p-0">Manage, change, or remove any of your personal information.</p>
-      <div class="row">
-        <div class="col-6 content-col">
-          <div class="card z-depth-0 custom-card-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-8">
-                  <h4>Privacy & Personalization</h4>
-                  <p class="card-text">
-                    See the data in your Google Account and choose what activity is saved to personalize your Google experience
-                  </p>
-                </div>
-                <div class="col-4">
-                  <img src="{% static 'media/site_images/privacy_personalization.png' %}" class="help-image z-depth-0" alt="avatar image">
+  <div class="row">
+    <div class="col-lg-3">
+      {% block nav_content %}
+        <div class="d-lg-none classic-tabs">
+          <ul class="nav tabs-primary" id="myClassicTab" role="tablist">
+            <li class="nav-item custom-tabs-0a">
+              <a class="nav-link waves-light active show" id="home-tab-classic" href="{% url 'my_account' %}" role="tab" aria-controls="home-classic" aria-selected="true">Home</a>
+            </li>
+            <li class="nav-item custom-tabs-0a">
+              <a class="nav-link waves-light" id="info-tab-classic" href="{% url 'personal_info' %}" role="tab" aria-controls="info-classic" aria-selected="false">Personal Info</a>
+            </li>
+          </ul>
+        </div>
+        <div class="d-none d-lg-block">
+          <!-- Nav tabs -->
+          <ul class="nav md-pills pills-primary flex-column" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'my_account' %}" role="tab">Downloads
+                <i class="fas fa-download ml-2"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'personal_info' %}" role="tab">Orders & invoices
+                <i class="fas fa-file-alt ml-2"></i>
+              </a>
+            </li>
+          </ul>
+          <!-- Nav tabs -->
+        </div>
+      {% endblock nav_content %}
+      </div>
+    <div class="col-lg-9">
+      {% block tab_content %}
+        <div class="tab-content border-right border-bottom border-left rounded-bottom" id="myClassicTabContent">
+          <div class="tab-pane fade active show" id="home-classic" role="tabpanel" aria-labelledby="home-tab-classic">
+            {% if user.avatar %}
+              <img src="/static/media/{{ user.avatar }}" class="rounded-circle z-depth-0 head-thumbnail" alt="avatar image">
+            {% else %}
+              <img src="{% static 'media/site_images/dummy_img.jpg' %}" class="rounded-circle z-depth-0 head-thumbnail" alt="avatar image">
+            {% endif %}
+            {% if user.first_name and user.last_name %}
+              <h3 class="text-center">Welcome, {{ user.first_name }} {{ user.last_name }}</h3>
+            {% else %}
+              <h3 class="text-center">Welcome, [u] {{ user.username }}</h3>
+            {% endif %}
+            <p class="text-center custom-p-0">Manage, change, or remove any of your personal information.</p>
+            <div class="row justify-content-center">
+              <div class="col-6 content-col">
+                <div class="card shadow-none border">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-8">
+                        <h4>Privacy & Personalization</h4>
+                        <p class="card-text">
+                          See the data in your Google Account and choose what activity is saved to personalize your Google experience
+                        </p>
+                      </div>
+                      <div class="col-4">
+                        <img src="{% static 'media/site_images/privacy_personalization.png' %}" class="help-image z-depth-0" alt="avatar image">
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="custom-hr-0">
+                  <button type="button" class="btn btn-custom-flat btn-flat btn-block btn-custom-0">
+                    <div class="bottom-label">Manage your data & personalization</div>
+                  </button>
                 </div>
               </div>
             </div>
-            <hr class="custom-hr-0">
-            <button type="button" class="btn btn-custom-flat btn-flat btn-block btn-custom-0">
-              <div class="bottom-label">Manage your data & personalization</div>
-            </button>
           </div>
         </div>
+      {% endblock tab_content %}
       </div>
+      <!-- Classic tabs -->
     </div>
   </div>
-  {% endblock tab_content %}
-</div>
-<!-- Classic tabs -->
-{% endblock %}
+
+{% endblock content %}
+
 
 {% block pdf %}{% endblock pdf %}
