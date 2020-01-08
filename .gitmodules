@@ -1,0 +1,3 @@
+[submodule "pymun/pymun/staticfiles_dirs"]
+	path = pymun/pymun/staticfiles_dirs
+	url = git@github.com:crimsonpython24/staticfiles_dirs.git
