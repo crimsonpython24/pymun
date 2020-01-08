@@ -1,32 +1,30 @@
-{% extends "accounts/manage_account.html" %}
+{% extends "accounts/myaccount_base.html" %}
 {% load static %}
 
-{% block style %}
-<link rel="stylesheet" href="{% static 'accounts/css/manage_account.css' %}">
-<link rel="stylesheet" href="{% static 'accounts/css/personal_info.css' %}">
-{% endblock style %}
+{% block link1a %}active show{% endblock link1a %}
+{% block link1b %}active show{% endblock link1b %}
 
-{% block nav_content %}
-<ul class="nav tabs-primary" id="myClassicTab" role="tablist">
-  <li class="nav-item custom-tabs-0a">
-    <a class="nav-link waves-light" id="home-tab-classic" href="{% url 'my_account' %}"
-      role="tab" aria-controls="home-classic" aria-selected="true">Home</a>
-  </li>
-  <li class="nav-item custom-tabs-0a">
-    <a class="nav-link waves-light active show" id="info-tab-classic" href="{% url 'personal_info' %}" role="tab"
-      aria-controls="info-classic" aria-selected="false">Personal Info</a>
-  </li>
-</ul>
-{% endblock nav_content %}
+{% block static %}
+<link rel="stylesheet" href="{% static 'accounts/css/personal_info.css' %}"/>
+{% endblock static %}
 
 {% block tab_content %}
-  <div class="custom-head-text-0">
-    <h3 class="text-center">Personal Info</h3>
-    <p class="text-center custom-p-0">Basic info, like your name and photo, that you use on __ services</p>
+<div class="content-custom">
+  <div class="d-xl-none">
+    <div class="custom-head-text-0">
+      <p class="text-center custom-p-0">Basic info, like your name and photo, that you use on __ services</p>
+    </div>
   </div>
+  <div class="d-none d-xl-block">
+    <div class="custom-head-text-0">
+      <h3 class="text-center">Personal Info</h3>
+      <p class="text-center custom-p-0">Basic info, like your name and photo, that you use on __ services</p>
+    </div>
+  </div>
+
   <div class="container">
     <!-- Card -->
-    <div class="card content-card-custom-0 z-depth-0">
+    <div class="card content-card-custom-0 z-depth-0 border">
       <div class="card-body card-custom-1">
         <div class="card-header-custom-0">
           <h4 class="card-title">Profile</h4>
@@ -71,8 +69,8 @@
       </div>
     </div>
     <!-- Card -->
-    <div class="inserted-space-0"></div>
-    <div class="card content-card-custom-0 z-depth-0">
+    <div class="inserted-space-0" style="height:25px;"></div>
+    <div class="card content-card-custom-0 z-depth-0 border">
       <div class="card-body card-custom-1">
         <div class="card-header-custom-0">
           <h4 class="card-title">Contact Info</h4>
@@ -103,4 +101,5 @@
     </div>
     <!-- Card -->
   </div>
+</div>
 {% endblock tab_content %}

@@ -6,5 +6,5 @@
 .custom-text-1 {text-transform: capitalize; transform: scale(0.95);}
 .list-group-custom {height: 3.8rem;}
 .custom-card-1 {border: 1px solid #c3c3c3; padding-bottom: 0px;}
-.inserted-space-0 {height: 30px;}
+.inserted-space-0 {min-height: 20px;}
 .custom-text-1b {text-transform: lowercase; transform: scale(0.95);}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'accounts/css/manage_account.css' %}">
+{% endblock style %}
+
+{% block content %}
+<!-- Classic tabs -->
+  <div class="row">
+    <div class="col-xl-3">
+      <div class="d-xl-none classic-tabs">
+        <ul class="nav tabs-primary" id="myClassicTab" role="tablist">
+          <li class="nav-item custom-tabs-0a">
+            <a class="nav-link waves-light {% block link0a %}{% endblock link0a %}" id="home-tab-classic" href="{% url 'my_account' %}" role="tab" aria-controls="home-classic" aria-selected="true">Home</a>
+          </li>
+          <li class="nav-item custom-tabs-0a">
+            <a class="nav-link waves-light {% block link1a %}{% endblock link1a %}" id="info-tab-classic" href="{% url 'personal_info' %}" role="tab" aria-controls="info-classic" aria-selected="false">Personal Info</a>
+          </li>
+        </ul>
+      </div>
+      <div class="d-none d-xl-block d-custom-help">
+        <!-- Nav tabs -->
+        <ul class="nav md-pills pills-primary flex-column nav-justified" role="tablist">
+          <li class="nav-item custom-item-0 nav-custom-0">
+            <a class="nav-link {% block link0b %}{% endblock link0b %} nav-link-custom z-depth-0" href="{% url 'my_account' %}" href="#panel90" role="tab">
+              <div class="row">
+                <div class="col-3 float-right custom-col-0"><i class="far fa-user-circle fa-lg"></i></div>
+                <div class="col-9 text-left custom-col-1">Home</div>
+              </div>
+            </a>
+          </li>
+          <li class="nav-item custom-item-0 nav-custom-0">
+            <a class="nav-link {% block link1b %}{% endblock link1b %} nav-link-custom z-depth-0" href="{% url 'personal_info' %}" href="#panel91" role="tab">
+              <div class="row">
+                <div class="col-3 float-right custom-col-0"><i class="far fa-id-card fa-lg"></i></div>
+                <div class="col-9 text-left custom-col-1">Personal Info</div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      <!-- Nav tabs -->
+      </div>
+    </div>
+    <div class="col-xl-9 custom-xl-9">
+      {% block tab_content %} {% endblock tab_content %}
+      <!-- Classic tabs -->
+    </div>
+  </div>
+
+{% endblock content %}
+
+{% block pdf %}{% endblock pdf %}
