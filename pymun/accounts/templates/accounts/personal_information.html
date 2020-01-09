@@ -1,12 +1,13 @@
 {% extends "accounts/myaccount_base.html" %}
 {% load static %}
 
+{% block style %}
+<link rel="stylesheet" href="{% static 'accounts/css/manage_account.css' %}">
+<link rel="stylesheet" href="{% static 'accounts/css/personal_info.css' %}"/>
+{% endblock style %}
+
 {% block link1a %}active show{% endblock link1a %}
 {% block link1b %}active show{% endblock link1b %}
-
-{% block static %}
-<link rel="stylesheet" href="{% static 'accounts/css/personal_info.css' %}"/>
-{% endblock static %}
 
 {% block tab_content %}
 <div class="content-custom">
