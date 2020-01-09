@@ -118,7 +118,7 @@ class EditAddonsView(UpdateView):
 @method_decorator(login_required, name='dispatch')
 class ManageAccountView(generic.list.ListView):
     model = models.User
-    template_name = 'accounts/manage_account.html'
+    template_name = 'myaccount/manage_account.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -128,7 +128,7 @@ class ManageAccountView(generic.list.ListView):
 @method_decorator(login_required, name='dispatch')
 class PersonalInfoView(generic.list.ListView):
     model = models.User
-    template_name = 'accounts/personal_information.html'
+    template_name = 'myaccount/personal_information.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
