@@ -28,70 +28,6 @@ def valuetolabel(name, cont):
     return '<label for="{}"><p>{}</p></label>'.format(name, cont)
 
 
-class UserCreationForm(forms.ModelForm):
-    """
-    A form that creates a user, with no privileges,
-    from the given username and password.
-    """
-
-    error_messages = {
-        'password_mismatch': _('The two password fields didn’t match.'),
-    }
-
-    password1 = forms.CharField(
-        label=_('Password'),
-        strip=False,
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
-        help_text=password_validation.password_validators_help_text_html(),
-    )
-
-    password2 = forms.CharField(
-        label=_('Password confirmation'),
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
-        strip=False,
-        help_text=_('Enter the same password as before, for verification.'),
-    )
-
-    email = forms.EmailField(
-        label=_('Email'),
-        widget=forms.EmailInput(),
-        help_text=_('Enter your email'),
-    )
-
-    recovery_email = forms.EmailField(
-        label=_('Recovery Email (Optional)'),
-        required=False,
-        widget=forms.EmailInput(),
-        help_text=_('Enter a backup email address in case of lost password'),
-    )
-
-    FAVORITE_COLORS_CHOICES = [
-        ('male', 'Male'),
-        ('female', 'Female'),
-        ('others', 'Non-Binary'),
-        ('none', 'Undeclarable')
-    ]
-
-    birthday = forms.DateField(
-        widget=forms.SelectDateWidget(
-            empty_label=('Choose Year', 'Choose Month', 'Choose Day'),
-        ),
-    )
-
-    gender = forms.ChoiceField(
-        label=_('Gender'),
-        required=False,
-        widget=forms.Select,
-        choices=FAVORITE_COLORS_CHOICES,
-    )
-
-    class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'username', 'email', 'password1',
-                  'password2', 'birthday', 'gender', 'recovery_email')
-        field_classes: Dict[Any, Type[UsernameField]] = dict(username=UsernameField)
-
-
 class UserUpdateFormBase(forms.ModelForm):
     birthday = forms.DateField(
         widget=forms.SelectDateWidget(
@@ -130,16 +66,40 @@ class UserUpdateFormBase(forms.ModelForm):
         fields = '__all__'
 
 
-class UserUpdateFormMain(UserUpdateFormBase):
+class UserUpdateNameForm(UserUpdateFormBase):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'email', 'birthday',
-                  'gender', 'recovery_email', 'avatar')
-        field_classes = {'username': UsernameField}
+        fields = ('first_name', 'last_name')
 
+    def __init__(self, *args, **kwargs):
+        super(UserUpdateNameForm, self).__init__(*args, **kwargs)
+        self.helper = helper.FormHelper()
+        self.helper.form_show_labels = False
+        self.helper.layout = layout.Layout(
+            layout.Div(
+                layout.Div(
+                    layout.Div(
+                        layout.Div(
+                            layout.HTML(fieldtostring(type="text", name="first_name")),
+                            layout.HTML(valuetolabel("first_name", "First Name")),
+                            css_class="md-form md-outline",
+                        ),
+                        css_class="col",
+                    ),
 
-class UserUpdateFormAddons(UserUpdateFormBase):
-    class Meta:
-        model = User
-        fields = ('gender', 'workplace', 'college', 'high_school',
-                  'hometown', 'nickname', 'biography')
+                    layout.Div(
+                        layout.Div(
+                            layout.HTML(fieldtostring(type="text", name="last_name")),
+                            layout.HTML(valuetolabel("last_name", "Last Name")),
+                            css_class="md-form md-outline",
+                        ),
+                        css_class="col",
+                    ),
+                    css_class="row",
+                ),
+
+                layout.ButtonHolder(
+                    layout.Submit('Save', 'Save', css_class='button white'),
+                ),
+            )
+        )

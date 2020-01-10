@@ -20,6 +20,7 @@ class UserCreationView(CreateView):
     # f = forms.UserCreationForm
     # context = BeautifulSoup(f.as_p(self), features="html5lib").prettify()
 
+
 @method_decorator(login_required, name='dispatch')
 class EditMainView(UpdateView):
     model = models.User
