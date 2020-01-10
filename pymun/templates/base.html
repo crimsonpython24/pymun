@@ -16,7 +16,7 @@
     <header>
       <!--/.Navbar -->
       <nav class="mb-1 navbar navbar-expand navbar-custom lighten-1 z-depth-0">
-        <a class="navbar-brand custom-nav-brand text-muted" href="{% url 'my_account' %}">My Account</a>
+        <a class="navbar-brand custom-nav-brand text-muted" href="{% url 'index' %}">My Account</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
           aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -55,9 +55,13 @@
                   </div>
                   <div class="card-body card-body-custom">
                     {% if user.first_name and user.last_name %}
-                      <h6 class="card-title card-title-profile">{{ user.first_name }} {{ user.last_name }}</h6>
+                      <a  href="{% url 'profile' slug=user.slug %}" class="waves-effect waves-light" style="padding-bottom: 0px;">
+                        <h6 class="card-title card-title-profile">{{ user.first_name }} {{ user.last_name }}</h6>
+                      </a>
                     {% else %}
-                      <h6 class="card-title card-title-profile">[u] {{ user.username }}</h6>
+                      <a  href="{% url 'profile' slug=user.slug %}" class="waves-effect waves-light" style="padding-bottom: 0px;">
+                        <h6 class="card-title card-title-profile">[u] {{ user.username }}</h6>
+                      </a>
                     {% endif %}
                     <p class="card-text">{{ user.email }}</p>
                   </div>
