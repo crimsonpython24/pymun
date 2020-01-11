@@ -17,5 +17,7 @@ urlpatterns = [
     path('<slug:slug>/myaccount', views.ManageAccountView.as_view(), name='my_account'),
     path('<slug:slug>/myaccount/personal-info', views.PersonalInfoView.as_view(), name='personal_info'),
     path('<slug:slug>/myaccount/change_name', views.ChangeNameView.as_view(), name='change_name'),
-    path('<slug:slug>/myaccount/change_gender', views.ChangeGenderView.as_view(), name='change_gender')
+    path('<slug:slug>/myaccount/change_birthday', views.ChangeBirthdayView.as_view(), name='change_birthday'),
+    path('<slug:slug>/myaccount/change_gender', views.ChangeGenderView.as_view(), name='change_gender'),
+    path('<slug:slug>/myaccount/change_email', views.ChangeEmailView.as_view(), name='change_email')
 ]

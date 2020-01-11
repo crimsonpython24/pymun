@@ -99,6 +99,18 @@ class ChangeNameView(ChangeInfoView):
 
 
 @method_decorator(login_required, name='dispatch')
+class ChangeBirthdayView(ChangeInfoView):
+    template_name = 'myaccount/change_birthday.html'
+    form_class = forms.UserUpdateBirthdayForm
+
+
+@method_decorator(login_required, name='dispatch')
 class ChangeGenderView(ChangeInfoView):
     template_name = 'myaccount/change_gender.html'
     form_class = forms.UserUpdateGenderForm
+
+
+@method_decorator(login_required, name='dispatch')
+class ChangeEmailView(ChangeInfoView):
+    template_name = 'myaccount/change_email.html'
+    form_class = forms.UserUpdateEmailForm

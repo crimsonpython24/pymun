@@ -49,7 +49,7 @@
               </a>
             </div>
             <div class="list-group-item list-group-item-action waves-effect list-group-custom">
-              <a style="display:block" href="#">
+              <a style="display:block" href="{% url 'change_birthday' slug=user.slug %}">
                 <div class="row custom-row-0">
                   <div class="col-3 text-muted custom-text-0"><small>Birthday</small></div>
                   <div class="col-8 custom-text-1">{{ user.birthday }}</div>
@@ -88,21 +88,10 @@
         </div>
         <div class="card-body-custom-0">
           <ul class="list-group list-group-flush">
-            <a href="#" class="list-group-item list-group-item-action waves-effect list-group-custom">
+            <a href="{% url 'change_email' slug=user.slug %}" class="list-group-item list-group-item-action waves-effect list-group-custom">
               <div class="row custom-row-0">
                 <div class="col-3 text-muted custom-text-0"><small>Email</small></div>
                 <div class="col-8 custom-text-1b">{{ user.email }}</div>
-                <div class="col-1"><i class="fas fa-angle-right"></i></div>
-              </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action waves-effect list-group-custom">
-              <div class="row custom-row-0">
-                <div class="col-3 text-muted custom-text-0"><small>Recovery Email</small></div>
-                {% if user.recovery_email %}
-                  <div class="col-8 custom-text-1b">{{ user.recovery_email }}</div>
-                {% else %}
-                  <div class="col-8 custom-text-1b">No recovery emails set</div>
-                {% endif %}
                 <div class="col-1"><i class="fas fa-angle-right"></i></div>
               </div>
             </a>

@@ -79,26 +79,25 @@ class UserUpdateNameForm(UserUpdateFormBase):
         )
 
 
-# class UserUpdateBirthdayForm(UserUpdateFormBase):
-#     birthday = forms.DateField(
-#         widget=forms.SelectDateWidget(empty_label=('Choose Year', 'Choose Month', 'Choose Day')),
-#     )
-#
-#     class Meta:
-#         model = User
-#         fields = ['birthday']
-#
-#     def __init__(self, *args, **kwargs):
-#         super(UserUpdateNameForm, self).__init__(*args, **kwargs)
-#         self.helper = helper.FormHelper(self)
-#         self.helper.form_show_labels = False
-#         self.helper.form_tag = False
-#         self.helper.layout = layout.Layout(
-#             layout.Div(
-#
-#
-#             )
-#         )
+class UserUpdateBirthdayForm(UserUpdateFormBase):
+    birthday = forms.DateField(
+        widget=forms.SelectDateWidget(empty_label=('Choose Year', 'Choose Month', 'Choose Day')),
+    )
+
+    class Meta:
+        model = User
+        fields = ['birthday']
+
+    def __init__(self, *args, **kwargs):
+        super(UserUpdateBirthdayForm, self).__init__(*args, **kwargs)
+        self.helper = helper.FormHelper(self)
+        self.helper.form_show_labels = False
+        self.helper.form_tag = False
+        self.helper.layout = layout.Layout(
+            layout.Div(
+                layout.Layout('birthday')
+            )
+        )
 
 
 class UserUpdateGenderForm(UserUpdateFormBase):
@@ -117,5 +116,49 @@ class UserUpdateGenderForm(UserUpdateFormBase):
         self.helper.layout = layout.Layout(
             layout.Div(
                 bootstrap.InlineRadios('gender')
+            )
+        )
+
+
+class UserUpdateEmailForm(UserUpdateFormBase):
+    class Meta:
+        model = User
+        fields = ['email', 'recovery_email', 'about_me_email']
+
+    def __init__(self, *args, **kwargs):
+        super(UserUpdateEmailForm, self).__init__(*args, **kwargs)
+        self.helper = helper.FormHelper(self)
+        self.helper.form_show_labels = False
+        self.helper.form_tag = False
+        self.helper.layout = layout.Layout(
+            layout.Div(
+                layout.Div(
+                    layout.Div(
+                        layout.Div(
+                            layout.Div(
+                                layout.HTML(
+                                    fieldtostring("required", "autofocus", type="email", name="email", value="")),
+                                layout.HTML(valuetolabel("email", "Email")),
+                                css_class="md-form",
+                            ),
+                        ),
+                        layout.Div(
+                            layout.Div(
+                                layout.HTML(fieldtostring(type="email", name="recovery_email", value="")),
+                                layout.HTML(valuetolabel("recovery_email", "Recovery Email")),
+                                css_class="md-form",
+                            ),
+                        ),
+                        layout.Div(
+                            layout.Div(
+                                layout.HTML(fieldtostring(type="email", name="about_me_email", value="")),
+                                layout.HTML(valuetolabel("about_me_email", "About Me Email")),
+                                css_class="md-form",
+                            ),
+                        ),
+                        css_class="list-group-item"
+                    ),
+                    css_class="list-group"
+                )
             )
         )
