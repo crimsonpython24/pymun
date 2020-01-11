@@ -1,18 +1,8 @@
-.custom-card-txt-0 {
-    font-size: 103% !important;
-}
-
-.custom-text-1 {
-    font-size: 87% !important;
-    font-weight: normal;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.custom-text-2 {
-    font-weight: bold;
-}
-
-.custom-text-3 {
-    font-size: 150% !important;
-}
+.custom-card-txt-0 {font-size: 103% !important;}
+.custom-text-1 {font-size: 87% !important; font-weight: normal; padding-top: 10px; padding-bottom: 10px;}
+.custom-text-2 {font-weight: bold;}
+.custom-text-3 {font-size: 125% !important;}
+.body-custom-0 {padding-top: 0px;}
+.btn-custom-0 {padding-left: 1rem !important; padding-right: 1rem !important}
+.custom-content-1 {transform: scale(1.1);}
+.custom-content-1a {transform: scale(0.95);}

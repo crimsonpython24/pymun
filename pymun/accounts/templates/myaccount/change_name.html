@@ -8,7 +8,17 @@
 {% endblock style %}
 
 {% block inner_content %}
-  <h3>Name</h3><hr>
+  <div class="row">
+    <div class="col-9">
+      <div class="row">
+        <div class="col-1 align-middle">
+          <a href="{% url 'personal_info' %}"><i class="fas fa-arrow-left fa-lg align-bottom"></i></a>
+        </div>
+        <div class="col-11"><h3>Name</h3></div>
+      </div>
+    </div>
+  </div>
+  <hr>
   <p class="text-muted  custom-text-1">Your changes will be available to anyone</p>
   <div class="card z-depth-0 border">
     <div class="card-body">
@@ -22,21 +32,27 @@
       </p>
     </div>
   </div>
-
   <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-      <div class="modal-content">
-        <div class="modal-header border-0">
-          <h5 class="modal-title custom-text-2" id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form method="post" action="{% url 'change_name' slug=user.slug %}">
-            {% crispy form %}
-            <button type="submit" class="btn btn-flat btn-sm float-right"><span class="text-primary custom-text-3">Done</span></button>
-          </form>
+      <div class="modal-content custom-content-1">
+        <div class="custom-content-1a">
+          <div class="modal-header border-0">
+            <h5 class="modal-title custom-text-2" id="exampleModalLongTitle" style="padding-bottom: 0px;">Change name</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="padding-top: 0px;">
+            <form method="post" action="{% url 'change_name' slug=user.slug %}">
+              {% crispy form %}
+              <div class="btn-group float-right" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-flat btn-sm float-right btn-custom-0" data-dismiss="modal">
+                  <span class="text-secondary custom-text-3">Cancel</span>
+                </button>
+                <button type="submit" class="btn btn-flat btn-sm float-right btn-custom-0"><span class="text-primary custom-text-3">Done</span></button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
