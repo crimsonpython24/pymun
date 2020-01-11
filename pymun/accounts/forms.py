@@ -63,26 +63,17 @@ class UserUpdateNameForm(UserUpdateFormBase):
             layout.Div(
                 layout.Div(
                     layout.Div(
-                        layout.Div(
-                            layout.HTML(fieldtostring("required", "autofocus", type="text", name="first_name", value="")),
-                            layout.HTML(valuetolabel("first_name", "First Name")),
-                            css_class="md-form md-outline",
-                        ),
-                        css_class="col",
+                        layout.HTML(fieldtostring("required", "autofocus", type="text", name="first_name", value="")),
+                        layout.HTML(valuetolabel("first_name", "First Name")),
+                        css_class="md-form",
                     ),
-
-                    layout.Div(
-                        layout.Div(
-                            layout.HTML(fieldtostring("required", type="text", name="last_name", value="")),
-                            layout.HTML(valuetolabel("last_name", "Last Name")),
-                            css_class="md-form md-outline",
-                        ),
-                        css_class="col",
-                    ),
-                    css_class="row",
                 ),
-                layout.ButtonHolder(
-                    layout.Submit('submit', 'Submit', css_class='button white')
-                )
+                layout.Div(
+                    layout.Div(
+                        layout.HTML(fieldtostring("required", type="text", name="last_name", value="")),
+                        layout.HTML(valuetolabel("last_name", "Last Name")),
+                        css_class="md-form",
+                    ),
+                ),
             )
         )

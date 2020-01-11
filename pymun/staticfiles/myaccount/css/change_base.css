@@ -8,3 +8,11 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+.custom-text-2 {
+    font-weight: bold;
+}
+
+.custom-text-3 {
+    font-size: 150% !important;
+}
