@@ -7,18 +7,8 @@
 <link rel="stylesheet" href="{% static 'myaccount/css/change_base.css' %}">
 {% endblock style %}
 
+{% block inner_topic %}Birthday{% endblock inner_topic %}
 {% block inner_content %}
-  <div class="row">
-    <div class="col-9">
-      <div class="row">
-        <div class="col-1 align-middle">
-          <a href="{% url 'personal_info' slug=user.slug %}"><i class="fas fa-arrow-left fa-lg align-bottom"></i></a>
-        </div>
-        <div class="col-11"><h3>Birthday</h3></div>
-      </div>
-    </div>
-  </div>
-  <hr>
   <p class="text-muted  custom-text-1">Your changes will be available to anyone</p>
   <div class="card z-depth-0 border">
     <div class="card-body">

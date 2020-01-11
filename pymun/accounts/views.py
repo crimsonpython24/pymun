@@ -83,7 +83,7 @@ class PersonalInfoView(generic.detail.DetailView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ChangeNameView(generic.edit.UpdateView):
+class ChangeInfoView(generic.edit.UpdateView):
     model = models.User
     template_name = 'myaccount/change_name.html'
     form_class = forms.UserUpdateNameForm
@@ -93,10 +93,12 @@ class ChangeNameView(generic.edit.UpdateView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ChangeGenderView(generic.edit.UpdateView):
-    model = models.User
+class ChangeNameView(ChangeInfoView):
+    template_name = 'myaccount/change_name.html'
+    form_class = forms.UserUpdateNameForm
+
+
+@method_decorator(login_required, name='dispatch')
+class ChangeGenderView(ChangeInfoView):
     template_name = 'myaccount/change_gender.html'
     form_class = forms.UserUpdateGenderForm
-
-    def get_success_url(self):
-        return reverse('profile', kwargs={'slug': self.object.slug})
