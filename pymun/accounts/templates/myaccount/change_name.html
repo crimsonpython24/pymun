@@ -3,5 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block tab_content %}
+  <form method="post" action="{% url 'change_name' slug=user.slug %}">
     {% crispy form %}
+  </form>
 {% endblock tab_content %}

@@ -41,6 +41,6 @@
 .custom-col-0 {padding-right: 0px !important; float: right !important; padding-bottom: auto;}
 .custom-col-1 {padding-left: 0.25rem;}
 .d-custom-help {padding-top: 1rem;}
-.nav-link-custom {width: 70%; height: 120%; margin-right: 50%;}
+.nav-link-custom {width: 70%; height: 120%; margin-right: 0px !important; max-width: 225px;}
 .custom-col-3 {padding-left: 0px; padding-right: 0px;}
 .bd-custom-0 {padding-top: 0px !important; padding-bottom: 0px !important;}

@@ -33,17 +33,20 @@
         </div>
         <div class="card-body-custom-0">
           <ul class="list-group list-group-flush">
-            <a href="#" class="list-group-item list-group-item-action waves-effect list-group-custom">
+            <div class="list-group-item list-group-item-action waves-effect list-group-custom">
               <div class="row custom-row-0">
                 <div class="col-3 text-muted custom-text-0"><small>Name</small></div>
-                {% if user.first_name and user.last_name %}
-                  <div class="col-8 custom-text-1">{{ user.first_name }} {{ user.last_name }}</div>
-                {% else %}
-                  <div class="col-8 custom-text-1">No First or Last Names Set</div>
-                {% endif %}
+                  <div class="col-8 custom-text-1"
+                       onclick="location.href='{% url 'change_name' slug=user.slug %}';">
+                    {% if user.first_name and user.last_name %}
+                      {{ user.first_name }} {{ user.last_name }}
+                    {% else %}
+                      No first or last name set
+                    {% endif %}
+                  </div>
                 <div class="col-1"><i class="fas fa-angle-right"></i></div>
               </div>
-            </a>
+            </div>
             <a href="#" class="list-group-item list-group-item-action waves-effect list-group-custom">
               <div class="row custom-row-0">
                 <div class="col-3 text-muted custom-text-0"><small>Birthday</small></div>

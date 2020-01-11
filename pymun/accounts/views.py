@@ -12,6 +12,7 @@ from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 from django.utils.text import slugify
 from xhtml2pdf import pisa
+from crispy_forms.helper import FormHelper
 
 from . import models, forms
 
@@ -82,7 +83,7 @@ class PersonalInfoView(generic.list.ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ChangeNameView(generic.FormView):
+class ChangeNameView(generic.edit.UpdateView):
     model = models.User
     template_name = 'myaccount/change_name.html'
     form_class = forms.UserUpdateNameForm
