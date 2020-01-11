@@ -63,7 +63,7 @@ class ProfileView(generic.DetailView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ManageAccountView(generic.list.ListView):
+class ManageAccountView(generic.detail.DetailView):
     model = models.User
     template_name = 'myaccount/manage_account.html'
 
@@ -73,7 +73,7 @@ class ManageAccountView(generic.list.ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-class PersonalInfoView(generic.list.ListView):
+class PersonalInfoView(generic.detail.DetailView):
     model = models.User
     template_name = 'myaccount/personal_information.html'
 
