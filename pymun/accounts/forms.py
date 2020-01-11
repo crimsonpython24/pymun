@@ -5,8 +5,11 @@ from django import forms
 from .models import User
 
 
-def fieldtostring(**kwargs):
+def fieldtostring(*args, **kwargs):
     string = '<input class="form-control" '
+    for arg in args:
+        if arg == 'required':
+            string += " required "
     for field, value in kwargs.items():
         if field == "css_class":
             string += ('class="' + value + '" ')
@@ -61,7 +64,7 @@ class UserUpdateNameForm(UserUpdateFormBase):
                 layout.Div(
                     layout.Div(
                         layout.Div(
-                            layout.HTML(fieldtostring(type="text", name="first_name", value="")),
+                            layout.HTML(fieldtostring("required", "autofocus", type="text", name="first_name", value="")),
                             layout.HTML(valuetolabel("first_name", "First Name")),
                             css_class="md-form md-outline",
                         ),
@@ -70,7 +73,7 @@ class UserUpdateNameForm(UserUpdateFormBase):
 
                     layout.Div(
                         layout.Div(
-                            layout.HTML(fieldtostring(type="text", name="last_name", value="")),
+                            layout.HTML(fieldtostring("required", type="text", name="last_name", value="")),
                             layout.HTML(valuetolabel("last_name", "Last Name")),
                             css_class="md-form md-outline",
                         ),

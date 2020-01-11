@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row"  style="margin: auto">
+    <div class="col-4"></div>
+    <div class="col-4">
+      {% block inner_content %}
+      {% endblock inner_content %}
+    </div>
+  </div>
+{% endblock content %}
