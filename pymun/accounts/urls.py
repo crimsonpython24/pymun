@@ -16,5 +16,6 @@ urlpatterns = [
 
     path('myaccount', views.ManageAccountView.as_view(), name='my_account'),
     path('myaccount/personal-info', views.PersonalInfoView.as_view(), name='personal_info'),
-    path('myaccount/change_name/<slug:slug>', views.ChangeNameView.as_view(), name='change_name')
+    path('myaccount/change_name/<slug:slug>', views.ChangeNameView.as_view(), name='change_name'),
+    path('myaccount/change_gender/<slug:slug>', views.ChangeGenderView.as_view(), name='change_gender')
 ]

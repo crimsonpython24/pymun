@@ -34,40 +34,47 @@
         <div class="card-body-custom-0">
           <ul class="list-group list-group-flush">
             <div class="list-group-item list-group-item-action waves-effect list-group-custom">
-              <div class="row custom-row-0">
-                <div class="col-3 text-muted custom-text-0"><small>Name</small></div>
-                  <div class="col-8 custom-text-1"
-                       onclick="location.href='{% url 'change_name' slug=user.slug %}';">
-                    {% if user.first_name and user.last_name %}
-                      {{ user.first_name }} {{ user.last_name }}
-                    {% else %}
-                      No first or last name set
-                    {% endif %}
-                  </div>
-                <div class="col-1"><i class="fas fa-angle-right"></i></div>
-              </div>
+              <a style="display:block" href="{% url 'change_name' slug=user.slug %}">
+                <div class="row custom-row-0">
+                  <div class="col-3 text-muted custom-text-0"><small>Name</small></div>
+                    <div class="col-8 custom-text-1">
+                      {% if user.first_name and user.last_name %}
+                        {{ user.first_name }} {{ user.last_name }}
+                      {% else %}
+                        No first or last name set
+                      {% endif %}
+                    </div>
+                  <div class="col-1"><i class="fas fa-angle-right"></i></div>
+                </div>
+              </a>
             </div>
-            <a href="#" class="list-group-item list-group-item-action waves-effect list-group-custom">
-              <div class="row custom-row-0">
-                <div class="col-3 text-muted custom-text-0"><small>Birthday</small></div>
-                <div class="col-8 custom-text-1">{{ user.birthday }}</div>
-                <div class="col-1"><i class="fas fa-angle-right"></i></div>
-              </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action waves-effect list-group-custom">
-              <div class="row custom-row-0">
-                <div class="col-3 text-muted custom-text-0"><small>Gender</small></div>
-                <div class="col-8 custom-text-1">{{ user.gender }}</div>
-                <div class="col-1"><i class="fas fa-angle-right"></i></div>
-              </div>
-            </a>
-            <a href="{% url 'password_change'  %}" class="list-group-item list-group-item-action waves-effect list-group-custom">
-              <div class="row custom-row-0">
-                <div class="col-3 text-muted custom-text-0"><small>Password</small></div>
-                <div class="col-8 custom-text-1">Please change it via this form:</div>
-                <div class="col-1"><i class="fas fa-angle-right"></i></div>
-              </div>
-            </a>
+            <div class="list-group-item list-group-item-action waves-effect list-group-custom">
+              <a style="display:block" href="#">
+                <div class="row custom-row-0">
+                  <div class="col-3 text-muted custom-text-0"><small>Birthday</small></div>
+                  <div class="col-8 custom-text-1">{{ user.birthday }}</div>
+                  <div class="col-1"><i class="fas fa-angle-right"></i></div>
+                </div>
+              </a>
+            </div>
+            <div class="list-group-item list-group-item-action waves-effect list-group-custom">
+              <a style="display:block" href="{% url 'change_gender' slug=user.slug %}">
+                <div class="row custom-row-0">
+                  <div class="col-3 text-muted custom-text-0"><small>Gender</small></div>
+                  <div class="col-8 custom-text-1">{{ user.gender }}</div>
+                  <div class="col-1"><i class="fas fa-angle-right"></i></div>
+                </div>
+              </a>
+            </div>
+            <div class="list-group-item list-group-item-action waves-effect list-group-custom">
+              <a style="display:block" href="{% url 'password_change' %}">
+                <div class="row custom-row-0">
+                  <div class="col-3 text-muted custom-text-0"><small>Password</small></div>
+                  <div class="col-8 custom-text-1">Please change it via this form:</div>
+                  <div class="col-1"><i class="fas fa-angle-right"></i></div>
+                </div>
+              </a>
+            </div>
           </ul>
         </div>
       </div>

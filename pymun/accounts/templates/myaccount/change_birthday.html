@@ -1,0 +1,54 @@
+{% extends "myaccount/change_base.html" %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'myaccount/css/change_base.css' %}">
+{% endblock style %}
+
+{% block inner_content %}
+  <div class="row">
+    <div class="col-9">
+      <div class="row">
+        <div class="col-1 align-middle">
+          <a href="{% url 'personal_info' %}"><i class="fas fa-arrow-left fa-lg align-bottom"></i></a>
+        </div>
+        <div class="col-11"><h3>Birthday</h3></div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <p class="text-muted  custom-text-1">Your changes will be available to anyone</p>
+  <div class="card z-depth-0 border">
+    <div class="card-body">
+      <p class="card-text custom-card-txt-0 text-body">
+        {% if user.first_name and user.last_name %}
+          {{ user.birthday }}
+        {% else %}
+          No birthday set
+        {% endif %}
+        <i class="fas fa-pencil-alt float-right align-middle" data-toggle="modal" data-target="#modalLoginForm"></i>
+      </p>
+    </div>
+  </div>
+  <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content custom-content-1">
+        <div class="custom-content-1a">
+          <div class="modal-header border-0">
+            <h5 class="modal-title custom-text-2" id="exampleModalLongTitle" style="padding-bottom: 0px;">Change name</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="padding-top: 0px;">
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock inner_content %}

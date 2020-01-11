@@ -90,3 +90,13 @@ class ChangeNameView(generic.edit.UpdateView):
 
     def get_success_url(self):
         return reverse('profile', kwargs={'slug': self.object.slug})
+
+
+@method_decorator(login_required, name='dispatch')
+class ChangeGenderView(generic.edit.UpdateView):
+    model = models.User
+    template_name = 'myaccount/change_gender.html'
+    form_class = forms.UserUpdateGenderForm
+
+    def get_success_url(self):
+        return reverse('profile', kwargs={'slug': self.object.slug})
