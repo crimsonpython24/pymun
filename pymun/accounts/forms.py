@@ -185,7 +185,7 @@ class UpdateRecoveryEmailForm(UpdateFormBase):
         fields = ['email', 'recovery_email', 'about_me_email']
 
     def __init__(self, *args, **kwargs):
-        super(UpdateAboutMeEmailForm, self).__init__(*args, **kwargs)
+        super(UpdateRecoveryEmailForm, self).__init__(*args, **kwargs)
         self.helper = helper.FormHelper(self)
         self.helper.form_show_labels = False
         self.helper.form_tag = False

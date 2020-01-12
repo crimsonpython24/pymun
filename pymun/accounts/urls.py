@@ -19,7 +19,8 @@ urlpatterns = [
     path('<slug:slug>/myaccount/change_name', views.ChangeNameView.as_view(), name='change_name'),
     path('<slug:slug>/myaccount/change_birthday', views.ChangeBirthdayView.as_view(), name='change_birthday'),
     path('<slug:slug>/myaccount/change_gender', views.ChangeGenderView.as_view(), name='change_gender'),
-    path('<slug:slug>/myaccount/change_email', views.ChangeContactEmailView.as_view(), name='change_email'),
+    path('<slug:slug>/myaccount/change_email', views.ChangeEmailView.as_view(), name='change_email'),
+    path('<slug:slug>/myaccount/change_contact_email', views.ChangeContactEmailView.as_view(), name='change_contact_email'),
     path('<slug:slug>/myaccount/change_about_me_email', views.ChangeAboutMeEmailView.as_view(), name='change_about_me_email'),
-    path('<slug:slug>/myaccount/change_about_me_email', views.ChangeRecoveryEmailView.as_view(), name='change_recovery_email'),
+    path('<slug:slug>/myaccount/change_recovery_email', views.ChangeRecoveryEmailView.as_view(), name='change_recovery_email'),
 ]

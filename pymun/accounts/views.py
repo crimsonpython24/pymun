@@ -111,8 +111,18 @@ class ChangeGenderView(ChangeInfoView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ChangeContactEmailView(ChangeInfoView):
+class ChangeEmailView(generic.detail.DetailView):
+    model = models.User
     template_name = 'myaccount/change_email_base.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+class ChangeContactEmailView(ChangeInfoView):
+    template_name = 'myaccount/change_contact_email.html'
     form_class = forms.UpdateContactEmailForm
 
 
