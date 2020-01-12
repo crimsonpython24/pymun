@@ -19,7 +19,7 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
         {% if user.email %}
-          <a style="display:block" href="{% url 'change_email' slug=user.slug %}">
+          <a style="display:block" href="{% url 'change_contact_email' slug=user.slug %}">
             <div class="row">
               <div class="col-5"><span class="custom-text-4">Contact email</span></div>
               <div class="col-7">

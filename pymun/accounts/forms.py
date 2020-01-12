@@ -135,28 +135,11 @@ class UpdateContactEmailForm(UpdateFormBase):
                 layout.Div(
                     layout.Div(
                         layout.Div(
-                            layout.Div(
-                                layout.HTML(
-                                    fieldtostring("required", "autofocus", type="email", name="email", value="")),
-                                layout.HTML(valuetolabel("email", "Email")),
-                                css_class="md-form",
-                            ),
+                            layout.HTML(
+                                fieldtostring("required", "autofocus", type="email", name="email", value="")),
+                            layout.HTML(valuetolabel("email", "Email")),
+                            css_class="md-form",
                         ),
-                        layout.Div(
-                            layout.Div(
-                                layout.HTML(fieldtostring(type="email", name="recovery_email", value="")),
-                                layout.HTML(valuetolabel("recovery_email", "Recovery Email")),
-                                css_class="md-form",
-                            ),
-                        ),
-                        layout.Div(
-                            layout.Div(
-                                layout.HTML(fieldtostring(type="email", name="about_me_email", value="")),
-                                layout.HTML(valuetolabel("about_me_email", "About Me Email")),
-                                css_class="md-form",
-                            ),
-                        ),
-                        css_class="list-group-item"
                     ),
                     css_class="list-group"
                 )
