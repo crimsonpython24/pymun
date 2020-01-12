@@ -55,7 +55,7 @@ class UpdateNameForm(UpdateFormBase):
         fields = ('first_name', 'last_name')
 
     def __init__(self, *args, **kwargs):
-        super(UserUpdateNameForm, self).__init__(*args, **kwargs)
+        super(UpdateNameForm, self).__init__(*args, **kwargs)
         self.helper = helper.FormHelper(self)
         self.helper.form_show_labels = False
         self.helper.form_tag = False
@@ -89,7 +89,7 @@ class UpdateBirthdayForm(UpdateFormBase):
         fields = ['birthday']
 
     def __init__(self, *args, **kwargs):
-        super(UserUpdateBirthdayForm, self).__init__(*args, **kwargs)
+        super(UpdateBirthdayForm, self).__init__(*args, **kwargs)
         self.helper = helper.FormHelper(self)
         self.helper.form_show_labels = False
         self.helper.form_tag = False
@@ -109,7 +109,7 @@ class UpdateGenderForm(UpdateFormBase):
         fields = ['gender']
 
     def __init__(self, *args, **kwargs):
-        super(UserUpdateGenderForm, self).__init__(*args, **kwargs)
+        super(UpdateGenderForm, self).__init__(*args, **kwargs)
         self.helper = helper.FormHelper(self)
         self.helper.form_show_labels = False
         self.helper.form_tag = False

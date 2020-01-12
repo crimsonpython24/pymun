@@ -1,9 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'myaccount/css/change_base.css' %}"/>
+{% endblock style %}
 
 {% block content %}
-  <div class="row"  style="margin: auto">
-    <div class="col-4"></div>
-    <div class="col-4">
+  <div class="d-flex justify-content-center">
+    <div style="max-width: 685px;">
       {% block inner_header %}
         <div class="row">
           <div class="col-9">
