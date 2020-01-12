@@ -28,7 +28,7 @@ def valuetolabel(name, cont):
     return '<label for="{}">{}</label>'.format(name, cont)
 
 
-class UserUpdateFormBase(forms.ModelForm):
+class UpdateFormBase(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         password = self.fields.get('password')
@@ -49,7 +49,7 @@ class UserUpdateFormBase(forms.ModelForm):
         fields = '__all__'
 
 
-class UserUpdateNameForm(UserUpdateFormBase):
+class UpdateNameForm(UpdateFormBase):
     class Meta:
         model = User
         fields = ('first_name', 'last_name')
@@ -79,7 +79,7 @@ class UserUpdateNameForm(UserUpdateFormBase):
         )
 
 
-class UserUpdateBirthdayForm(UserUpdateFormBase):
+class UpdateBirthdayForm(UpdateFormBase):
     birthday = forms.DateField(
         widget=forms.SelectDateWidget(empty_label=('Choose Year', 'Choose Month', 'Choose Day')),
     )
@@ -100,7 +100,7 @@ class UserUpdateBirthdayForm(UserUpdateFormBase):
         )
 
 
-class UserUpdateGenderForm(UserUpdateFormBase):
+class UpdateGenderForm(UpdateFormBase):
     gender_choices = [('male', 'Male'), ('female', 'Female'), ('others', 'Non-Binary'), ('none', 'Undeclarable')]
     gender = forms.ChoiceField(label=_('Gender'), required=False, widget=forms.Select, choices=gender_choices,)
 
@@ -120,13 +120,13 @@ class UserUpdateGenderForm(UserUpdateFormBase):
         )
 
 
-class UserUpdateEmailForm(UserUpdateFormBase):
+class UpdateContactEmailForm(UpdateFormBase):
     class Meta:
         model = User
         fields = ['email', 'recovery_email', 'about_me_email']
 
     def __init__(self, *args, **kwargs):
-        super(UserUpdateEmailForm, self).__init__(*args, **kwargs)
+        super(UpdateContactEmailForm, self).__init__(*args, **kwargs)
         self.helper = helper.FormHelper(self)
         self.helper.form_show_labels = False
         self.helper.form_tag = False
@@ -161,4 +161,34 @@ class UserUpdateEmailForm(UserUpdateFormBase):
                     css_class="list-group"
                 )
             )
+        )
+
+
+class UpdateAboutMeEmailForm(UpdateFormBase):
+    class Meta:
+        model = User
+        fields = ['email', 'recovery_email', 'about_me_email']
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateAboutMeEmailForm, self).__init__(*args, **kwargs)
+        self.helper = helper.FormHelper(self)
+        self.helper.form_show_labels = False
+        self.helper.form_tag = False
+        self.helper.layout = layout.Layout(
+            layout.Div()
+        )
+
+
+class UpdateRecoveryEmailForm(UpdateFormBase):
+    class Meta:
+        model = User
+        fields = ['email', 'recovery_email', 'about_me_email']
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateAboutMeEmailForm, self).__init__(*args, **kwargs)
+        self.helper = helper.FormHelper(self)
+        self.helper.form_show_labels = False
+        self.helper.form_tag = False
+        self.helper.layout = layout.Layout(
+            layout.Div()
         )

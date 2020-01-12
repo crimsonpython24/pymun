@@ -86,7 +86,7 @@ class PersonalInfoView(generic.detail.DetailView):
 class ChangeInfoView(generic.edit.UpdateView):
     model = models.User
     template_name = 'myaccount/change_name.html'
-    form_class = forms.UserUpdateNameForm
+    form_class = forms.UpdateNameForm
 
     def get_success_url(self):
         return reverse('profile', kwargs={'slug': self.object.slug})
@@ -95,22 +95,35 @@ class ChangeInfoView(generic.edit.UpdateView):
 @method_decorator(login_required, name='dispatch')
 class ChangeNameView(ChangeInfoView):
     template_name = 'myaccount/change_name.html'
-    form_class = forms.UserUpdateNameForm
+    form_class = forms.UpdateNameForm
 
 
 @method_decorator(login_required, name='dispatch')
 class ChangeBirthdayView(ChangeInfoView):
     template_name = 'myaccount/change_birthday.html'
-    form_class = forms.UserUpdateBirthdayForm
+    form_class = forms.UpdateBirthdayForm
 
 
 @method_decorator(login_required, name='dispatch')
 class ChangeGenderView(ChangeInfoView):
     template_name = 'myaccount/change_gender.html'
-    form_class = forms.UserUpdateGenderForm
+    form_class = forms.UpdateGenderForm
 
 
 @method_decorator(login_required, name='dispatch')
-class ChangeEmailView(ChangeInfoView):
-    template_name = 'myaccount/change_email.html'
-    form_class = forms.UserUpdateEmailForm
+class ChangeContactEmailView(ChangeInfoView):
+    template_name = 'myaccount/change_email_base.html'
+    form_class = forms.UpdateContactEmailForm
+
+
+@method_decorator(login_required, name='dispatch')
+class ChangeAboutMeEmailView(ChangeInfoView):
+    template_name = 'myaccount/change_about_me_email.html'
+    form_class = forms.UpdateAboutMeEmailForm
+
+
+@method_decorator(login_required, name='dispatch')
+class ChangeRecoveryEmailView(ChangeInfoView):
+    template_name = 'myaccount/change_recovery_email.html'
+    form_class = forms.UpdateRecoveryEmailForm
+
