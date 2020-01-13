@@ -20,9 +20,12 @@ urlpatterns = [
     path('<slug:slug>/myaccount/change_birthday', views.ChangeBirthdayView.as_view(), name='change_birthday'),
     path('<slug:slug>/myaccount/change_gender', views.ChangeGenderView.as_view(), name='change_gender'),
     path('<slug:slug>/myaccount/change_email', views.ChangeEmailView.as_view(), name='change_email'),
-    path('<slug:slug>/myaccount/change_contact_email', views.ChangeContactEmailView.as_view(), name='change_contact_email'),
-    path('<slug:slug>/myaccount/change_about_me_email', views.ChangeAboutMeEmailView.as_view(), name='change_about_me_email'),
-    path('<slug:slug>/myaccount/change_recovery_email', views.ChangeRecoveryEmailView.as_view(), name='change_recovery_email'),
+    path('<slug:slug>/myaccount/change_email/contact', views.ChangeContactEmailView.as_view(), name='change_contact_email'),
+    path('<slug:slug>/myaccount/change_email/about_me', views.ChangeAboutMeEmailView.as_view(), name='change_about_me_email'),
+    path('<slug:slug>/myaccount/change_email/recovery', views.ChangeRecoveryEmailView.as_view(), name='change_recovery_email'),
 
     path('<slug:slug>/myaccount/about_me', views.AddAboutView.as_view(), name='about_me'),
+    path('<slug:slug>/myaccount/about_me/work', views.UpdateWorkView.as_view(), name='update_work'),
+    path('<slug:slug>/myaccount/about_me/places', views.UpdatePlacesView.as_view(), name='update_places'),
+    path('<slug:slug>/myaccount/about_me/detail', views.UpdateDetailView.as_view(), name='update_detail'),
 ]

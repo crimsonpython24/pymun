@@ -4,60 +4,58 @@
 {% load static %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'myaccount/css/about_me.css' %}"/>
 <link rel="stylesheet" href="{% static 'myaccount/css/change_base.css' %}">
+<link rel="stylesheet" href="{% static 'myaccount/css/change_email.css' %}">
 <link rel="stylesheet" href="{% static 'myaccount/css/personal_info.css' %}"/>
 {% endblock style %}
 
-{% block inner_topic %}Email{% endblock inner_topic %}
+{% block inner_topic %}About{% endblock inner_topic %}
 
 {% block inner_content %}
-<p class="text-muted custom-text-5">About Me</p>
+<p class="text-muted custom-text-5">To highlight info on your profile, set the audience to private. This means  fb can see this info</p>
 <div class="card content-card-custom-0 z-depth-0 border content-card-custom-0" style="min-width: 660px;">
   <!-- Card content -->
-  <div class="card-body card-body-custom-2">
-    <div class="row" style="margin: auto">
-    {% block sidebar %}
-      <div class="col-xl-3 custom-col-3" style="padding: 0px; padding: 0px;border-right: 1px solid #c3c3c3;">
-        <div class="d-xl-none classic-tabs">
-          <ul class="nav tabs-primary" id="myClassicTab" role="tablist">
-            <li class="nav-item custom-tabs-0a">
-              <a class="nav-link waves-light {% block link0a %}{% endblock link0a %}" id="home-tab-classic" href="{% url 'my_account' slug=user.slug %}" role="tab" aria-controls="home-classic" aria-selected="true">Home</a>
-            </li>
-            <li class="nav-item custom-tabs-0a">
-              <a class="nav-link waves-light {% block link1a %}{% endblock link1a %}" id="info-tab-classic" href="{% url 'personal_info' slug=user.slug %}" role="tab" aria-controls="info-classic" aria-selected="false">Personal Info</a>
-            </li>
-          </ul>
-        </div>
-        <div class="d-none d-xl-block d-custom-help">
-          <!-- Nav tabs -->
-          <ul class="nav md-pills pills-primary flex-column nav-justified outline" role="tablist">
-            <div class="d-flex flex-column bd-highlight mb-3 outline">
-              <div class="p-2 bd-highlight bd-custom-0" style="padding-left: 0px !important;">
-                <li class="nav-item custom-item-0 nav-custom-0" style="padding: 0px;">
-                  <a class="nav-link {% block link0b %}active show{% endblock link0b %} nav-link-custom z-depth-0" href="{% url 'my_account' slug=user.slug %}" href="#panel90" role="tab">
-                    <div class="col-9 text-left custom-col-1" style="padding: 0px; margin: 0px;">Home</div>
-                  </a>
-                </li>
-              </div>
-              <div class="p-2 bd-highlight bd-custom-0" style="padding-left: 0px !important;">
-                <li class="nav-item custom-item-0 nav-custom-0"  style="padding: 0px;">
-                  <a class="nav-link {% block link1b %}{% endblock link1b %} nav-link-custom z-depth-0" href="{% url 'personal_info' slug=user.slug %}" href="#panel91" role="tab">
-                    <div class="col-9 text-left custom-col-1" style="padding: 0px; margin: 0px;">Personal Info</div>
-                  </a>
-                </li>
-              </div>
+  <div class="card-body card-body-custom-0">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item waves-effect">
+        <a style="display:block" href="{% url 'update_work' slug=user.slug %}">
+          <div class="row">
+            <div class="col-5"><span class="custom-text-4">Work and Education</span></div>
+            <div class="col-7">
+              <p class="text-muted custom-text-5">
+                Update your current workplace, skills, and your education degree
+              </p>
             </div>
-          </ul>
-        <!-- Nav tabs -->
-        </div>
-      </div>
-    {% endblock sidebar %}
-    <div class="col-xl-9 custom-xl-9">
-      {% block tab_content %} {% endblock tab_content %}
-      <!-- Classic tabs -->
-    </div>
+          </div>
+        </a>
+      </li>
+      <li class="list-group-item waves-effect">
+        <a style="display:block" href="{% url 'update_places' slug=user.slug %}">
+          <div class="row">
+            <div class="col-5"><span class="custom-text-4">Places Lived</span></div>
+            <div class="col-7">
+              <p class="text-muted custom-text-5">
+                Update the places you are living in or you had lived
+              </p>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="list-group-item waves-effect">
+        <a style="display:block" href="{% url 'update_detail' slug=user.slug %}">
+          <div class="row">
+            <div class="col-5"><span class="custom-text-4">Further Details</span></div>
+            <div class="col-7">
+              <p class="text-muted custom-text-5">
+                Personal details, like nicknames, bio, and a quote
+              </p>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
   </div>
 </div>
+<!-- Card -->
 
 {% endblock inner_content %}

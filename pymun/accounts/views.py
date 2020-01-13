@@ -146,3 +146,21 @@ class AddAboutView(generic.detail.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+@method_decorator(login_required, name='dispatch')
+class UpdateWorkView(ChangeInfoView):
+    template_name = 'myaccount/update_work.html'
+    form_class = forms.UpdateWorkForm
+
+
+@method_decorator(login_required, name='dispatch')
+class UpdatePlacesView(ChangeInfoView):
+    template_name = 'myaccount/update_places.html'
+    form_class = forms.UpdatePlacesForm
+
+
+@method_decorator(login_required, name='dispatch')
+class UpdateDetailView(ChangeInfoView):
+    template_name = 'myaccount/update_detail.html'
+    form_class = forms.UpdateDetailForm
