@@ -23,4 +23,6 @@ urlpatterns = [
     path('<slug:slug>/myaccount/change_contact_email', views.ChangeContactEmailView.as_view(), name='change_contact_email'),
     path('<slug:slug>/myaccount/change_about_me_email', views.ChangeAboutMeEmailView.as_view(), name='change_about_me_email'),
     path('<slug:slug>/myaccount/change_recovery_email', views.ChangeRecoveryEmailView.as_view(), name='change_recovery_email'),
+
+    path('<slug:slug>/myaccount/about_me', views.AddAboutView.as_view(), name='about_me'),
 ]
