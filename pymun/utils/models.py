@@ -124,8 +124,7 @@ class MetaTagsMixin(models.Model):
     class Meta:
         abstract = True
 
-    meta_keywords = models.CharField(
-        _("Keywords"), max_length=255, blank=True, help_text=_("Separate keywords by comma."))
+    meta_keywords = models.CharField(_("Keywords"), max_length=255, blank=True, help_text=_("Separate keywords by comma."))
     meta_description = models.CharField(_("Description"), max_length=255, blank=True)
     meta_author = models.CharField(_("Author"), max_length=255, blank=True)
     meta_copyright = models.CharField(_("Copyright"), max_length=255, blank=True)
@@ -275,6 +274,5 @@ class SchemaMicrodata(models.Model):
     itemtype = models.CharField(_("Microdata item type"), max_length=100, blank=True, choices=ItemType.choices())
 
     def itemtype_attribute(self):
-        attr = loader.render_to_string("utils/itemtype.attr.html",
-                                       {"itemtype": self.get_itemtype_display()})
+        attr = loader.render_to_string("utils/itemtype.attr.html", {"itemtype": self.get_itemtype_display()})
         return mark_safe(attr)

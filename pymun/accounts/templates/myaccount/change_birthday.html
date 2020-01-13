@@ -33,7 +33,7 @@
             </button>
           </div>
           <div class="modal-body" style="padding-top: 0px;">
-            <form method="post" action="{% url 'change_birthday' slug=user.slug %}">
+            <form method="post" action="{% url 'change_birthday'  %}">
               {% crispy form %}
               <div class="btn-group float-right" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-flat btn-sm float-right btn-custom-0" data-dismiss="modal">

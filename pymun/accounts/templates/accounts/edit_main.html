@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-<form method="post" action="{% url 'edit_main' slug=user.slug %}" enctype="multipart/form-data">
+<form method="post" action="{% url 'edit_main'  %}" enctype="multipart/form-data">
 {% csrf_token %}
 {{ form.as_p }}
 <button class="btn btn-outline-default btn-rounded waves-effect" type="submit">{% trans "Save" %}</button>

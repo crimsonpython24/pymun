@@ -35,7 +35,7 @@
             </li>
             <li class="nav-item avatar dropdown no-transition">
               <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true"
-                 aria-expanded="false" href="{% url 'profile' slug=user.slug %}">
+                 aria-expanded="false" href="{% url 'profile' slug=user.slug  %}">
                 {% if user.avatar %}
                   <img src="/static/media/{{ user.avatar }}" class="rounded-circle">
                 {% else %}
@@ -69,7 +69,7 @@
                     <div class="row">
                       <div class="col-2"></div>
                       <div class="col-8">
-                        <a href="{% url 'my_account' slug=user.slug %}" class="btn btn-block btn-sm btn-flat btn-custom btn-rounded btn-smaller">
+                        <a href="{% url 'my_account' %}" class="btn btn-block btn-sm btn-flat btn-custom btn-rounded btn-smaller">
                           <span class="text-manage-acc align-middle">Manage your Account</span>
                         </a>
                       </div>

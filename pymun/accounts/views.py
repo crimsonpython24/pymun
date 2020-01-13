@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseServerError
+from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedirect, request
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 from django.utils.text import slugify
@@ -63,7 +63,7 @@ class ProfileView(generic.DetailView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ManageAccountView(generic.detail.DetailView):
+class ManageAccountView(generic.list.ListView):
     model = models.User
     template_name = 'myaccount/manage_account.html'
 
@@ -73,7 +73,7 @@ class ManageAccountView(generic.detail.DetailView):
 
 
 @method_decorator(login_required, name='dispatch')
-class PersonalInfoView(generic.detail.DetailView):
+class PersonalInfoView(generic.list.ListView):
     model = models.User
     template_name = 'myaccount/personal_information.html'
 
@@ -83,13 +83,17 @@ class PersonalInfoView(generic.detail.DetailView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ChangeInfoView(generic.edit.UpdateView):
+class ChangeInfoView(generic.edit.FormView):
     model = models.User
     template_name = 'myaccount/change_name.html'
     form_class = forms.UpdateNameForm
 
     def get_success_url(self):
-        return reverse('profile', kwargs={'slug': self.object.slug})
+        return reverse('my_account')
+
+    def form_valid(self, form):
+        form.save()
+        return super(ChangeInfoView, self).form_valid(form)
 
 
 @method_decorator(login_required, name='dispatch')
@@ -111,7 +115,7 @@ class ChangeGenderView(ChangeInfoView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ChangeEmailView(generic.detail.DetailView):
+class ChangeEmailView(generic.list.ListView):
     model = models.User
     template_name = 'myaccount/change_email_base.html'
 
@@ -139,7 +143,7 @@ class ChangeRecoveryEmailView(ChangeInfoView):
 
 
 @method_decorator(login_required, name='dispatch')
-class AddAboutView(generic.detail.DetailView):
+class AddAboutView(generic.list.ListView):
     model = models.User
     template_name = 'myaccount/about_me.html'
 

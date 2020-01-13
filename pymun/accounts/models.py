@@ -43,7 +43,7 @@ def get_centering_points(size, target):
 
 # Still to be added: (1) many-to-many field, see book for details
 class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, AbstractUser):
-    
+
     slug = models.SlugField(unique=True)
     avatar = models.ImageField('Avatar', upload_to=upload_to, blank=True, null=True)
     
