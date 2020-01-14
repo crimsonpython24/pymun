@@ -89,7 +89,7 @@ class ChangeInfoView(generic.edit.UpdateView):
     form_class = forms.UpdateNameForm
 
     def get_object(self):
-        return get_object_or_404(models.User, slug=models.User.slug)
+        return self.request.user
 
     def get_success_url(self):
         return reverse('profile', kwargs={'slug': self.object.slug})

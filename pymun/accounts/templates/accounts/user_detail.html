@@ -21,7 +21,7 @@
       <h4>gender: {{ user.gender }}</h4>
       <h4>biography: {{ user.biography }}</h4>
     </div>
-    <a href="{% url 'user-pdf'  %}">generate ur pdf!</a>
+    <a href="{% url 'user-pdf' slug=user.slug %}">generate ur pdf!</a>
   </div>
 </div>
 {% endblock %}
