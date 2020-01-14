@@ -15,7 +15,7 @@ urlpatterns = [
     path('profile/<slug:slug>/pdf/', views.download_cv_pdf, name="user-pdf"),
 
     path('myaccount/', views.ManageAccountView.as_view(), name='my_account'),
-    path('myaccount/personal-info', views.PersonalInfoView.as_view(), name='personal_info'),
+    path('myaccount/personal_info', views.PersonalInfoView.as_view(), name='personal_info'),
     path('myaccount/change_name', views.ChangeNameView.as_view(), name='change_name'),
     path('myaccount/change_birthday', views.ChangeBirthdayView.as_view(), name='change_birthday'),
     path('myaccount/change_gender', views.ChangeGenderView.as_view(), name='change_gender'),

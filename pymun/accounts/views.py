@@ -83,17 +83,16 @@ class PersonalInfoView(generic.list.ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ChangeInfoView(generic.edit.FormView):
+class ChangeInfoView(generic.edit.UpdateView):
     model = models.User
     template_name = 'myaccount/change_name.html'
     form_class = forms.UpdateNameForm
 
-    def get_success_url(self):
-        return reverse('my_account')
+    def get_object(self):
+        return get_object_or_404(models.User, slug=models.User.slug)
 
-    def form_valid(self, form):
-        form.save()
-        return super(ChangeInfoView, self).form_valid(form)
+    def get_success_url(self):
+        return reverse('profile', kwargs={'slug': self.object.slug})
 
 
 @method_decorator(login_required, name='dispatch')
