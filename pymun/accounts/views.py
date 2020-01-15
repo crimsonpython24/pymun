@@ -126,7 +126,13 @@ class ChangeEmailView(generic.list.ListView):
 @method_decorator(login_required, name='dispatch')
 class ChangeContactEmailView(ChangeInfoView):
     template_name = 'myaccount/change_contact_email.html'
-    form_class = forms.UpdateContactEmailForm
+    form_class = forms.UpdateContactEmailForm(user=request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super(ChangeContactEmailView, self).get_context_data(**kwargs)
+        context["today"] = self.actual_time
+
+        return context
 
 
 @method_decorator(login_required, name='dispatch')

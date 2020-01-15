@@ -1,12 +1,13 @@
 from crispy_forms import helper, layout, bootstrap
 from django import forms
 from django.utils.translation import gettext_lazy as _
+from django.http import request
 
 from .models import User
 
 
 def fieldtostring(*args, **kwargs):
-    string = '<input class="form-control" '
+    string = '<input '
     for arg in args:
         if arg == 'required':
             string += " required "
@@ -63,14 +64,18 @@ class UpdateNameForm(UpdateFormBase):
             layout.Div(
                 layout.Div(
                     layout.Div(
-                        layout.HTML(fieldtostring("required", "autofocus", type="text", name="first_name", value="")),
+                        layout.HTML(fieldtostring(
+                            "required", "autofocus", type="text", name="first_name", value="", css_class="form-control"
+                        )),
                         layout.HTML(valuetolabel("first_name", "First Name")),
                         css_class="md-form",
                     ),
                 ),
                 layout.Div(
                     layout.Div(
-                        layout.HTML(fieldtostring("required", type="text", name="last_name", value="")),
+                        layout.HTML(fieldtostring(
+                            "required", type="text", name="last_name", value="", css_class="form-control"
+                        )),
                         layout.HTML(valuetolabel("last_name", "Last Name")),
                         css_class="md-form",
                     ),
@@ -126,6 +131,7 @@ class UpdateContactEmailForm(UpdateFormBase):
         fields = ['email', 'recovery_email', 'about_me_email']
 
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
         super(UpdateContactEmailForm, self).__init__(*args, **kwargs)
         self.helper = helper.FormHelper(self)
         self.helper.form_show_labels = False
@@ -133,16 +139,12 @@ class UpdateContactEmailForm(UpdateFormBase):
         self.helper.layout = layout.Layout(
             layout.Div(
                 layout.Div(
-                    layout.Div(
-                        layout.Div(
-                            layout.HTML(
-                                fieldtostring("required", "autofocus", type="email", name="email", value="")),
-                            layout.HTML(valuetolabel("email", "Email")),
-                            css_class="md-form",
-                        ),
-                    ),
-                    css_class="list-group"
-                )
+                    layout.HTML(fieldtostring(
+                        "required", "autofocus", type="radio", name="email", value="", css_class="form-check-input"
+                    )),
+                    layout.HTML(valuetolabel("email", "Email")),
+                    css_class="form-check",
+                ),
             )
         )
 
