@@ -12,6 +12,7 @@ from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 from django.utils.text import slugify
 from xhtml2pdf import pisa
+from django.http import HttpRequest
 from crispy_forms.helper import FormHelper
 
 from . import models, forms
@@ -124,14 +125,19 @@ class ChangeEmailView(generic.list.ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ChangeContactEmailView(ChangeInfoView):
+class ChangeContactEmailView(generic.edit.FormView):
     template_name = 'myaccount/change_contact_email.html'
-    form_class = forms.UpdateContactEmailForm(user=request.user)
+
+    def get_object(self):
+        return self.request.user
+
+    form_class = forms.UpdateContactEmailForm(get_object(ChangeContactEmailView))
+
+    def get_success_url(self):
+        return reverse('profile', kwargs={'slug': self.object.slug})
 
     def get_context_data(self, **kwargs):
         context = super(ChangeContactEmailView, self).get_context_data(**kwargs)
-        context["today"] = self.actual_time
-
         return context
 
 
