@@ -130,8 +130,9 @@ class UpdateContactEmailForm(UpdateFormBase):
         model = User
         fields = ['email', 'recovery_email', 'about_me_email']
 
-    def __init__(self, user, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+
         super(UpdateContactEmailForm, self).__init__(*args, **kwargs)
         self.helper = helper.FormHelper(self)
         self.helper.form_show_labels = False
@@ -142,7 +143,7 @@ class UpdateContactEmailForm(UpdateFormBase):
                     layout.HTML(fieldtostring(
                         "required", "autofocus", type="radio", name="email", value="", css_class="form-check-input"
                     )),
-                    layout.HTML(valuetolabel("email", self.user.username)),
+                    layout.HTML(valuetolabel("email", self.request.user.email)),
                     css_class="form-check",
                 ),
             )

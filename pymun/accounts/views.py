@@ -127,11 +127,15 @@ class ChangeEmailView(generic.list.ListView):
 @method_decorator(login_required, name='dispatch')
 class ChangeContactEmailView(generic.edit.FormView):
     template_name = 'myaccount/change_contact_email.html'
+    form_class = forms.UpdateContactEmailForm
+
+    def get_form_kwargs(self):
+        kwargs = super(ChangeContactEmailView, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_object(self):
         return self.request.user
-
-    form_class = forms.UpdateContactEmailForm(get_object(ChangeContactEmailView))
 
     def get_success_url(self):
         return reverse('profile', kwargs={'slug': self.object.slug})
