@@ -7,18 +7,47 @@
 <link rel="stylesheet" href="{% static 'myaccount/css/change_base.css' %}">
 {% endblock style %}
 
-{% block inner_topic %}Contact Email{% endblock inner_topic %}
-{% block icon_url %}{% url 'change_email' %}{% endblock icon_url %}
-
+{% block inner_topic %}Email{% endblock inner_topic %}
 {% block inner_content %}
   <p class="text-muted  custom-text-1">Your changes will be available to anyone</p>
   <div class="card z-depth-0 border">
-    <div class="card-body" style="padding-left: 0px; padding-right: 0px;">
-      <p class="card-text custom-card-txt-0 text-body">
-        <form action="{% url 'change_contact_email' %}">
-          {% crispy form %}
-        </form>
-      </p>
+    <div class="card-body">
+      <div class="form-check" style="padding-left: 0px;">
+        <input type="radio" class="form-check-input" id="materialChecked" name="materialExampleRadios" checked>
+        <label class="form-check-label" for="materialChecked">
+          <span class="card-text custom-card-txt-0 text-body">{{ user.email }}</span>
+        </label>
+      </div>
+      <div style="padding-top: 20px;"></div>
+      <button class="btn btn-flat" data-toggle="modal" data-target="#modalLoginForm"
+              style="padding-left: 1%; padding-right: 1%; margin: 0px; padding-top: 1%; padding-bottom: 1%">
+        Add Other Email
+      </button>
+    </div>
+  </div>
+  <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content custom-content-1">
+        <div class="custom-content-1a">
+          <div class="modal-header border-0">
+            <h5 class="modal-title custom-text-2" id="exampleModalLongTitle" style="padding-bottom: 0px;">Add Contact Email</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="padding-top: 0px;">
+            <form method="post" action="{% url 'change_name'  %}">
+              {% crispy form %}
+              <div class="btn-group float-right" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-flat btn-sm float-right btn-custom-0" data-dismiss="modal">
+                  <span class="text-secondary custom-text-3">Cancel</span>
+                </button>
+                <button type="submit" class="btn btn-flat btn-sm float-right btn-custom-0"><span class="text-primary custom-text-3">Done</span></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

@@ -46,21 +46,17 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
 
     slug = models.SlugField(unique=True)
     avatar = models.ImageField('Avatar', upload_to=upload_to, blank=True, null=True)
-    
+    email = models.EmailField(_('email address'), blank=True)
     recovery_email = models.EmailField(_('Recovery Email'), blank=True, null=True)
     about_me_email = models.EmailField(_('About Me Email'), blank=True, null=True)
-
     birthday = models.DateField(_('Birthday'), blank=True, null=True)
     genders = (('male', 'Male'), ('female', 'Female'), ('others', 'Non-Binary'), ('none', 'Undeclarable'))
     gender = models.CharField(_('Gender'), blank=True, choices=genders, max_length=10)
-
     workplace = models.CharField(_('Workplace'), blank=True, max_length=100)
     college = models.CharField(_('College'), blank=True, max_length=100)
     high_school = models.CharField(_('High School'), blank=True, max_length=100)
-
     current_city = models.CharField(_('Current City'), blank=True, max_length=100)
     hometown = models.CharField(_('Hometown'), blank=True, max_length=100)
-
     nickname = models.CharField(_('Nickname'), blank=True, max_length=50)
     # biography = util_fields.MultilingualCharField(_('Biography'), blank=True, max_length=500)
     # favorite_quote = util_fields.MultilingualCharField(_('Favorite Quote'), blank=True, max_length=500)
@@ -122,3 +118,12 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
     @classmethod
     def itemprop_fields(cls) -> object:
         return ["title", "content"] + super().itemprop_fields()
+
+
+class ContactEmail(models.Model):
+    address = models.EmailField(_('email address'), blank=True)
+    verified = models.BooleanField(_('verified'), default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.address

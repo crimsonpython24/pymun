@@ -129,11 +129,6 @@ class ChangeContactEmailView(generic.edit.FormView):
     template_name = 'myaccount/change_contact_email.html'
     form_class = forms.UpdateContactEmailForm
 
-    def get_form_kwargs(self):
-        kwargs = super(ChangeContactEmailView, self).get_form_kwargs()
-        kwargs.update({'request': self.request})
-        return kwargs
-
     def get_object(self):
         return self.request.user
 

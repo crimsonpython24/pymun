@@ -3,10 +3,10 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.http import request
 
-from .models import User
+from .models import User, ContactEmail
 
 
-def fieldtostring(*args, **kwargs):
+def fieldtostring(if_user, *args, **kwargs):
     string = '<input '
     for arg in args:
         if arg == 'required':
@@ -17,8 +17,11 @@ def fieldtostring(*args, **kwargs):
         if field == 'aria_describedby':
             string += ('aria-describedby="' + value + '" ')
         if field == "name":
-            string += ('id="' + value + '" max_length="' + str(User._meta.get_field(value).max_length) + '" ')
-            string += ('name="' + value + '" ')
+            if if_user:
+                string += ('id="' + value + '" max_length="' + str(User._meta.get_field(value).max_length) + '" ')
+                string += ('name="' + value + '" ')
+            else:
+                string += ('id="' + value + '" ' + 'name="' + value + '" ')
         else:
             string += (field + '="' + value + '" ')
     string += ">"
@@ -65,7 +68,7 @@ class UpdateNameForm(UpdateFormBase):
                 layout.Div(
                     layout.Div(
                         layout.HTML(fieldtostring(
-                            "required", "autofocus", type="text", name="first_name", value="", css_class="form-control"
+                            True, "required", "autofocus", type="text", name="first_name", value="", css_class="form-control"
                         )),
                         layout.HTML(valuetolabel("first_name", "First Name")),
                         css_class="md-form",
@@ -74,7 +77,7 @@ class UpdateNameForm(UpdateFormBase):
                 layout.Div(
                     layout.Div(
                         layout.HTML(fieldtostring(
-                            "required", type="text", name="last_name", value="", css_class="form-control"
+                            True, "required", type="text", name="last_name", value="", css_class="form-control"
                         )),
                         layout.HTML(valuetolabel("last_name", "Last Name")),
                         css_class="md-form",
@@ -127,12 +130,10 @@ class UpdateGenderForm(UpdateFormBase):
 
 class UpdateContactEmailForm(UpdateFormBase):
     class Meta:
-        model = User
-        fields = ['email', 'recovery_email', 'about_me_email']
+        model = ContactEmail
+        fields = ['address']
 
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop("request")
-
         super(UpdateContactEmailForm, self).__init__(*args, **kwargs)
         self.helper = helper.FormHelper(self)
         self.helper.form_show_labels = False
@@ -140,11 +141,13 @@ class UpdateContactEmailForm(UpdateFormBase):
         self.helper.layout = layout.Layout(
             layout.Div(
                 layout.Div(
-                    layout.HTML(fieldtostring(
-                        "required", "autofocus", type="radio", name="email", value="", css_class="form-check-input"
-                    )),
-                    layout.HTML(valuetolabel("email", self.request.user.email)),
-                    css_class="form-check",
+                    layout.Div(
+                        layout.HTML(fieldtostring(
+                            False, "required", "autofocus", type="text", name="address", value="", css_class="form-control"
+                        )),
+                        layout.HTML(valuetolabel("address", "Email")),
+                        css_class="md-form",
+                    ),
                 ),
             )
         )
@@ -153,7 +156,7 @@ class UpdateContactEmailForm(UpdateFormBase):
 class UpdateAboutMeEmailForm(UpdateFormBase):
     class Meta:
         model = User
-        fields = ['email', 'recovery_email', 'about_me_email']
+        fields = ['about_me_email']
 
     def __init__(self, *args, **kwargs):
         super(UpdateAboutMeEmailForm, self).__init__(*args, **kwargs)
@@ -168,7 +171,7 @@ class UpdateAboutMeEmailForm(UpdateFormBase):
 class UpdateRecoveryEmailForm(UpdateFormBase):
     class Meta:
         model = User
-        fields = ['email', 'recovery_email', 'about_me_email']
+        fields = ['recovery_email']
 
     def __init__(self, *args, **kwargs):
         super(UpdateRecoveryEmailForm, self).__init__(*args, **kwargs)
