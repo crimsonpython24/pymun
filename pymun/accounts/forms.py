@@ -128,6 +128,21 @@ class UpdateGenderForm(UpdateFormBase):
         )
 
 
+class UpdateMainEmailForm(UpdateFormBase):
+    class Meta:
+        model = User
+        fields = ['about_me_email']
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateMainEmailForm, self).__init__(*args, **kwargs)
+        self.helper = helper.FormHelper(self)
+        self.helper.form_show_labels = False
+        self.helper.form_tag = False
+        self.helper.layout = layout.Layout(
+            layout.Div()
+        )
+
+
 class UpdateContactEmailForm(UpdateFormBase):
     class Meta:
         model = ContactEmail

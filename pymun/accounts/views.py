@@ -123,9 +123,9 @@ class ChangeEmailView(generic.list.ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ChangeContactEmailView(generic.edit.FormView):
-    template_name = 'myaccount/change_contact_email.html'
-    form_class = forms.UpdateContactEmailForm
+class ChangeMainEmailView(generic.edit.FormView):
+    template_name = 'myaccount/change_main_email.html'
+    form_class = forms.UpdateMainEmailForm
 
     def get_object(self):
         return self.request.user
@@ -139,13 +139,19 @@ class ChangeContactEmailView(generic.edit.FormView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ChangeAboutMeEmailView(ChangeInfoView):
+class ChangeAboutMeEmailView(ChangeMainEmailView):
     template_name = 'myaccount/change_about_me_email.html'
     form_class = forms.UpdateAboutMeEmailForm
 
 
 @method_decorator(login_required, name='dispatch')
-class ChangeRecoveryEmailView(ChangeInfoView):
+class ChangeContactEmailView(ChangeMainEmailView):
+    template_name = 'myaccount/change_contact_email.html'
+    form_class = forms.UpdateContactEmailForm
+
+
+@method_decorator(login_required, name='dispatch')
+class ChangeRecoveryEmailView(ChangeMainEmailView):
     template_name = 'myaccount/change_recovery_email.html'
     form_class = forms.UpdateRecoveryEmailForm
 

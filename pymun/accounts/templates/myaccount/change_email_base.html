@@ -19,11 +19,28 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
         {% if user.email %}
-          <a style="display:block" href="{% url 'change_contact_email'  %}">
+          <a style="display:block" href="{% url 'change_main_email'  %}">
             <div class="row">
               <div class="col-5"><span class="custom-text-4">Contact email</span></div>
               <div class="col-7">
                 <span class="custom-text-4">{{ user.email }}</span>
+                <p class="text-muted custom-text-5">
+                  The address where you get information about most of our services you use with this account
+                </p>
+              </div>
+            </div>
+          </a>
+        {% endif %}
+      </li>
+      <li class="list-group-item">
+        {% if user.email %}
+          <a style="display:block" href="{% url 'change_contact_email'  %}">
+            <div class="row">
+              <div class="col-5"><span class="custom-text-4">Recovery email</span></div>
+              <div class="col-7">
+                {% if user.recovery_email %}
+                  <span class="custom-text-4">{{ user.contact_email }}</span>
+                {% else %}<span class="custom-text-4 custom-text-6 text-primary">Add contact email</span>{% endif %}
                 <p class="text-muted custom-text-5">
                   The address where you get information about most of our services you use with this account
                 </p>
