@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="{% static 'myaccount/css/change_base.css' %}">
 <link rel="stylesheet" href="{% static 'myaccount/css/change_email.css' %}">
 <link rel="stylesheet" href="{% static 'myaccount/css/personal_info.css' %}"/>
+<style>
+  .md-accordion .card .card-body {font-weight: normal; line-height: 1.5; color: inherit !important; font-size: 1rem;}
+</style>
 {% endblock style %}
 
 {% block inner_topic %}Email{% endblock inner_topic %}
@@ -18,59 +21,21 @@
   <div class="card-body card-body-custom-0">
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
-        {% if user.email %}
-          <a style="display:block" href="{% url 'change_main_email'  %}">
-            <div class="row">
-              <div class="col-5"><span class="custom-text-4">Contact email</span></div>
-              <div class="col-7">
-                <span class="custom-text-4">{{ user.email }}</span>
-                <p class="text-muted custom-text-5">
-                  The address where you get information about most of our services you use with this account
-                </p>
-              </div>
-            </div>
-          </a>
-        {% endif %}
-      </li>
-      <li class="list-group-item">
-        {% if user.email %}
-          <a style="display:block" href="{% url 'change_contact_email'  %}">
-            <div class="row">
-              <div class="col-5"><span class="custom-text-4">Recovery email</span></div>
-              <div class="col-7">
-                {% if user.recovery_email %}
-                  <span class="custom-text-4">{{ user.contact_email }}</span>
-                {% else %}<span class="custom-text-4 custom-text-6 text-primary">Add contact email</span>{% endif %}
-                <p class="text-muted custom-text-5">
-                  The address where you get information about most of our services you use with this account
-                </p>
-              </div>
-            </div>
-          </a>
-        {% endif %}
-      </li>
-      <li class="list-group-item">
-        {% if user.email %}
-          <a style="display:block" href="{% url 'change_about_me_email'  %}">
-            <div class="row">
-              <div class="col-5"><span class="custom-text-4">About me email</span></div>
-              <div class="col-7">
-                {% if user.about_me_email %}
-                  <span class="custom-text-4">{{ user.about_me_email }}</span>
-                {% else %}<span class="custom-text-4 custom-text-6 text-primary">Add about me email</span>{% endif %}
-                <p class="text-muted custom-text-5">
-                  The address where you get information about most of our services you use with this account
-                </p>
-              </div>
-            </div>
-          </a>
-        {% endif %}
+        <div class="row">
+          <div class="col-5"><span class="custom-text-4a">Account email</span></div>
+          <div class="col-7">
+            <span class="custom-text-4">{{ user.email }}</span>
+            <p class="text-muted custom-text-5">
+              The address used to identify your Google Account to you and others. You can't change this address.
+            </p>
+          </div>
+        </div>
       </li>
       <li class="list-group-item">
         {% if user.email %}
           <a style="display:block" href="{% url 'change_recovery_email'  %}">
             <div class="row">
-              <div class="col-5"><span class="custom-text-4">Recovery email</span></div>
+              <div class="col-5"><span class="custom-text-4a">Recovery email</span></div>
               <div class="col-7">
                 {% if user.recovery_email %}
                   <span class="custom-text-4">{{ user.recovery_email }}</span>
@@ -84,6 +49,56 @@
         {% endif %}
       </li>
     </ul>
+  </div>
+</div>
+<div class="md-accordion accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+  <div class="card content-card-custom-0 z-depth-0 border border-top-0 content-card-custom-0" style="min-width: 660px;">
+    <a style="display:block" data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
+      <div class="card-header" role="tab" id="headingOne1">
+        <span class="custom-text-4a">Advanced stats</span><i class="fas fa-angle-down rotate-icon float-right"></i>
+      </div>
+    </a>
+    <!-- Card content -->
+    <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
+      <div class="card-body card-body-custom-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            {% if user.email %}
+              <a style="display:block" href="{% url 'change_contact_email'  %}">
+                <div class="row">
+                  <div class="col-5"><span class="custom-text-4a">Contact email</span></div>
+                  <div class="col-7">
+                    {% if user.recovery_email %}
+                      <span class="custom-text-4">{{ user.contact_email }}</span>
+                    {% else %}<span class="custom-text-4 custom-text-6 text-primary">Add contact email</span>{% endif %}
+                    <p class="text-muted custom-text-5">
+                      The address where you get information about most of our services you use with this account
+                    </p>
+                  </div>
+                </div>
+              </a>
+            {% endif %}
+          </li>
+          <li class="list-group-item">
+            {% if user.email %}
+              <a style="display:block" href="{% url 'change_about_me_email'  %}">
+                <div class="row">
+                  <div class="col-5"><span class="custom-text-4a">About me email</span></div>
+                  <div class="col-7">
+                    {% if user.about_me_email %}
+                      <span class="custom-text-4">{{ user.about_me_email }}</span>
+                    {% else %}<span class="custom-text-4 custom-text-6 text-primary">Add about me email</span>{% endif %}
+                    <p class="text-muted custom-text-5">
+                      The address where you get information about most of our services you use with this account
+                    </p>
+                  </div>
+                </div>
+              </a>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 <!-- Card -->
