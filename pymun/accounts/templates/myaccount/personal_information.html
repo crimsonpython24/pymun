@@ -25,7 +25,7 @@
 
   <div class="container container-custom">
     <!-- Card -->
-    <div class="card content-card-custom-0 z-depth-0 border">
+    <div class="card content-card-custom-0 z-depth-0 border" style="height:327.3px;">
       <div class="card-body card-custom-1">
         <div class="card-header-custom-0">
           <h4 class="card-title">Profile</h4>
@@ -33,29 +33,33 @@
         </div>
         <div class="card-body-custom-0">
           <ul class="list-group list-group-flush">
-            <div class="list-group-item list-group-item-action waves-effect list-group-custom">
-              <a style="display:block" href="{% url 'change_name'  %}">
-                <div class="row custom-row-0">
-                  <div class="col-3 text-muted custom-text-0"><small>Name</small></div>
+            <div aria-labelledby="name-if" class="list-group-item list-group-item-action waves-effect list-group-custom" style="display:block;">
+              <div class="d-none d-md-block">
+                <a style="display:block" href="{% url 'change_name'  %}">
+                  <div class="row custom-row-0">
+                    <div class="col-3 text-muted custom-text-0"><small>Name</small></div>
                     <div class="col-8 custom-text-1">
-                      {% if user.first_name and user.last_name %}
-                        {{ user.first_name }} {{ user.last_name }}
-                      {% else %}
-                        No first or last name set
-                      {% endif %}
+                      {% if user.first_name and user.last_name %}{{ user.first_name }} {{ user.last_name }}
+                      {% else %}No first or last name set{% endif %}
                     </div>
-                  <div class="col-1"><i class="fas fa-angle-right"></i></div>
+                    <div class="col-1"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </a>
+              </div>
+              <div class="d-md-none">
+                <div style="padding-left: 0px;">
+                  <a style="display:block" href="{% url 'change_name'  %}">
+                    <div class="row custom-row-0">
+                      <div class="col-11 custom-text-1">
+                        <div class="text-muted custom-text-0"><small>Name</small></div>
+                        {% if user.first_name and user.last_name %}{{ user.first_name }} {{ user.last_name }}
+                        {% else %}No first or last name set{% endif %}
+                      </div>
+                      <div class="col-1"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </a>
                 </div>
-              </a>
-            </div>
-            <div class="list-group-item list-group-item-action waves-effect list-group-custom">
-              <a style="display:block" href="{% url 'change_birthday'  %}">
-                <div class="row custom-row-0">
-                  <div class="col-3 text-muted custom-text-0"><small>Birthday</small></div>
-                  <div class="col-8 custom-text-1">{{ user.birthday }}</div>
-                  <div class="col-1"><i class="fas fa-angle-right"></i></div>
-                </div>
-              </a>
+              </div>
             </div>
             <div class="list-group-item list-group-item-action waves-effect list-group-custom">
               <a style="display:block" href="{% url 'change_gender'  %}">
