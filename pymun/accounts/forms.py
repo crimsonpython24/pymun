@@ -138,15 +138,7 @@ class UpdateContactEmailForm(UpdateFormBase):
         self.helper.form_show_labels = False
         self.helper.form_tag = False
         self.helper.layout = layout.Layout(
-            layout.Div(
-                layout.Div(
-                    layout.HTML(fieldtostring(
-                        "required", "autofocus", type="radio", name="email", value="", css_class="form-check-input"
-                    )),
-                    layout.HTML(valuetolabel("email", self.request.user.email)),
-                    css_class="form-check",
-                ),
-            )
+            layout.Div()
         )
 
 

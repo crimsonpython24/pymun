@@ -86,8 +86,6 @@ class PersonalInfoView(generic.list.ListView):
 @method_decorator(login_required, name='dispatch')
 class ChangeInfoView(generic.edit.UpdateView):
     model = models.User
-    template_name = 'myaccount/change_name.html'
-    form_class = forms.UpdateNameForm
 
     def get_object(self):
         return self.request.user
