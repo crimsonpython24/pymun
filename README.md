@@ -45,3 +45,7 @@ This is the second version of the `pymun` project, and it was initially derived 
 ### Decorations
 
 The decorations were also stripped off, again, to simplify the code as a whole. Refer to commit `c21c5b30ba154d8ebb8d5578dafd5e09915230a5` for the source code.
+
+### Sql Migration
+
+Because of the email fields, this project was switchd from sqlite to postgre on jan. 15

@@ -130,5 +130,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+<<<<<<< HEAD
 # Secret configs
 settings_config.py
+=======
+# Secret stuffs
+settings_config.py
+>>>>>>> 57c29e7273d1f16ebe890c3df2ebe125a8fba4b0
