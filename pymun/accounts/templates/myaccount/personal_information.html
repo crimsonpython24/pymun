@@ -25,7 +25,7 @@
 
   <div class="container container-custom">
     <!-- Card -->
-    <div class="card content-card-custom-0 z-depth-0 border" style="height:327.3px;">
+    <div class="card content-card-custom-0 z-depth-0 border">
       <div class="card-body card-custom-1">
         <div class="card-header-custom-0">
           <h4 class="card-title">Profile</h4>
@@ -53,6 +53,15 @@
                 <div class="row custom-row-0">
                   <div class="col-3 text-muted custom-text-0"><small>Gender</small></div>
                   <div class="col-8 custom-text-1">{{ user.gender }}</div>
+                  <div class="col-1"><i class="fas fa-angle-right"></i></div>
+                </div>
+              </a>
+            </div>
+            <div class="list-group-item list-group-item-action waves-effect list-group-custom">
+              <a style="display:block" href="{% url 'change_birthday'  %}">
+                <div class="row custom-row-0">
+                  <div class="col-3 text-muted custom-text-0"><small>Birthday</small></div>
+                  <div class="col-8 custom-text-1">{{ user.birthday }}</div>
                   <div class="col-1"><i class="fas fa-angle-right"></i></div>
                 </div>
               </a>

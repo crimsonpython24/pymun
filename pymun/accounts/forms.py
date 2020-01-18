@@ -2,6 +2,8 @@ from crispy_forms import helper, layout, bootstrap
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.http import request
+from django.contrib.postgres.forms import SplitArrayField
+from django.forms import EmailField
 
 from .models import User
 
@@ -159,19 +161,30 @@ class UpdateContactEmailForm(UpdateFormBase):
         )
 
 
-from django.contrib.postgres.forms import SplitArrayField
-from django.forms import EmailField
-
-
-class UpdateRecoveryEmailForm(UpdateFormBase):
-    SplitArrayField(EmailField(required=True), size=3, remove_trailing_nulls=False)
-
+class UpdateRecoveryEmailView(UpdateFormBase):
     class Meta:
         model = User
         fields = ['recovery_email']
 
     def __init__(self, *args, **kwargs):
-        super(UpdateRecoveryEmailForm, self).__init__(*args, **kwargs)
+        super(UpdateRecoveryEmailView, self).__init__(*args, **kwargs)
+        self.helper = helper.FormHelper(self)
+        self.helper.form_show_labels = False
+        self.helper.form_tag = False
+        self.helper.layout = layout.Layout(
+            layout.Div()
+        )
+
+
+class UpdateAlternateEmailForm(UpdateFormBase):
+    SplitArrayField(EmailField(required=True), size=float("inf"), remove_trailing_nulls=False)
+
+    class Meta:
+        model = User
+        fields = ['alternate_email']
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateAlternateEmailForm, self).__init__(*args, **kwargs)
         self.helper = helper.FormHelper(self)
         self.helper.form_show_labels = False
         self.helper.form_tag = False

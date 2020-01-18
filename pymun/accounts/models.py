@@ -49,7 +49,8 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
     avatar = models.ImageField('Avatar', upload_to=upload_to, blank=True, null=True)
 
     email = models.EmailField(_('email address'), blank=True)
-    recovery_email = ArrayField(models.EmailField(_('Recovery Email')), blank=True, null=True)
+    recovery_email = models.EmailField(_('Recovery Email'), blank=True, null=True)
+    alternate_email = ArrayField(models.EmailField(_('Recovery Email')), blank=True, null=True)
     contact_email = ArrayField(models.EmailField(_('Contact Email')), blank=True, null=True)
 
     birthday = models.DateField(_('Birthday'), blank=True, null=True)

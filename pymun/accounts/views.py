@@ -134,6 +134,9 @@ class ChangeEmailBaseView(generic.edit.FormView):
         context = super(ChangeEmailBaseView, self).get_context_data(**kwargs)
         return context
 
+    def form_valid(self, form):
+        return super().form_valid(form)
+
 
 @method_decorator(login_required, name='dispatch')
 class ChangeContactEmailView(ChangeEmailBaseView):
@@ -144,7 +147,13 @@ class ChangeContactEmailView(ChangeEmailBaseView):
 @method_decorator(login_required, name='dispatch')
 class ChangeRecoveryEmailView(ChangeEmailBaseView):
     template_name = 'myaccount/change_recovery_email.html'
-    form_class = forms.UpdateRecoveryEmailForm
+    form_class = forms.UpdateRecoveryEmailView
+
+
+@method_decorator(login_required, name='dispatch')
+class ChangeAlternateEmailView(ChangeEmailBaseView):
+    template_name = 'myaccount/change_recovery_email.html'
+    form_class = forms.UpdateAlternateEmailForm
 
 
 @method_decorator(login_required, name='dispatch')

@@ -31,6 +31,23 @@
           </div>
         </div>
       </li>
+      <li class="list-group-item">
+        {% if user.email %}
+          <a style="display:block" href="{% url 'change_recovery_email'  %}">
+            <div class="row">
+              <div class="col-5"><span class="custom-text-4a">Recovery email</span></div>
+              <div class="col-7">
+                {% if user.recovery_email %}
+                  <span class="custom-text-4">{{ user.recovery_email }}</span>
+                {% else %}<span class="custom-text-4 custom-text-6 text-primary">Add recovery email</span>{% endif %}
+                <p class="text-muted custom-text-5">
+                  The address where you get information about most of our services you use with this account
+                </p>
+              </div>
+            </div>
+          </a>
+        {% endif %}
+      </li>
     </ul>
   </div>
 </div>
@@ -64,13 +81,13 @@
           </li>
           <li class="list-group-item">
             {% if user.email %}
-              <a style="display:block" href="{% url 'change_recovery_email'  %}">
+              <a style="display:block" href="{% url 'change_alternate_email'  %}">
                 <div class="row">
-                  <div class="col-5"><span class="custom-text-4a">Recovery email</span></div>
+                  <div class="col-5"><span class="custom-text-4a">Alternate email</span></div>
                   <div class="col-7">
-                    {% if user.recovery_email %}
-                      <span class="custom-text-4">{{ user.recovery_email }}</span>
-                    {% else %}<span class="custom-text-4 custom-text-6 text-primary">Add recovery email</span>{% endif %}
+                    {% if user.alternate_email %}
+                      <span class="custom-text-4">{{ user.alternate_email }}</span>
+                    {% else %}<span class="custom-text-4 custom-text-6 text-primary">Add alternate email</span>{% endif %}
                     <p class="text-muted custom-text-5">
                       The address where you get information about most of our services you use with this account<br>
                       It can also be used in case you are locked out like an idiot
