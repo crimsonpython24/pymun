@@ -33,33 +33,20 @@
         </div>
         <div class="card-body-custom-0">
           <ul class="list-group list-group-flush">
-            <div aria-labelledby="name-if" class="list-group-item list-group-item-action waves-effect list-group-custom" style="display:block;">
-              <div class="d-none d-md-block">
-                <a style="display:block" href="{% url 'change_name'  %}">
-                  <div class="row custom-row-0">
-                    <div class="col-3 text-muted custom-text-0"><small>Name</small></div>
+            <div class="list-group-item list-group-item-action waves-effect list-group-custom">
+              <a style="display:block" href="{% url 'change_name'  %}">
+                <div class="row custom-row-0">
+                  <div class="col-3 text-muted custom-text-0"><small>Name</small></div>
                     <div class="col-8 custom-text-1">
-                      {% if user.first_name and user.last_name %}{{ user.first_name }} {{ user.last_name }}
-                      {% else %}No first or last name set{% endif %}
+                      {% if user.first_name and user.last_name %}
+                        {{ user.first_name }} {{ user.last_name }}
+                      {% else %}
+                        No first or last name set
+                      {% endif %}
                     </div>
-                    <div class="col-1"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </a>
-              </div>
-              <div class="d-md-none">
-                <div style="padding-left: 0px;">
-                  <a style="display:block" href="{% url 'change_name'  %}">
-                    <div class="row custom-row-0">
-                      <div class="col-11 custom-text-1">
-                        <div class="text-muted custom-text-0"><small>Name</small></div>
-                        {% if user.first_name and user.last_name %}{{ user.first_name }} {{ user.last_name }}
-                        {% else %}No first or last name set{% endif %}
-                      </div>
-                      <div class="col-1"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                  </a>
+                  <div class="col-1"><i class="fas fa-angle-right"></i></div>
                 </div>
-              </div>
+              </a>
             </div>
             <div class="list-group-item list-group-item-action waves-effect list-group-custom">
               <a style="display:block" href="{% url 'change_gender'  %}">
