@@ -123,12 +123,14 @@ class ChangeEmailView(generic.list.ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ChangeEmailBaseView(generic.edit.FormView):
+class ChangeEmailBaseView(generic.edit.UpdateView):
+    model = models.User
+
     def get_object(self):
         return self.request.user
 
     def get_success_url(self):
-        return reverse('profile', kwargs={'slug': self.request.user.slug})
+        return reverse('personal_info')
 
     def get_context_data(self, **kwargs):
         context = super(ChangeEmailBaseView, self).get_context_data(**kwargs)
@@ -147,12 +149,12 @@ class ChangeContactEmailView(ChangeEmailBaseView):
 @method_decorator(login_required, name='dispatch')
 class ChangeRecoveryEmailView(ChangeEmailBaseView):
     template_name = 'myaccount/change_recovery_email.html'
-    form_class = forms.UpdateRecoveryEmailView
+    form_class = forms.UpdateRecoveryEmailForm
 
 
 @method_decorator(login_required, name='dispatch')
 class ChangeAlternateEmailView(ChangeEmailBaseView):
-    template_name = 'myaccount/change_recovery_email.html'
+    template_name = 'myaccount/change_alternate_email.html'
     form_class = forms.UpdateAlternateEmailForm
 
 

@@ -17,7 +17,7 @@ urlpatterns = [
     path('myaccount/change_birthday', views.ChangeBirthdayView.as_view(), name='change_birthday'),
     path('myaccount/change_gender', views.ChangeGenderView.as_view(), name='change_gender'),
     path('myaccount/change_email', views.ChangeEmailView.as_view(), name='change_email'),
-    path('myaccount/change_email/contact', views.ChangeRecoveryEmailView.as_view(), name='change_recovery_email'),
+    path('myaccount/change_email/recovery', views.ChangeRecoveryEmailView.as_view(), name='change_recovery_email'),
     path('myaccount/change_email/contact', views.ChangeContactEmailView.as_view(), name='change_contact_email'),
     path('myaccount/change_email/alternate', views.ChangeAlternateEmailView.as_view(), name='change_alternate_email'),
 

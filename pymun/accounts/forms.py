@@ -161,13 +161,13 @@ class UpdateContactEmailForm(UpdateFormBase):
         )
 
 
-class UpdateRecoveryEmailView(UpdateFormBase):
+class UpdateRecoveryEmailForm(UpdateFormBase):
     class Meta:
         model = User
         fields = ['recovery_email']
 
     def __init__(self, *args, **kwargs):
-        super(UpdateRecoveryEmailView, self).__init__(*args, **kwargs)
+        super(UpdateRecoveryEmailForm, self).__init__(*args, **kwargs)
         self.helper = helper.FormHelper(self)
         self.helper.form_show_labels = False
         self.helper.form_tag = False
