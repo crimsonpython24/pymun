@@ -1,0 +1,32 @@
+{% extends "myaccount/email/change_email_base.html" %}
+
+{% block inner_topic %}Contact Email{% endblock inner_topic %}
+
+{% block card_text %}
+  <p class="text-muted  custom-text-1">Your changes will be available to anyone</p>
+  <div class="card z-depth-0 border">
+    <div class="card-body">
+      <p class="card-text custom-card-txt-0 text-body">
+        {% if user.contact_email %}
+          {{ user.contact_email }}
+        {% else %}
+          No contact email set
+        {% endif %}
+        <i class="fas fa-pencil-alt float-right align-middle" data-toggle="modal" data-target="#modalLoginForm"></i>
+      </p>
+    </div>
+  </div>
+{% endblock card_text %}
+
+{% block modal_header %}
+  <div class="modal-header border-0">
+    <h5 class="modal-title custom-text-2" id="exampleModalLongTitle" style="padding-bottom: 0px;">Change gender</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endblock modal_header %}
+
+{% block email_form %}
+  No forms yet
+{% endblock email_form %}

@@ -1,0 +1,27 @@
+{% extends "myaccount/change_base.html" %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'myaccount/css/change_base.css' %}">
+{% endblock style %}
+
+{% block inner_topic %}Alternate Email{% endblock inner_topic %}
+{% block icon_url %}{% url 'change_email' %}{% endblock icon_url %}
+
+{% block inner_content %}
+  {% block card_text %}{% endblock card_text %}
+  <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content custom-content-1">
+        <div class="custom-content-1a">
+          {% block modal_header %}{% endblock modal_header %}
+          <div class="modal-body" style="padding-top: 0px;">
+            {% block email_form %}{% endblock email_form %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock inner_content %}
