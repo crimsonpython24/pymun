@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.timezone import now as timezone_now
+from django.contrib.postgres.fields import ArrayField
 
 from utils import models as util_models
 
@@ -46,22 +47,28 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
 
     slug = models.SlugField(unique=True)
     avatar = models.ImageField('Avatar', upload_to=upload_to, blank=True, null=True)
+
     email = models.EmailField(_('email address'), blank=True)
-    recovery_email = models.EmailField(_('Recovery Email'), blank=True, null=True)
-    about_me_email = models.EmailField(_('About Me Email'), blank=True, null=True)
+    recovery_email = ArrayField(models.EmailField(_('Recovery Email')), blank=True, null=True)
+    contact_email = ArrayField(models.EmailField(_('Contact Email')), blank=True, null=True)
+    about_me_email = ArrayField(models.EmailField(_('About Me Email')), blank=True, null=True)
+
     birthday = models.DateField(_('Birthday'), blank=True, null=True)
     genders = (('male', 'Male'), ('female', 'Female'), ('others', 'Non-Binary'), ('none', 'Undeclarable'))
     gender = models.CharField(_('Gender'), blank=True, choices=genders, max_length=10)
+
     workplace = models.CharField(_('Workplace'), blank=True, max_length=100)
     college = models.CharField(_('College'), blank=True, max_length=100)
+
     high_school = models.CharField(_('High School'), blank=True, max_length=100)
     current_city = models.CharField(_('Current City'), blank=True, max_length=100)
     hometown = models.CharField(_('Hometown'), blank=True, max_length=100)
+
     nickname = models.CharField(_('Nickname'), blank=True, max_length=50)
-    # biography = util_fields.MultilingualCharField(_('Biography'), blank=True, max_length=500)
-    # favorite_quote = util_fields.MultilingualCharField(_('Favorite Quote'), blank=True, max_length=500)
     biography = models.CharField(_('Biography'), blank=True, max_length=500)
     favorite_quote = models.CharField(_('Favorite Quote'), blank=True, max_length=500)
+    # biography = util_fields.MultilingualCharField(_('Biography'), blank=True, max_length=500)
+    # favorite_quote = util_fields.MultilingualCharField(_('Favorite Quote'), blank=True, max_length=500)
 
     def __str__(self):
         assert isinstance(self.username, object)
