@@ -35,9 +35,16 @@
             </button>
           </div>
           <div class="modal-body" style="padding-top: 0px;">
-
-            No forms yet.
-
+            <form method="post" action="{% url 'change_recovery_email'  %}">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <div class="btn-group float-right" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-flat btn-sm float-right btn-custom-0" data-dismiss="modal">
+                  <span class="text-secondary custom-text-3">Cancel</span>
+                </button>
+                <button type="submit" class="btn btn-flat btn-sm float-right btn-custom-0"><span class="text-primary custom-text-3">Done</span></button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

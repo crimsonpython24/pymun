@@ -51,7 +51,6 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
     email = models.EmailField(_('email address'), blank=True)
     recovery_email = ArrayField(models.EmailField(_('Recovery Email')), blank=True, null=True)
     contact_email = ArrayField(models.EmailField(_('Contact Email')), blank=True, null=True)
-    about_me_email = ArrayField(models.EmailField(_('About Me Email')), blank=True, null=True)
 
     birthday = models.DateField(_('Birthday'), blank=True, null=True)
     genders = (('male', 'Male'), ('female', 'Female'), ('others', 'Non-Binary'), ('none', 'Undeclarable'))
@@ -126,11 +125,3 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
     def itemprop_fields(cls) -> object:
         return ["title", "content"] + super().itemprop_fields()
 
-
-class ContactEmail(models.Model):
-    address = models.EmailField(_('email address'), blank=True)
-    verified = models.BooleanField(_('verified'), default=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.address

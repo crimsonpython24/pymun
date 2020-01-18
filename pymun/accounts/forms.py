@@ -3,7 +3,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.http import request
 
-from .models import User, ContactEmail
+from .models import User
 
 
 def fieldtostring(if_user, *args, **kwargs):
@@ -68,7 +68,8 @@ class UpdateNameForm(UpdateFormBase):
                 layout.Div(
                     layout.Div(
                         layout.HTML(fieldtostring(
-                            True, "required", "autofocus", type="text", name="first_name", value="", css_class="form-control"
+                            True, "required", "autofocus", type="text", name="first_name", value="",
+                            css_class="form-control"
                         )),
                         layout.HTML(valuetolabel("first_name", "First Name")),
                         css_class="md-form",
@@ -110,7 +111,7 @@ class UpdateBirthdayForm(UpdateFormBase):
 
 class UpdateGenderForm(UpdateFormBase):
     gender_choices = [('male', 'Male'), ('female', 'Female'), ('others', 'Non-Binary'), ('none', 'Undeclarable')]
-    gender = forms.ChoiceField(label=_('Gender'), required=False, widget=forms.Select, choices=gender_choices,)
+    gender = forms.ChoiceField(label=_('Gender'), required=False, widget=forms.Select, choices=gender_choices, )
 
     class Meta:
         model = User
@@ -131,7 +132,7 @@ class UpdateGenderForm(UpdateFormBase):
 class UpdateMainEmailForm(UpdateFormBase):
     class Meta:
         model = User
-        fields = ['about_me_email']
+        fields = ['email']
 
     def __init__(self, *args, **kwargs):
         super(UpdateMainEmailForm, self).__init__(*args, **kwargs)
@@ -145,8 +146,8 @@ class UpdateMainEmailForm(UpdateFormBase):
 
 class UpdateContactEmailForm(UpdateFormBase):
     class Meta:
-        model = ContactEmail
-        fields = ['address']
+        model = User
+        fields = ['contact_email']
 
     def __init__(self, *args, **kwargs):
         super(UpdateContactEmailForm, self).__init__(*args, **kwargs)
@@ -158,22 +159,13 @@ class UpdateContactEmailForm(UpdateFormBase):
         )
 
 
-class UpdateAboutMeEmailForm(UpdateFormBase):
-    class Meta:
-        model = User
-        fields = ['about_me_email']
-
-    def __init__(self, *args, **kwargs):
-        super(UpdateAboutMeEmailForm, self).__init__(*args, **kwargs)
-        self.helper = helper.FormHelper(self)
-        self.helper.form_show_labels = False
-        self.helper.form_tag = False
-        self.helper.layout = layout.Layout(
-            layout.Div()
-        )
+from django.contrib.postgres.forms import SplitArrayField
+from django.forms import EmailField
 
 
 class UpdateRecoveryEmailForm(UpdateFormBase):
+    SplitArrayField(EmailField(required=True), size=3, remove_trailing_nulls=False)
+
     class Meta:
         model = User
         fields = ['recovery_email']
@@ -187,47 +179,46 @@ class UpdateRecoveryEmailForm(UpdateFormBase):
             layout.Div()
         )
 
-
-class UpdateWorkForm(UpdateFormBase):
-    class Meta:
-        model = User
-        fields = ['email', 'recovery_email', 'about_me_email']
-
-    def __init__(self, *args, **kwargs):
-        super(UpdateWorkForm, self).__init__(*args, **kwargs)
-        self.helper = helper.FormHelper(self)
-        self.helper.form_show_labels = False
-        self.helper.form_tag = False
-        self.helper.layout = layout.Layout(
-            layout.Div()
-        )
-
-
-class UpdatePlacesForm(UpdateFormBase):
-    class Meta:
-        model = User
-        fields = ['email', 'recovery_email', 'about_me_email']
-
-    def __init__(self, *args, **kwargs):
-        super(UpdatePlacesForm, self).__init__(*args, **kwargs)
-        self.helper = helper.FormHelper(self)
-        self.helper.form_show_labels = False
-        self.helper.form_tag = False
-        self.helper.layout = layout.Layout(
-            layout.Div()
-        )
-
-
-class UpdateDetailForm(UpdateFormBase):
-    class Meta:
-        model = User
-        fields = ['email', 'recovery_email', 'about_me_email']
-
-    def __init__(self, *args, **kwargs):
-        super(UpdateDetailForm, self).__init__(*args, **kwargs)
-        self.helper = helper.FormHelper(self)
-        self.helper.form_show_labels = False
-        self.helper.form_tag = False
-        self.helper.layout = layout.Layout(
-            layout.Div()
-        )
+# class UpdateWorkForm(UpdateFormBase):
+#     class Meta:
+#         model = User
+#         fields = ['email', 'recovery_email', 'about_me_email']
+# 
+#     def __init__(self, *args, **kwargs):
+#         super(UpdateWorkForm, self).__init__(*args, **kwargs)
+#         self.helper = helper.FormHelper(self)
+#         self.helper.form_show_labels = False
+#         self.helper.form_tag = False
+#         self.helper.layout = layout.Layout(
+#             layout.Div()
+#         )
+# 
+# 
+# class UpdatePlacesForm(UpdateFormBase):
+#     class Meta:
+#         model = User
+#         fields = ['email', 'recovery_email', 'about_me_email']
+# 
+#     def __init__(self, *args, **kwargs):
+#         super(UpdatePlacesForm, self).__init__(*args, **kwargs)
+#         self.helper = helper.FormHelper(self)
+#         self.helper.form_show_labels = False
+#         self.helper.form_tag = False
+#         self.helper.layout = layout.Layout(
+#             layout.Div()
+#         )
+# 
+# 
+# class UpdateDetailForm(UpdateFormBase):
+#     class Meta:
+#         model = User
+#         fields = ['email', 'recovery_email', 'about_me_email']
+# 
+#     def __init__(self, *args, **kwargs):
+#         super(UpdateDetailForm, self).__init__(*args, **kwargs)
+#         self.helper = helper.FormHelper(self)
+#         self.helper.form_show_labels = False
+#         self.helper.form_tag = False
+#         self.helper.layout = layout.Layout(
+#             layout.Div()
+#         )

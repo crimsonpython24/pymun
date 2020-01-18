@@ -17,13 +17,12 @@ urlpatterns = [
     path('myaccount/change_gender', views.ChangeGenderView.as_view(), name='change_gender'),
     path('myaccount/change_email', views.ChangeEmailView.as_view(), name='change_email'),
     path('myaccount/change_email/contact', views.ChangeContactEmailView.as_view(), name='change_contact_email'),
-    path('myaccount/change_email/about_me', views.ChangeAboutMeEmailView.as_view(), name='change_about_me_email'),
     path('myaccount/change_email/recovery', views.ChangeRecoveryEmailView.as_view(), name='change_recovery_email'),
 
     path('myaccount/about_me', views.AddAboutView.as_view(), name='about_me'),
-    path('myaccount/about_me/work', views.UpdateWorkView.as_view(), name='update_work'),
-    path('myaccount/about_me/places', views.UpdatePlacesView.as_view(), name='update_places'),
-    path('myaccount/about_me/detail', views.UpdateDetailView.as_view(), name='update_detail'),
+    # path('myaccount/about_me/work', views.UpdateWorkView.as_view(), name='update_work'),
+    # path('myaccount/about_me/places', views.UpdatePlacesView.as_view(), name='update_places'),
+    # path('myaccount/about_me/detail', views.UpdateDetailView.as_view(), name='update_detail'),
 
     path('myaccount/', views.ManageAccountView.as_view(), name='my_account'),
 

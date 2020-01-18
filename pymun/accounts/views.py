@@ -128,17 +128,11 @@ class ChangeEmailBaseView(generic.edit.FormView):
         return self.request.user
 
     def get_success_url(self):
-        return reverse('profile', kwargs={'slug': self.object.slug})
+        return reverse('profile', kwargs={'slug': self.request.user.slug})
 
     def get_context_data(self, **kwargs):
         context = super(ChangeEmailBaseView, self).get_context_data(**kwargs)
         return context
-
-
-@method_decorator(login_required, name='dispatch')
-class ChangeAboutMeEmailView(ChangeEmailBaseView):
-    template_name = 'myaccount/change_about_me_email.html'
-    form_class = forms.UpdateAboutMeEmailForm
 
 
 @method_decorator(login_required, name='dispatch')
@@ -163,19 +157,19 @@ class AddAboutView(generic.list.ListView):
         return context
 
 
-@method_decorator(login_required, name='dispatch')
-class UpdateWorkView(ChangeInfoView):
-    template_name = 'myaccount/update_work.html'
-    form_class = forms.UpdateWorkForm
-
-
-@method_decorator(login_required, name='dispatch')
-class UpdatePlacesView(ChangeInfoView):
-    template_name = 'myaccount/update_places.html'
-    form_class = forms.UpdatePlacesForm
-
-
-@method_decorator(login_required, name='dispatch')
-class UpdateDetailView(ChangeInfoView):
-    template_name = 'myaccount/update_detail.html'
-    form_class = forms.UpdateDetailForm
+# @method_decorator(login_required, name='dispatch')
+# class UpdateWorkView(ChangeInfoView):
+#     template_name = 'myaccount/update_work.html'
+#     form_class = forms.UpdateWorkForm
+#
+#
+# @method_decorator(login_required, name='dispatch')
+# class UpdatePlacesView(ChangeInfoView):
+#     template_name = 'myaccount/update_places.html'
+#     form_class = forms.UpdatePlacesForm
+#
+#
+# @method_decorator(login_required, name='dispatch')
+# class UpdateDetailView(ChangeInfoView):
+#     template_name = 'myaccount/update_detail.html'
+#     form_class = forms.UpdateDetailForm
