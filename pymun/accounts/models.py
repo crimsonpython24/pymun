@@ -12,8 +12,7 @@ from django.utils.timezone import now as timezone_now
 from django.contrib.postgres.fields import ArrayField
 
 from utils import models as util_models
-
-# from utils import fields as util_fields
+from utils import fields as util_fields
 
 
 THUMBNAIL_SIZE = getattr(settings, "QUOTES_THUMBNAIL_SIZE", 50)
@@ -65,10 +64,8 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
     hometown = models.CharField(_('Hometown'), blank=True, max_length=100)
 
     nickname = models.CharField(_('Nickname'), blank=True, max_length=50)
-    biography = models.CharField(_('Biography'), blank=True, max_length=500)
-    favorite_quote = models.CharField(_('Favorite Quote'), blank=True, max_length=500)
-    # biography = util_fields.MultilingualCharField(_('Biography'), blank=True, max_length=500)
-    # favorite_quote = util_fields.MultilingualCharField(_('Favorite Quote'), blank=True, max_length=500)
+    biography = util_fields.MultilingualCharField(_('Biography'), blank=True, max_length=500)
+    favorite_quote = util_fields.MultilingualCharField(_('Favorite Quote'), blank=True, max_length=500)
 
     def __str__(self):
         assert isinstance(self.username, object)

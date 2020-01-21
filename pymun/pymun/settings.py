@@ -130,3 +130,13 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
+
+LANGUAGE_CODE = "en-us"
+
+LANGUAGES = (
+    ("en-us", "US English"),
+    ("en-gb", "British English"),
+    ("es", "Español"),
+    ("fr", "Français"),
+    ("zh-tw", "繁體中文"),
+)

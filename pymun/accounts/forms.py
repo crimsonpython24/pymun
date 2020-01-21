@@ -35,6 +35,10 @@ def valuetolabel(name, cont):
 
 
 class UpdateFormBase(forms.ModelForm):
+    def save(self):
+        cleaned_data = self.cleaned_data
+        user = self.request.user
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         password = self.fields.get('password')
