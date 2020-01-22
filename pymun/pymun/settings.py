@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'accounts.apps.AccountsConfig',
     'utils.apps.UtilsConfig',
+    'haystack',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -140,3 +141,31 @@ LANGUAGES = (
     ("fr", "Français"),
     ("zh-tw", "繁體中文"),
 )
+
+LANGUAGE_CODE = 'en'
+LANGUAGES = (
+    ("en", "English"),
+    ("es", "Español"),
+    ("fr", "Français"),
+    ("zh", "繁體中文"),
+)
+
+HAYSTACK_CONNECTIONS = {
+    'default_en': dict(
+        ENGINE='search.multilingual_whoosh_backend.' 'MultilingualWhooshEngine',
+        PATH=os.path.join(BASE_DIR, 'tmp/whoosh_index_en')
+    ),
+    'default_es': dict(
+        ENGINE='search.multilingual_whoosh_backend.' 'MultilingualWhooshEngine',
+        PATH=os.path.join(BASE_DIR, 'tmp/whoosh_index_es')
+    ),
+    'default_fr': dict(
+        ENGINE='search.multilingual_whoosh_backend.' 'MultilingualWhooshEngine',
+        PATH=os.path.join(BASE_DIR, 'tmp/whoosh_index_fr')
+    ),
+    'default_zh': dict(
+        ENGINE='search.multilingual_whoosh_backend.' 'MultilingualWhooshEngine',
+        PATH=os.path.join(BASE_DIR, 'tmp/whoosh_index_zh')
+    ),
+}
+HAYSTACK_CONNECTIONS['default'] = HAYSTACK_CONNECTIONS[f'default_{LANGUAGE_CODE}']
