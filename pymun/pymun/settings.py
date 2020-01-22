@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'accounts.apps.AccountsConfig',
     'utils.apps.UtilsConfig',
+    'search.apps.SearchConfig',
     'haystack',
 ]
 
@@ -168,4 +169,10 @@ HAYSTACK_CONNECTIONS = {
         PATH=os.path.join(BASE_DIR, 'tmp/whoosh_index_zh')
     ),
 }
-HAYSTACK_CONNECTIONS['default'] = HAYSTACK_CONNECTIONS[f'default_{LANGUAGE_CODE}']
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
