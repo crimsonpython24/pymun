@@ -67,9 +67,6 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
     biography = util_fields.MultilingualCharField(_('Biography'), blank=True, max_length=500)
     favorite_quote = util_fields.MultilingualCharField(_('Favorite Quote'), blank=True, max_length=500)
 
-    def __unicode__(self):
-        return self.username
-
     def __str__(self):
         assert isinstance(self.username, object)
         return self.username

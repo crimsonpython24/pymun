@@ -1,7 +1,7 @@
 import os
 import django
 
-from . import models
+from accounts.models import User
 from faker import Faker
 
 
@@ -16,7 +16,7 @@ def call(N=10):
         first_name = full_name.split()[0]
         last_name = full_name.split()[1]
         full_name_clean = first_name + last_name
-        user_obj = models.User.objects.get_or_create(
+        user_obj = User.objects.get_or_create(
             username=full_name_clean,
             email=full_name_clean + '@gmail.com',
             first_name=first_name,
@@ -27,5 +27,5 @@ def call(N=10):
 
 if __name__ == '__main__':
     print("Filling random data")
-    call(10)
+    call(128)
     print("Filling done ")
