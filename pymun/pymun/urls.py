@@ -28,5 +28,5 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    path('search/', include('haystack.urls')),
+    path('search/', include('search.urls')),
 )
