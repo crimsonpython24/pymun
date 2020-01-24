@@ -1,4 +1,8 @@
+{% extends "base.html" %}
+
 {% load i18n %}
+{% load utility_tags %}
+
 {% block content %}
   <h2>Search</h2>
   <form method="get" action=".">
@@ -16,18 +20,15 @@
       {% empty %}
         <p>No results found.</p>
       {% endfor %}
+
       {% if page.has_previous or page.has_next %}
         <div>
-          {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-                  |
-          {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-
-          {% if object_list.has_other_pages %}
+          {% if page.has_other_pages %}
             <nav aria-label="Movie list pagination">
               <ul class="pagination">
-                {% if object_list.has_previous %}
+                {% if page.has_previous %}
                   <li class="page-item">
-                    <a class="page-link" href="{% modify_query page=object_list.previous_page_number %}">&laquo;</a>
+                    <a class="page-link" href="{% modify_query page=page.previous_page_number %}">&laquo;</a>
                   </li>
                 {% else %}
                   <li class="page-item disabled">
@@ -38,8 +39,8 @@
                   </li>
                 {% endif %}
 
-                {% for page_number in object_list.paginator.page_range %}
-                  {% if page_number == object_list.number %}
+                {% for page_number in page.paginator.page_range %}
+                  {% if page_number == page.number %}
                     <li class="page-item active">
                       <span class="page-link">{{ page_number }}
                         <span class="sr-only">(current)</span>
@@ -52,9 +53,9 @@
                   {% endif %}
                 {% endfor %}
 
-                {% if object_list.has_next %}
+                {% if page.has_next %}
                   <li class="page-item">
-                    <a class="page-link" href="{% modify_query page=object_list.next_page_number %}">
+                    <a class="page-link" href="{% modify_query page=page.next_page_number %}">
                       <span aria-hidden="true">&raquo;</span>
                       <span class="sr-only">Next</span>
                     </a>
@@ -69,5 +70,6 @@
       {% else %}
         <p>Show some example queries to run, maybe query syntax, something else?</p>
       {% endif %}
+    {% endif %}
   </form>
 {% endblock %}
