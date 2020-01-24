@@ -27,5 +27,5 @@ def call(N=10):
 
 if __name__ == '__main__':
     print("Filling random data")
-    call(128)
+    call(int(input("Input a number: ")))
     print("Filling done ")
