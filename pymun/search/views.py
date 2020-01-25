@@ -1,4 +1,3 @@
-
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator, InvalidPage
 from django.http import Http404

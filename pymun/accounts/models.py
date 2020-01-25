@@ -14,6 +14,8 @@ from django.contrib.postgres.fields import ArrayField
 from utils import models as util_models
 from utils import fields as util_fields
 
+from PIL import Image, ImageDraw, ImageFont
+import random
 
 THUMBNAIL_SIZE = getattr(settings, "QUOTES_THUMBNAIL_SIZE", 50)
 THUMBNAIL_EXT = getattr(settings, "QUOTES_THUMBNAIL_EXT", None)
@@ -23,7 +25,7 @@ def upload_to(instance, filename):
     now = timezone_now()
     base, ext = os.path.splitext(filename)
     ext = ext.lower()
-    return f"{instance.slug}{now:%Y/%m/%Y%m%d%H%M%S}{ext}"
+    return f"{instance.slug}{now:/%Y_%m/%Y%m%d%H%M%S}{ext}"
 
 
 def get_square_crop_points(image):
@@ -71,8 +73,30 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
         assert isinstance(self.username, object)
         return self.username
 
+    @staticmethod
+    def create_image(char1, char2, slug):
+        now = timezone_now()
+        W, H = (512, 512)
+        msg = char1 + char2
+
+        myFont = ImageFont.truetype('/Library/Fonts/Arial.ttf', 300)
+        img = Image.new(
+            'RGB', (W, H), color=(random.randrange(0, 70), random.randrange(0, 70), random.randrange(0, 70)))
+        draw = ImageDraw.Draw(img)
+        w, h = draw.textsize(msg, font=myFont)
+        draw.text(((W - w) / 2, (H - h) / 2), msg, fill=(255, 255, 225), font=myFont)
+
+        base_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), f"static/media/")
+
+        if not os.path.exists(base_path):
+            os.makedirs(base_path)
+
+        img.save(base_path + f"{slug}{now:/%Y_%m/%Y%m%d%H%M%S}.png", "PNG")
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.username, allow_unicode=True)
+        if not self.avatar:
+            self.create_image(self.first_name[0], self.last_name[1], self.slug)
         super().save(*args, **kwargs)
         self.create_thumbnail()
         
@@ -101,8 +125,7 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
         picture_path, thumbnail_path = self.get_picture_paths()
 
         if thumbnail_path:
-            url = (storage.url(thumbnail_path)
-                   if storage.exists(thumbnail_path) else self.avatar.url)
+            url = (storage.url(thumbnail_path) if storage.exists(thumbnail_path) else self.avatar.url)
 
         return '/static/' + url
 
@@ -116,7 +139,7 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
             if THUMBNAIL_EXT:
                 filename_ext = THUMBNAIL_EXT
             thumb_path = f"{filename_base}_thumbnail{filename_ext}"
-    
+
         return picture_path, thumb_path
 
     @classmethod

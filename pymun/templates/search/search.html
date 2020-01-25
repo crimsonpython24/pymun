@@ -8,9 +8,11 @@
       {% for result in page.object_list %}
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <a href="{% url 'profile' slug=result.username|lower %}" class="font-weight-normal text-dark" style="font-size: 90%;">
-              {{ result.username }}
+            <a href="{% url 'profile' slug=result.object.slug %}" class="font-weight-normal text-dark" style="font-size: 90%;">
+              {{ result.object.first_name }} {{ result.object.last_name }}
             </a>
+            <br>
+            <small class="text-muted">@{{ result.object.username }}</small>
           </li>
         </ul>
       {% empty %}
