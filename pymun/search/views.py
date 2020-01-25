@@ -7,7 +7,7 @@ from django.shortcuts import render
 from . import forms
 from haystack.query import EmptySearchQuerySet
 
-RESULTS_PER_PAGE = getattr(settings, "HAYSTACK_SEARCH_RESULTS_PER_PAGE", 15)
+RESULTS_PER_PAGE = getattr(settings, "HAYSTACK_SEARCH_RESULTS_PER_PAGE", 8)
 
 
 class SearchView(object):
