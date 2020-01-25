@@ -1,27 +1,63 @@
-{% load static %}
-{% load crispy_forms_tags %}
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+{% extends "base.html" %}
 
-    <link rel="stylesheet" type="text/css" href="{% static 'static/fontawesome-free-5.12.0-web/css/all.min.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'static/bootstrap-4.4.1/css/bootstrap.min.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'static/MDB-Pro_4.11.0/css/mdb.min.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'templates/css/base.css' %}"/>
-    {% block style %}{% endblock style %}
-</head>
+{% block content %}
+  {% load utility_tags %}
+  {% if query %}
+    <h3>Results</h3>
+    {% for result in page.object_list %}
+      <p><a href="{% url 'profile' slug=result.username|lower %}">{{ result.username }}</a></p>
+    {% empty %}
+      <p>No results found.</p>
+    {% endfor %}
 
-<body>
-  <form method="get" action=".">
-    {% crispy form %}
-    {% include "search/search_paginator.html" %}
-  </form>
-</body>
+    {% if page.has_previous or page.has_next %}
+      <div>
+        {% if page.has_other_pages %}
+          <nav aria-label="Movie list pagination">
+            <ul class="pagination">
+              {% if page.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="{% modify_query page=page.previous_page_number %}">&laquo;</a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <span class="page-link">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                  </span>
+                </li>
+              {% endif %}
 
+              {% for page_number in page.paginator.page_range %}
+                {% if page_number == page.number %}
+                  <li class="page-item active">
+                    <span class="page-link">{{ page_number }}
+                      <span class="sr-only">(current)</span>
+                    </span>
+                  </li>
+                {% else %}
+                  <li class="page-item">
+                    <a class="page-link" href="{% modify_query page=page_number %}">{{ page_number }}</a>
+                  </li>
+                {% endif %}
+              {% endfor %}
 
-  {% block scripts %}{% endblock scripts %}
-  <script type="text/javascript" src="{% static 'static/jquery-3.4.1/jquery-3.4.1.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'static/popper.js@1.16.0/popper.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'static/bootstrap-4.4.1/js/bootstrap.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'static/MDB-Pro_4.11.0/js/mdb.min.js' %}"></script>
-</html>
+              {% if page.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="{% modify_query page=page.next_page_number %}">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+              {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+              {% endif %}
+            </ul>
+          </nav>
+        {% endif %}
+      </div>
+    {% else %}
+      <p>Show some example queries to run, maybe query syntax, something else?</p>
+    {% endif %}
+  {% endif %}
+{% endblock content %}

@@ -3,16 +3,13 @@ from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator, InvalidPage
 from django.http import Http404
 from django.shortcuts import render
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
 
 from . import forms
 from haystack.query import EmptySearchQuerySet
 
-RESULTS_PER_PAGE = getattr(settings, "HAYSTACK_SEARCH_RESULTS_PER_PAGE", 20)
+RESULTS_PER_PAGE = getattr(settings, "HAYSTACK_SEARCH_RESULTS_PER_PAGE", 15)
 
 
-@csrf_exempt
 class SearchView(object):
     template = "search/search.html"
     extra_context = {}
