@@ -3,6 +3,9 @@ from urllib.parse import urlencode
 from django import template
 from django.utils.encoding import force_str
 
+from search.forms import SearchForm
+
+
 register = template.Library()
 
 
@@ -80,3 +83,8 @@ def remove_from_query(context, *args, **kwargs):
                         str(value) == str(kwargs[key])):
                     query_params.append((key, value))
     return construct_query_string(context, query_params)
+
+
+@register.inclusion_tag('search/search_bar.html')
+def display_search_user_form():
+    return {'form': SearchForm()}

@@ -8,14 +8,14 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedirect, request
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render_to_response
 from django.template.loader import render_to_string
 from django.utils.text import slugify
+
 from xhtml2pdf import pisa
-from django.http import HttpRequest
-from crispy_forms.helper import FormHelper
 
 from . import models, forms
+from search import forms as search_forms
 
 
 def link_callback(uri, rel):

@@ -1,6 +1,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
-
+{% load utility_tags %}
 <html>
 <head>
     <meta charset="UTF-8">
@@ -23,13 +23,16 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
-          <ul class="navbar-nav mr-auto">
-            <form method="get" action="{% url 'haystack_search' %}">
-              {% crispy form %}
-            </form>
-          </ul>
-          <ul class="navbar-nav ml-auto nav-flex-icons">
 
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <form method="GET" action="{% url 'haystack_search' %}">
+                {% display_search_user_form %}
+              </form>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav ml-auto nav-flex-icons">
             {% if user.is_authenticated %}
             <li class="nav-item icon-margin">
               <a class="nav-link waves-effect waves-light">

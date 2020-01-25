@@ -1,7 +1,6 @@
 {% extends "base.html" %}
-
+{% load utility_tags %}
 {% block content %}
-  {% load utility_tags %}
   {% if query %}
     <h3>Results</h3>
     {% for result in page.object_list %}

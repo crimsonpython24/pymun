@@ -5,7 +5,6 @@ from search import forms as search_forms
 
 class IndexView(generic.FormView):
     template_name = "base.html"
-
     form_class = search_forms.SearchForm
 
     def get_context_data(self, **kwargs):

@@ -56,15 +56,16 @@ class SearchForm(forms.Form):
         self.helper = helper.FormHelper(self)
         self.helper.form_show_labels = False
         self.helper.form_tag = False
+        self.helper.disable_csrf = True
         self.helper.layout = layout.Layout(
             layout.Div(
                 layout.Div(
                     layout.HTML(fieldtostring(
                         "required", "autofocus", type="text", name="q", value="",
-                        css_class="form-control"
+                        css_class="form-control form-control-sm", style="margin-left: 0px !important"
                     )),
                     layout.HTML(valuetolabel("q", "Search")),
-                    css_class="md-form md-bg",
+                    css_class="md-form md-bg form-sm",
                 ),
             ),
         )
