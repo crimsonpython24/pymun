@@ -73,11 +73,10 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
         assert isinstance(self.username, object)
         return self.username
 
-    @staticmethod
-    def create_image(char1, char2, slug):
+    def create_image(self):
         now = timezone_now()
         W, H = (512, 512)
-        msg = char1 + char2
+        msg = self.first_name[0] + self.last_name[0]
 
         myFont = ImageFont.truetype('/Library/Fonts/Arial.ttf', 300)
         img = Image.new(
@@ -86,17 +85,18 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
         w, h = draw.textsize(msg, font=myFont)
         draw.text(((W - w) / 2, (H - h) / 2), msg, fill=(255, 255, 225), font=myFont)
 
-        base_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), f"static/media/")
+        base_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), f"static/media/{self.slug}{now:/%Y_%m/}")
 
         if not os.path.exists(base_path):
             os.makedirs(base_path)
 
-        img.save(base_path + f"{slug}{now:/%Y_%m/%Y%m%d%H%M%S}.png", "PNG")
+        img.save(base_path + f"{now:%Y%m%d%H%M%S}.png", "PNG")
+        self.avatar = base_path + f"{now:%Y%m%d%H%M%S}.png"
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.username, allow_unicode=True)
         if not self.avatar:
-            self.create_image(self.first_name[0], self.last_name[1], self.slug)
+            self.create_image()
         super().save(*args, **kwargs)
         self.create_thumbnail()
         
