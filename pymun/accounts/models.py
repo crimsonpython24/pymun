@@ -1,4 +1,3 @@
-from PIL import Image
 import os
 
 from django.conf import settings
@@ -45,7 +44,6 @@ def get_centering_points(size, target):
 
 # Still to be added: (1) many-to-many field, see book for details
 class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, AbstractUser):
-
     slug = models.SlugField(unique=True)
     avatar = models.ImageField('Avatar', upload_to=upload_to, blank=True, null=True)
 
@@ -78,12 +76,12 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
         W, H = (512, 512)
         msg = self.first_name[0] + self.last_name[0]
 
-        myFont = ImageFont.truetype('/Library/Fonts/Arial.ttf', 300)
+        myFont = ImageFont.truetype('/Library/Fonts/Arial.ttf', 250)
         img = Image.new(
             'RGB', (W, H), color=(random.randrange(0, 70), random.randrange(0, 70), random.randrange(0, 70)))
         draw = ImageDraw.Draw(img)
         w, h = draw.textsize(msg, font=myFont)
-        draw.text(((W - w) / 2, (H - h) / 2), msg, fill=(255, 255, 225), font=myFont)
+        draw.text(((W - w) / 2, (H - h) / 2.2), msg, fill=(255, 255, 225), font=myFont)
 
         base_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), f"static/media/{self.slug}{now:/%Y_%m/}")
 
@@ -91,7 +89,7 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
             os.makedirs(base_path)
 
         img.save(base_path + f"{now:%Y%m%d%H%M%S}.png", "PNG")
-        self.avatar = base_path + f"{now:%Y%m%d%H%M%S}.png"
+        self.avatar = f"{self.slug}{now:/%Y_%m/%Y%m%d%H%M%S}.png"
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.username, allow_unicode=True)
@@ -99,7 +97,7 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
             self.create_image()
         super().save(*args, **kwargs)
         self.create_thumbnail()
-        
+
     @property
     def get_url_path(self):
         return reverse("profile", kwargs={"slug": self.object.slug})
@@ -132,7 +130,7 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
     def get_picture_paths(self):
         picture_path = None
         thumb_path = None
-    
+
         if self.avatar:
             picture_path = self.avatar.name
             filename_base, filename_ext = os.path.splitext(picture_path)
@@ -145,4 +143,3 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
     @classmethod
     def itemprop_fields(cls) -> object:
         return ["title", "content"] + super().itemprop_fields()
-

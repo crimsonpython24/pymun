@@ -11,7 +11,7 @@
     {% if user.avatar %}
       <img src="/static/media/{{ user.avatar }}" class="rounded-circle z-depth-0 head-thumbnail" alt="avatar image">
     {% else %}
-      <img src="{% static 'media/site_images/dummy_img.jpg' %}" class="rounded-circle z-depth-0 head-thumbnail" alt="avatar image">
+      <img src="{% static 'site_images/dummy_img.jpg' %}" class="rounded-circle z-depth-0 head-thumbnail" alt="avatar image">
     {% endif %}
     {% if user.first_name and user.last_name %}
       <h3 class="text-center">Welcome, {{ user.first_name }} {{ user.last_name }}</h3>
