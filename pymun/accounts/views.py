@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedirect, request
+from django.http import HttpResponse, HttpResponseServerError, HttpRequest, Http404
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template.loader import render_to_string
 from django.utils.text import slugify
@@ -57,7 +57,7 @@ class ProfileView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         user = self.request.user
-        context = super().get_context_data(**kwargs)
+        context = super(ProfileView, self).get_context_data(**kwargs)
         context['username'] = self.request.user.username
         # return f'context_{request.LANGUAGE_CODE}'
         return context
@@ -160,21 +160,3 @@ class AddAboutView(generic.list.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
-
-
-# @method_decorator(login_required, name='dispatch')
-# class UpdateWorkView(ChangeInfoView):
-#     template_name = 'myaccount/update_work.html'
-#     form_class = forms.UpdateWorkForm
-#
-#
-# @method_decorator(login_required, name='dispatch')
-# class UpdatePlacesView(ChangeInfoView):
-#     template_name = 'myaccount/update_places.html'
-#     form_class = forms.UpdatePlacesForm
-#
-#
-# @method_decorator(login_required, name='dispatch')
-# class UpdateDetailView(ChangeInfoView):
-#     template_name = 'myaccount/update_detail.html'
-#     form_class = forms.UpdateDetailForm

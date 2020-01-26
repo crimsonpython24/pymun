@@ -39,74 +39,76 @@
                 <i class="fas fa-ellipsis-v fa-md text-black-50"></i>
               </a>
             </li>
-            <li class="nav-item avatar dropdown no-transition">
-              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true"
-                 aria-expanded="false" href="{% url 'profile' slug=user.slug  %}">
-                {% if user.avatar %}
-                  <img src="/static/media/{{ user.avatar }}" class="rounded-circle">
-                {% else %}
-                  <img src="{% static 'media/site_images/dummy_img.jpg' %}" class="rounded-circle">
-                {% endif %}
-              </a>
-              <div class="dropdown-menu dropdown-menu-lg-right dropdown-menu-profile dropdown-secondary no-transition nav-collapse dropdown-menu-right"
-                   aria-labelledby="navbarDropdownMenuLink-55">
-                <div class="card testimonial-card z-depth-1-half no-shrink custom-width-card">
-                  <div class="card-up-custom transparent-obj bg-profile lighten-1"></div>
-                  <div class="size-avatar mx-auto white">
-                    {% if user.avatar %}
-                      <img src="/static/media/{{ user.avatar }}" class="rounded-circle" width="84">
-                    {% else %}
-                      <img src="{% static 'media/site_images/dummy_img.jpg' %}" class="rounded-circle" width="84"/>
-                    {% endif %}
-                  </div>
-                  <div class="card-body card-body-custom">
-                    {% if user.first_name and user.last_name %}
-                      <a  href="{% url 'profile' slug=user.slug %}" class="waves-effect waves-light" style="padding-bottom: 0px;">
-                        <h6 class="card-title card-title-profile">{{ user.first_name }} {{ user.last_name }}</h6>
-                      </a>
-                    {% else %}
-                      <a  href="{% url 'profile' slug=user.slug %}" class="waves-effect waves-light" style="padding-bottom: 0px;">
-                        <h6 class="card-title card-title-profile">[u] {{ user.username }}</h6>
-                      </a>
-                    {% endif %}
-                    <p class="card-text">{{ user.email }}</p>
-                  </div>
-                  <div class="btn-margin-3">
-                    <div class="row">
-                      <div class="col-2"></div>
-                      <div class="col-8">
-                        <a href="{% url 'my_account' %}" class="btn btn-block btn-sm btn-flat btn-custom btn-rounded btn-smaller">
-                          <span class="text-manage-acc align-middle">Manage your Account</span>
-                        </a>
-                      </div>
+            {% block icon_dropdown %}
+              <li class="nav-item avatar dropdown no-transition">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false" href="{% url 'profile' slug=user.slug  %}">
+                  {% if user.avatar %}
+                    <img src="/static/media/{{ user.avatar }}" class="rounded-circle">
+                  {% else %}
+                    <img src="{% static 'media/site_images/dummy_img.jpg' %}" class="rounded-circle">
+                  {% endif %}
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg-right dropdown-menu-profile dropdown-secondary no-transition nav-collapse dropdown-menu-right"
+                     aria-labelledby="navbarDropdownMenuLink-55">
+                  <div class="card testimonial-card z-depth-1-half no-shrink custom-width-card">
+                    <div class="card-up-custom transparent-obj bg-profile lighten-1"></div>
+                    <div class="size-avatar mx-auto white">
+                      {% if user.avatar %}
+                        <img src="/static/media/{{ user.avatar }}" class="rounded-circle" width="84">
+                      {% else %}
+                        <img src="{% static 'media/site_images/dummy_img.jpg' %}" class="rounded-circle" width="84"/>
+                      {% endif %}
                     </div>
-                  </div>
-
-                  <div class="btn-margin-0">
-                    <button type="button" class="btn btn-flat btn-lg btn-block btn-add-acc">
+                    <div class="card-body card-body-custom">
+                      {% if user.first_name and user.last_name %}
+                        <a  href="{% url 'profile' slug=user.slug %}" class="waves-effect waves-light" style="padding-bottom: 0px;">
+                          <h6 class="card-title card-title-profile">{{ user.first_name }} {{ user.last_name }}</h6>
+                        </a>
+                      {% else %}
+                        <a  href="{% url 'profile' slug=user.slug %}" class="waves-effect waves-light" style="padding-bottom: 0px;">
+                          <h6 class="card-title card-title-profile">[u] {{ user.username }}</h6>
+                        </a>
+                      {% endif %}
+                      <p class="card-text">{{ user.email }}</p>
+                    </div>
+                    <div class="btn-margin-3">
                       <div class="row">
+                        <div class="col-2"></div>
                         <div class="col-8">
-                          <i class="far fa-user-circle icon-signout"></i>
-                          <span class="text-add-acc">Add another account</span>
+                          <a href="{% url 'my_account' %}" class="btn btn-block btn-sm btn-flat btn-custom btn-rounded btn-smaller">
+                            <span class="text-manage-acc align-middle">Manage your Account</span>
+                          </a>
                         </div>
                       </div>
-                    </button>
-                  </div>
-                  <div class="btn-margin-1">
-                    <button type="button" class="btn btn-flat btn-sm btn-custom btn-sign-out">
-                      <span class="text-sign-out">Sign out</span>
-                    </button>
-                  </div>
-                  <div class="margin-2">
-                    <div class="margin-2a">
-                      <p class="text-muted small text-footer">Privacy Policy</p>
-                      <p class="text-muted small text-footer">     |     </p>
-                      <p class="text-muted small text-footer">Terms of Service</p>
+                    </div>
+
+                    <div class="btn-margin-0">
+                      <button type="button" class="btn btn-flat btn-lg btn-block btn-add-acc">
+                        <div class="row">
+                          <div class="col-8">
+                            <i class="far fa-user-circle icon-signout"></i>
+                            <span class="text-add-acc">Add another account</span>
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                    <div class="btn-margin-1">
+                      <button type="button" class="btn btn-flat btn-sm btn-custom btn-sign-out">
+                        <span class="text-sign-out">Sign out</span>
+                      </button>
+                    </div>
+                    <div class="margin-2">
+                      <div class="margin-2a">
+                        <p class="text-muted small text-footer">Privacy Policy</p>
+                        <p class="text-muted small text-footer">     |     </p>
+                        <p class="text-muted small text-footer">Terms of Service</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </li>
+              </li>
+            {% endblock icon_dropdown %}
             {% endif %}
           </ul>
         </div>

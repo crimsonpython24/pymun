@@ -9,14 +9,20 @@ from faker import Faker
 obj = Faker()
 
 
-def call(N=10):
+def call(N, first):
     for i in range(N):
-        full_name = obj.name()
-        first_name = full_name.split()[0]
-        last_name = full_name.split()[1]
-        full_name_clean = (first_name + last_name).lower()
+        if first is None:
+            full_name = obj.name()
+            first_name = full_name.split()[0]
+            last_name = full_name.split()[1]
+            full_name_clean = (first_name + last_name).lower()
+        else:
+            first_name = first
+            last_name = obj.name().split()[1]
+            full_name_clean = (first_name + last_name).lower()
+
         user_obj = User.objects.get_or_create(
-            username=full_name_clean.lower() + str(random.randrange(0, 1000)),
+            username=full_name_clean.lower() + str(random.randrange(0, 10000)),
             email=full_name_clean + '@gmail.com',
             first_name=first_name,
             last_name=last_name,
@@ -32,5 +38,5 @@ if __name__ == '__main__':
     django.setup()
 
     print("Filling random data")
-    call(int(input("Input a number: ")))
+    call(int(input("Input a number: ")), input("first name if any: "))
     print("Filling done ")
