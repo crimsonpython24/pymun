@@ -28,4 +28,5 @@ urlpatterns = [
 
     path('profile/<slug:slug>', views.ProfileView.as_view(), name='profile'),
     path('profile/<slug:slug>/pdf/', views.download_cv_pdf, name="user-pdf"),
+    path('profile/<slug:slug>/image/', views.download_user_picture, name='user-image'),
 ]

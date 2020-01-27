@@ -1,8 +1,33 @@
 {% extends "base.html" %}
 {% load utility_tags %}
 
+{% block style %}
+<style>
+    .custom-tabs-0 {
+        padding-top: 13px !important;
+        padding-bottom: 13px !important;
+    }
+</style>
+{% endblock style %}
+
 {% block content %}
   {% if query %}
+    <div class="classic-tabs">
+      <ul class="nav tabs-primary" id="myClassicTab" role="tablist" style="height: 48px;">
+        <li class="nav-item">
+          <a class="nav-link waves-light active show custom-tabs-0" id="profile-tab-classic" data-toggle="tab" href="#profile-classic"
+            role="tab" aria-controls="profile-classic" aria-selected="true">First Name</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-light custom-tabs-0" id="follow-tab-classic" data-toggle="tab" href="#follow-classic" role="tab"
+            aria-controls="follow-classic" aria-selected="false">Last Name</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-light custom-tabs-0" id="contact-tab-classic" data-toggle="tab" href="#contact-classic" role="tab"
+            aria-controls="contact-classic" aria-selected="false">Username</a>
+        </li>
+      </ul>
+    </div>
 　  <div class="mx-auto" style="width: 776px;">
       <h5 class="font-weight-bold">Search Results for '{{ query }}':</h5>
       {% for result in page.object_list %}

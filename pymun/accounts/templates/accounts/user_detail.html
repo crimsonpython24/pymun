@@ -20,6 +20,8 @@
       <h4>biography: {{ user.biography }}</h4>
     </div>
     <a href="{% url 'user-pdf' slug=user.slug %}">generate ur pdf!</a>
+    <br>
+    <a href="{% url 'user-image' slug=user.slug %}">download image ehre</a>
   </div>
 </div>
 {% endblock %}

@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 from . import settings_config
 
+from auth_extra.password_validation import SpecialCharacterInclusionValidator
+from django.contrib.auth.password_validation import get_password_validators, get_default_password_validators
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -90,9 +93,11 @@ DATABASES = settings_config.DATABASES
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'OPTIONS': {'max_similarity': 0.5},
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {'min_length': 8}
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -100,7 +105,27 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+    {
+        'NAME': 'auth_extra.password_validation.'
+                'MaximumLengthValidator',
+        'OPTIONS': {
+            'max_length': 32,
+        },
+    },
+    {
+        'NAME': 'auth_extra.password_validation.'
+                'SpecialCharacterInclusionValidator',
+        'OPTIONS': {
+            'special_chars': ('{', '}', '^', '&') + SpecialCharacterInclusionValidator.DEFAULT_SPECIAL_CHARACTERS
+        }
+    },
 ]
+
+config = [{
+    'NAME': 'auth_extra.password_validation.MaximumLengthValidator'
+}]
+max_length_validator = get_password_validators(config)[0]
+default_validators = get_default_password_validators()
 
 
 # Internationalization

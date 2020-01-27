@@ -4,12 +4,13 @@ import os
 
 from django.views import generic
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseServerError, HttpRequest, Http404
-from django.shortcuts import get_object_or_404, render_to_response
+from django.http import HttpResponse, HttpResponseServerError
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
+from django.http import FileResponse, HttpResponseNotFound
+from django.shortcuts import get_object_or_404
 from django.utils.text import slugify
 
 from xhtml2pdf import pisa
@@ -47,6 +48,23 @@ def download_cv_pdf(request, slug):
 
     if status.err:
         response = HttpResponseServerError("The PDF could not be generated.")
+
+    return response
+
+
+@login_required(login_url="user-login")
+def download_user_picture(request, slug):
+    user = get_object_or_404(models.User, slug=slug)
+
+    try:
+        filename, extension = os.path.splitext(user.avatar.file.name)
+        extension = extension[1:]
+        response = FileResponse(user.avatar.file, content_type=f"image/{extension}")
+        username = slugify(user.username)[:100]
+        filename = slugify(user.avatar)[:100]
+        response["Content-Disposition"] = "attachment; filename=" + f"{username}---{filename}.{extension}"
+    except ValueError:
+        response = HttpResponseNotFound(content='Picture unavailable')
 
     return response
 
