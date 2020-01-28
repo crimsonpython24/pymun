@@ -2,7 +2,9 @@ from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator, InvalidPage
 from django.http import Http404
 from django.shortcuts import render
+from django.views.generic.list import ListView
 
+from accounts import models
 from . import forms
 from haystack.query import EmptySearchQuerySet
 
@@ -110,3 +112,14 @@ class SearchView(object):
         context = self.get_context()
 
         return render(self.request, self.template, context)
+
+
+class AdminListView(ListView):
+    model = models.User
+    paginate_by = 10
+    template_name = "search/search_admins.html"
+
+    def get_context_data(self, **kwargs):
+        admins = models.User.objects.filter(is_superuser=True)
+        context = super(AdminListView, self).get_context_data(**kwargs)
+        return context
