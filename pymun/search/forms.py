@@ -64,7 +64,7 @@ class SearchForm(forms.Form):
                         "required", "autofocus", type="text", name="q", value="",
                         css_class="form-control form-control-sm", style="margin-left: 0px !important"
                     )),
-                    layout.HTML(valuetolabel("q", "Search")),
+                    layout.HTML(valuetolabel("q", "Search users...")),
                     css_class="md-form md-bg form-sm",
                 ),
             ),

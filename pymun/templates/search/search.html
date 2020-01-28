@@ -5,38 +5,43 @@
 {% block status01 %}{% endblock status01 %}
 
 {% block extended_content %}
+  {% if query %}
   <h5 class="font-weight-normal">Search Results for '{{ query }}':</h5>
-  {% for result in page.object_list %}
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item" style="padding-left: 0px;">
-        <div class="row">
-          <div class="col-6" style="padding-left: 0px;">
-            <div class="row">
-              <div class="col-2" style="padding-right: 0px;">
-                <img src="{{ result.object.get_thumbnail_picture_url }}" class="img-fluid z-depth-0 rounded-circle" style="width: 30px; height: 30px;">
-              </div>
-              <div class="col" style="padding-left: 0px;">
-                {% if result.object.username == "crimsonpython24" %}
-                  <a href="{% url 'profile' slug=result.object.slug %}" id="c" class="font-weight-normal text-dark" style="font-size: 90%;">
-                    <span class="txt anim-text-flow">Trainer Python</span>
-                    <span class="badge badge-dark">Site Owner</span>
-                    <span class="badge badge-danger">Administrator</span>
-                  </a>
-                {% else %}
-                  <a href="{% url 'profile' slug=result.object.slug %}" class="font-weight-normal text-dark" style="font-size: 90%;">
-                    {{ result.object.first_name }} {{ result.object.last_name }}
-                    {% if result.object.is_superuser %}<span class="badge badge-danger">Administrator</span>{% endif %}
-                  </a>
-                {% endif %}
-                <br>
-                <small class="text-muted">@{{ result.object.username }}</small>
+    {% for result in page.object_list %}
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" style="padding-left: 0px;">
+          <div class="row">
+            <div class="col-6" style="padding-left: 0px;">
+              <div class="row">
+                <div class="col-2" style="padding-right: 0px;">
+                  <img src="{{ result.object.get_thumbnail_picture_url }}" class="img-fluid z-depth-0 rounded-circle" style="width: 30px; height: 30px;">
+                </div>
+                <div class="col" style="padding-left: 0px;">
+                  {% if result.object.username == "crimsonpython24" %}
+                    <a href="{% url 'profile' slug=result.object.slug %}" id="c" class="font-weight-normal text-dark" style="font-size: 90%;">
+                      <span class="txt anim-text-flow">Trainer Python</span>
+                      <span class="badge badge-dark">Site Owner</span>
+                      <span class="badge badge-danger">Administrator</span>
+                    </a>
+                  {% else %}
+                    <a href="{% url 'profile' slug=result.object.slug %}" class="font-weight-normal text-dark" style="font-size: 90%;">
+                      {{ result.object.first_name }} {{ result.object.last_name }}
+                      {% if result.object.is_superuser %}<span class="badge badge-danger">Administrator</span>{% endif %}
+                    </a>
+                  {% endif %}
+                  <br>
+                  <small class="text-muted">@{{ result.object.username }}</small>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </li>
-    </ul>
-  {% empty %}
-    <p>No results found.</p>
-  {% endfor %}
+        </li>
+      </ul>
+    {% empty %}
+      <p>No results found.</p>
+    {% endfor %}
+  {% else %}
+    <h5 class="font-weight-normal">Search Results for <code>&lt;None&gt;</code>:</h5>
+    No query entered. Type anything in the search bar.
+  {% endif %}
 {% endblock extended_content %}

@@ -120,6 +120,6 @@ class AdminListView(ListView):
     template_name = "search/search_admins.html"
 
     def get_context_data(self, **kwargs):
-        admins = models.User.objects.filter(is_superuser=True)
         context = super(AdminListView, self).get_context_data(**kwargs)
+        context['admins'] = models.User.objects.filter(is_superuser=True)
         return context

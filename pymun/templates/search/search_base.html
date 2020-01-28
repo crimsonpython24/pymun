@@ -45,7 +45,7 @@
 
 {% block content %}
   <div class="classic-tabs">
-    <ul class="nav tabs-primary" id="myClassicTab" role="tablist" style="height: 44px;">
+    <ul class="nav tabs-primary blue-gradient" id="myClassicTab" role="tablist" style="height: 44px;">
       <li class="nav-item">
         <a class="nav-link waves-light custom-tabs-0 {% block status00 %}{% endblock status00 %}" id="profile-tab-classic"
            href="{% url 'haystack_search' %}" role="tab" aria-controls="profile-classic" aria-selected="true">
@@ -71,7 +71,7 @@
   <div style="height:20px;"></div>
   <div class="mx-auto" style="width: 776px;">
     {% block extended_content %}{% endblock extended_content %}
-    {% if page.has_previous or page.has_next %}
+    {% if page.has_previous and page.has_next %}
       {% if page.has_other_pages %}
         <nav aria-label="Movie list pagination">
           <ul class="pagination pg-blue justify-content-center">
@@ -100,7 +100,6 @@
                 {% endif %}
               {% endfor %}
             </span>
-
             {% if page.has_next %}
               <li class="page-item">
                 <a class="page-link" href="{% modify_query page=page.next_page_number %}">Next</a>
@@ -117,12 +116,12 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination pg-blue justify-content-center">
           <li class="page-item disabled"><a class="page-link">Previous</a></li>
-
           <span class="pagination pg-blue justify-content-center pagination-circle z-depth-0">
             <li class="page-item active"><a class="page-link">1</a></li>
           </span>
           <li class="page-item disabled"><a class="page-link">Next</a></li>
         </ul>
+        {% if not query %}<p class="text-center text-secondary"><small>lmao why is this even here</small></p>{% endif %}
       </nav>
     {% endif %}
   </div>

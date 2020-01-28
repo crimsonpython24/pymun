@@ -5,31 +5,38 @@
 {% block status01 %} active show {% endblock status01 %}
 
 {% block extended_content %}
-  <h5 class="font-weight-normal">Search Results for Administrators:
-  {% for result in admins %}
+  <h5 class="font-weight-normal">Search Results for Administrators:</h5>
+  {% for admin in admins %}
     <ul class="list-group list-group-flush">
       <li class="list-group-item" style="padding-left: 0px;">
         <div class="row">
           <div class="col-6" style="padding-left: 0px;">
             <div class="row">
               <div class="col-2" style="padding-right: 0px;">
-                <img src="{{ result.object.get_thumbnail_picture_url }}" class="img-fluid z-depth-0 rounded-circle" style="width: 30px; height: 30px;">
+                <img src="{{ admin.get_thumbnail_picture_url }}" class="img-fluid z-depth-0 rounded-circle" style="width: 30px; height: 30px;">
               </div>
               <div class="col" style="padding-left: 0px;">
-                {% if result.object.username == "crimsonpython24" %}
-                  <a href="{% url 'profile' slug=result.object.slug %}" id="c" class="font-weight-normal text-dark" style="font-size: 90%;">
+                {% if admin.username == "crimsonpython24" %}
+                  <a href="{% url 'profile' slug=admin.slug %}" class="font-weight-normal text-dark" style="font-size: 90%;">
                     <span class="txt anim-text-flow">Trainer Python</span>
                     <span class="badge badge-dark">Site Owner</span>
                     <span class="badge badge-danger">Administrator</span>
                   </a>
+                {% elif admin.username == "blackmamba4life" %}
+                  <a href="{% url 'profile' slug=admin.slug %}" class="font-weight-normal text-dark" style="font-size: 90%;">
+                    <span class="txt anim-text-flow">kobe</span>
+                    <span class="badge badge-dark"><i class="fas fa-dragon"></i></span>
+                    <span class="badge badge-danger">Administrator</span>
+                  </a>
                 {% else %}
-                  <a href="{% url 'profile' slug=result.object.slug %}" class="font-weight-normal text-dark" style="font-size: 90%;">
-                    {{ result.object.first_name }} {{ result.object.last_name }}
-                    {% if result.object.is_superuser %}<span class="badge badge-danger">Administrator</span>{% endif %}
+                  <a href="{% url 'profile' slug=admin.slug %}" class="font-weight-normal text-dark"
+                     style="font-size: 90%;">
+                    {{ admin.first_name }} {{ admin.last_name }}
+                    <span class="badge badge-danger">Administrator</span>
                   </a>
                 {% endif %}
                 <br>
-                <small class="text-muted">@{{ result.object.username }}</small>
+                <small class="text-muted">@{{ admin.username }}</small>
               </div>
             </div>
           </div>

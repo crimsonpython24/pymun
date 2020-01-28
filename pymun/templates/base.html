@@ -115,7 +115,22 @@
       </nav>
     </header>
   {% endblock navbar %}
-  {% block content %}{% endblock content %}
+  {% block content %}
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <div class="view overlay">
+          <img src="{% static 'site_static/kobe-bryant-wallpaper-hd-2.jpg' %}" class="img-fluid img-thumbnail" alt="zoom">
+          <div class="mask flex-center waves-effect waves-light rgba-black-strong">
+            <div class="grid">
+              <div class="row text-center"><h2 class="white-text">KOBE BRYANT</h2></div>
+              <div class="row text-center align-items-center"><h4 class="white-text">1978-2020</h4></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock content %}
 
 </body>
   {% block scripts %}{% endblock scripts %}
