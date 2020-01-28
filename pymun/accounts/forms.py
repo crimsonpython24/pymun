@@ -8,7 +8,7 @@ from django.forms import EmailField
 from .models import User
 
 
-def fieldtostring(if_user, *args, **kwargs):
+def fieldtostring(if_user, different_id=False, *args, **kwargs):
     string = '<input '
     for arg in args:
         if arg == 'required':
@@ -19,7 +19,9 @@ def fieldtostring(if_user, *args, **kwargs):
         if field == 'aria_describedby':
             string += ('aria-describedby="' + value + '" ')
         if field == "name":
-            if if_user:
+            if different_id:
+                string += ('name="' + value + '" ')
+            elif if_user:
                 string += ('id="' + value + '" max_length="' + str(User._meta.get_field(value).max_length) + '" ')
                 string += ('name="' + value + '" ')
             else:
@@ -30,15 +32,16 @@ def fieldtostring(if_user, *args, **kwargs):
     return string
 
 
-def valuetolabel(name, cont):
-    return '<label for="{}">{}</label>'.format(name, cont)
+def valuetolabel(name, cont, **kwargs):
+    string = '<label '.format(name, cont)
+    for field, value in kwargs.items():
+        if field == 'css_class':
+            string += ('class="' + value + '" ')
+    string += ' for="{}">{}</label>'.format(name, cont)
+    return string
 
 
 class UpdateFormBase(forms.ModelForm):
-    def save(self):
-        cleaned_data = self.cleaned_data
-        user = self.request.user
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         password = self.fields.get('password')
@@ -130,7 +133,38 @@ class UpdateGenderForm(UpdateFormBase):
         self.helper.form_tag = False
         self.helper.layout = layout.Layout(
             layout.Div(
-                bootstrap.InlineRadios('gender')
+                layout.Div(
+                    layout.HTML(fieldtostring(
+                        True, True, "required", type="radio", name="gender", value="male",
+                        id="id_gender_1", css_class="form-check-input"
+                    )),
+                    layout.HTML(valuetolabel("id_gender_1", "Male", css_class="form-check-label")),
+                    css_class="form-check"
+                ),
+                layout.Div(
+                    layout.HTML(fieldtostring(
+                        True, True, "required", type="radio", name="gender", value="female",
+                        id="id_gender_2", css_class="form-check-input"
+                    )),
+                    layout.HTML(valuetolabel("id_gender_2", "Female", css_class="form-check-label")),
+                    css_class="form-check"
+                ),
+                layout.Div(
+                    layout.HTML(fieldtostring(
+                        True, True, "required", type="radio", name="gender", value="others",
+                        id="id_gender_3", css_class="form-check-input"
+                    )),
+                    layout.HTML(valuetolabel("id_gender_3", "Non-Binary", css_class="form-check-label")),
+                    css_class="form-check"
+                ),
+                layout.Div(
+                    layout.HTML(fieldtostring(
+                        True, True, "required", type="radio", name="gender", value="none",
+                        id="id_gender_4", css_class="form-check-input"
+                    )),
+                    layout.HTML(valuetolabel("id_gender_4", "Undeclarable", css_class="form-check-label")),
+                    css_class="form-check"
+                )
             )
         )
 
