@@ -74,7 +74,10 @@ class User(util_models.CreationModificationDateMixin, util_models.UrlMixin, Abst
     def create_image(self):
         now = timezone_now()
         W, H = (512, 512)
-        msg = self.first_name[0] + self.last_name[0]
+        try:
+            msg = self.first_name[0] + self.last_name[0]
+        except IndexError:
+            msg=""
 
         myFont = ImageFont.truetype('/Library/Fonts/Arial.ttf', 250)
         img = Image.new(

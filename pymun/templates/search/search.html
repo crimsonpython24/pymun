@@ -7,6 +7,39 @@
         padding-top: 13px !important;
         padding-bottom: 13px !important;
     }
+
+    .anim-text-flow, .anim-text-flow-hover:hover {
+        $animationSteps: 20;
+        $animationDuration: 50;
+        $animationElement: span;
+        $animationElementsCount: 100;
+        $delayBetweenLetters: 0.05;
+
+        #{$animationElement} {
+            animation-name: anim-text-flow-keys;
+            animation-duration: #{$animationDuration}s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes anim-text-flow-keys {
+            @for $i from 0 through $animationSteps {
+                #{percentage($i * (1 / $animationSteps))} {
+                    color: hsla(random(365), 60, 60, 1);
+                }
+            }
+        }
+
+        $totalDelayTime: $animationElementsCount * $delayBetweenLetters;
+
+        @for $i from 1 through $animationElementsCount {
+            #{$animationElement}:nth-of-type(#{$i}) {
+                animation-delay: #{($i * $delayBetweenLetters) - $totalDelayTime}s;
+            }
+        }
+    }
+
 </style>
 {% endblock style %}
 
@@ -28,16 +61,37 @@
         </li>
       </ul>
     </div>
+    <div style="height:20px;"></div>
 　  <div class="mx-auto" style="width: 776px;">
-      <h5 class="font-weight-bold">Search Results for '{{ query }}':</h5>
+      <h5 class="font-weight-normal">Search Results for '{{ query }}':</h5>
       {% for result in page.object_list %}
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <a href="{% url 'profile' slug=result.object.slug %}" class="font-weight-normal text-dark" style="font-size: 90%;">
-              {{ result.object.first_name }} {{ result.object.last_name }}
-            </a>
-            <br>
-            <small class="text-muted">@{{ result.object.username }}</small>
+          <li class="list-group-item" style="padding-left: 0px;">
+            <div class="row">
+              <div class="col-6" style="padding-left: 0px;">
+                <div class="row">
+                  <div class="col-2" style="padding-right: 0px;">
+                    <img src="{{ result.object.get_thumbnail_picture_url }}" class="img-fluid z-depth-0 rounded-circle" style="width: 30px; height: 30px;">
+                  </div>
+                  <div class="col" style="padding-left: 0px;">
+                    {% if result.object.username == "crimsonpython24" %}
+                      <a href="{% url 'profile' slug=result.object.slug %}" id="c" class="font-weight-normal text-dark" style="font-size: 90%;">
+                        <span class="txt anim-text-flow">Trainer Python</span>
+                        <span class="badge badge-dark">Site Owner</span>
+                        <span class="badge badge-danger">Administrator</span>
+                      </a>
+                    {% else %}
+                      <a href="{% url 'profile' slug=result.object.slug %}" class="font-weight-normal text-dark" style="font-size: 90%;">
+                        {{ result.object.first_name }} {{ result.object.last_name }}
+                        {% if result.object.is_superuser %}<span class="badge badge-danger">Administrator</span>{% endif %}
+                      </a>
+                    {% endif %}
+                    <br>
+                    <small class="text-muted">@{{ result.object.username }}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
         </ul>
       {% empty %}
@@ -48,43 +102,41 @@
         <div>
           {% if page.has_other_pages %}
             <nav aria-label="Movie list pagination">
-              <ul class="pagination">
+              <ul class="pagination pg-blue justify-content-center">
                 {% if page.has_previous %}
                   <li class="page-item">
-                    <a class="page-link" href="{% modify_query page=page.previous_page_number %}">&laquo;</a>
+                    <a class="page-link" href="{% modify_query page=page.previous_page_number %}">Previous</a>
                   </li>
                 {% else %}
                   <li class="page-item disabled">
-                    <span class="page-link">
-                      <span aria-hidden="true">&laquo;</span>
-                      <span class="sr-only">Previous</span>
-                    </span>
+                    <span class="page-link"><span aria-hidden="true">Previous</span></span>
                   </li>
                 {% endif %}
 
-                {% for page_number in page.paginator.page_range %}
-                  {% if page_number == page.number %}
-                    <li class="page-item active">
-                      <span class="page-link">{{ page_number }}
-                        <span class="sr-only">(current)</span>
-                      </span>
-                    </li>
-                  {% else %}
-                    <li class="page-item">
-                      <a class="page-link" href="{% modify_query page=page_number %}">{{ page_number }}</a>
-                    </li>
-                  {% endif %}
-                {% endfor %}
+                <span class="pagination pg-blue justify-content-center pagination-circle">
+                  {% for page_number in page.paginator.page_range %}
+                    {% if page_number == page.number %}
+                      <li class="page-item active">
+                        <span class="page-link">{{ page_number }}
+                          <span class="sr-only">(current)</span>
+                        </span>
+                      </li>
+                    {% else %}
+                      <li class="page-item">
+                        <a class="page-link" href="{% modify_query page=page_number %}">{{ page_number }}</a>
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                </span>
 
                 {% if page.has_next %}
                   <li class="page-item">
-                    <a class="page-link" href="{% modify_query page=page.next_page_number %}">
-                      <span aria-hidden="true">&raquo;</span>
-                      <span class="sr-only">Next</span>
-                    </a>
+                    <a class="page-link" href="{% modify_query page=page.next_page_number %}">Next</a>
                   </li>
                 {% else %}
-                  <li class="disabled"><span>&raquo;</span></li>
+                  <li class="page-item disabled">
+                    <span class="page-link"><span aria-hidden="true">Next</span></span>
+                  </li>
                 {% endif %}
               </ul>
             </nav>
@@ -96,3 +148,14 @@
     </div>
   {% endif %}
 {% endblock content %}
+
+{% block scripts %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+  $('.txt').html(function(i, html) {
+    var chars = $.trim(html).split("");
+
+    return '<span>' + chars.join('</span><span>') + '</span>';
+  });
+</script>
+{% endblock scripts %}
