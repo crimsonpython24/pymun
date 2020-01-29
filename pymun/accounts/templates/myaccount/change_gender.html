@@ -5,20 +5,27 @@
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'myaccount/css/change_base.css' %}">
+<style>
+  .custom-form-check-0 {padding-top: 10px; padding-bottom: 10px;}
+
+  .form-check-input[type="radio"]:not(:checked)+label:before,
+  .form-check-input[type="radio"]:not(:checked)+label:after, label.btn input[type="radio"]:not(:checked)+label:before,
+  label.btn input[type="radio"]:not(:checked)+label:after {border: 1.4px solid #007bff; transform: scale(1.25);}
+
+</style>
 {% endblock style %}
 
 {% block inner_topic %}Gender{% endblock inner_topic %}
 {% block inner_content %}
   <p class="text-muted  custom-text-1">Your changes will be available to anyone</p>
   <div class="card z-depth-0 border">
-    <div class="card-body">
+    <div class="card-body" style="padding-left: 0px; padding-right: 0px;">
       <form method="post" action="{% url 'change_gender'  %}">
         {% crispy form %}
-        <div class="btn-group float-right" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-flat btn-sm float-right btn-custom-0" data-dismiss="modal">
-            <span class="text-secondary custom-text-3">Cancel</span>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="submit" class="btn btn-flat btn-sm btn-custom-0">
+            <span class="text-primary custom-text-3" style="transform: scale(1.5);">Done</span>
           </button>
-          <button type="submit" class="btn btn-flat btn-sm float-right btn-custom-0"><span class="text-primary custom-text-3">Done</span></button>
         </div>
       </form>
     </div>

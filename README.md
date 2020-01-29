@@ -49,3 +49,7 @@ The decorations were also stripped off, again, to simplify the code as a whole. 
 ### Sql Migration
 
 Because of the email fields, this project was switchd from sqlite to postgre on jan. 15
+
+### Activity Log
+  1. Jan. 19: suspended due to postgres issues on windows
+  2. Jan. 29: suspended due to winter homeworks

@@ -41,6 +41,21 @@ def valuetolabel(name, cont, **kwargs):
     return string
 
 
+def selecttostring(*args, **kwargs):
+    string = '<select '
+    for field, value in kwargs.items():
+        if field == 'css_class':
+            string += ('class="' + value + '" ')
+        else:
+            string += (field + '="' + value + '" ')
+    string += ">"
+    return string
+
+
+def closeselect():
+    return "</select>"
+
+
 class UpdateFormBase(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -113,7 +128,64 @@ class UpdateBirthdayForm(UpdateFormBase):
         self.helper.form_tag = False
         self.helper.layout = layout.Layout(
             layout.Div(
-                layout.Layout('birthday')
+                layout.Div(
+                    layout.Div(
+                        layout.Div(
+                            layout.HTML(
+                                selecttostring(
+                                    "required", name="birthday_month", id="id_birthday_month",
+                                    css_class="form-control md-form"
+                                )
+                            ),
+                            layout.HTML(
+                                """
+                                <option value="" disabled selected>Choose your option</option>
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3" selected>March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                                """ + closeselect()
+                            ),
+                        ),
+                        css_class="col"
+                    ),
+                    layout.Div(
+                        layout.Div(
+                            layout.Div(
+                                layout.Div(
+                                    layout.HTML(
+                                        fieldtostring(
+                                            False, "required", name="birthday_day", id="id_birthday_day",
+                                            css_class="form-control", type="number", placeholder="Day"
+                                        )
+                                    ),
+                                    css_class="col-5 birthday-change-col-0"
+                                ),
+                                layout.Div(
+                                    layout.HTML(
+                                        fieldtostring(
+                                            False, "required", name="birthday_year", id="id_birthday_year",
+                                            css_class="form-control", type="number", placeholder="Year"
+                                        )
+                                    ),
+                                    css_class="col-7 birthday-change-col-0"
+                                ),
+                                css_class="row"
+                            ),
+                            css_class="md-form"
+                        ),
+                        css_class="col"
+                    ),
+                    css_class="row"
+                )
             )
         )
 
@@ -139,7 +211,7 @@ class UpdateGenderForm(UpdateFormBase):
                         id="id_gender_1", css_class="form-check-input"
                     )),
                     layout.HTML(valuetolabel("id_gender_1", "Male", css_class="form-check-label")),
-                    css_class="form-check"
+                    css_class="form-check custom-form-check-0"
                 ),
                 layout.Div(
                     layout.HTML(fieldtostring(
@@ -147,7 +219,7 @@ class UpdateGenderForm(UpdateFormBase):
                         id="id_gender_2", css_class="form-check-input"
                     )),
                     layout.HTML(valuetolabel("id_gender_2", "Female", css_class="form-check-label")),
-                    css_class="form-check"
+                    css_class="form-check custom-form-check-0"
                 ),
                 layout.Div(
                     layout.HTML(fieldtostring(
@@ -155,7 +227,7 @@ class UpdateGenderForm(UpdateFormBase):
                         id="id_gender_3", css_class="form-check-input"
                     )),
                     layout.HTML(valuetolabel("id_gender_3", "Non-Binary", css_class="form-check-label")),
-                    css_class="form-check"
+                    css_class="form-check custom-form-check-0"
                 ),
                 layout.Div(
                     layout.HTML(fieldtostring(
@@ -163,7 +235,7 @@ class UpdateGenderForm(UpdateFormBase):
                         id="id_gender_4", css_class="form-check-input"
                     )),
                     layout.HTML(valuetolabel("id_gender_4", "Undeclarable", css_class="form-check-label")),
-                    css_class="form-check"
+                    css_class="form-check custom-form-check-0"
                 )
             )
         )

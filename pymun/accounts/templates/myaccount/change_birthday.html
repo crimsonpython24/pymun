@@ -5,6 +5,11 @@
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'myaccount/css/change_base.css' %}">
+<style>
+  .birthday-change-col-0 {
+    padding-left: 5px; padding-right: 5px;
+  }
+</style>
 {% endblock style %}
 
 {% block inner_topic %}Birthday{% endblock inner_topic %}
@@ -49,3 +54,13 @@
   </div>
 
 {% endblock inner_content %}
+
+{% block script %}
+<script>
+    // Material Select Initialization
+    $(document).ready(function() {
+        $('.mdb-select').material-select();
+        $('.mdb-select').materialSelect();
+    });
+</script>
+{% endblock script %}
